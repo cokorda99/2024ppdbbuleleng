@@ -1,0 +1,320 @@
+<ion-view title="Dashboard e-PPDB Siswa" hide-nav-bar="true" cache-view="false" id="welcome">
+    <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+
+        <div id="wrapper" class="bg-light">
+            <div id="nav-flex" class="bck no-print">
+                <div class="pt-5" id="sidebar-wrapper">
+                    <div class="d-grid gap-1 mx-3">
+                        <button ui-sref="welcome()" class="btn text-light side-button py-3" type="button"><span
+                                class="float-start ms-3"><i class="fas fa-sign-out-alt"></i> Kembali</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="flexbox-wrapper" class="w-100">
+                <div class="w-100 h-100" id="content-flex">
+                    <div class="d-flex flex-column" style="min-height: 100vh;">
+                        <div id="page-content-wrapper" style="flex :1">
+                            <div id="main-content" class="container-fluid mt-5 px-5">
+                                <!-- Page Heading -->
+                                <div class="mb-3 no-print">
+                                    <h5 id="page-header" class="text-dark fw-bold mb-0">
+                                        Registrasi Siswa
+                                    </h5>
+                                    <span id="small-header" class="text-muted">Untuk siswa dari luar kabupaten Buleleng silahkan Isi
+                                        form untuk melakukan Registrasi</span>
+                                </div>
+                                <!-- main content -->
+                                <div id="content">
+                                    <div class="card shadow mb-4 animated--grow-in">
+                                        <div class="card-body mx-5 p-5">
+                                            <form class="pb-5">
+                                                <h4 class="fw-bold">Data Diri </h4>
+                                                <p class="text-danger">Pastikan data terisi dengan lengkap dan tepat</p>
+
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3"
+                                                        class="col-xl-2 col-form-label">Nama <small class="text-danger fst-italic">*</small></label>
+                                                    <div class="col-xl-10">
+                                                        <input type="text" class="form-control" id="namaSiswa"
+                                                            placeholder="Masukan Nama Lengkap">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3" class="col-xl-2 col-form-label">Jenis
+                                                        Kelamin <small class="text-danger fst-italic">*</small></label>
+                                                    <div class="col-xl-10">
+                                                        <select class="form-select" id="jenisKelaminSiswa">
+                                                            <option value="">Pilih jenis Kelamin</option>
+                                                            <option value="Laki-laki">Laki-laki</option>
+                                                            <option value="Perempuan">Perempuan</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3"
+                                                        class="col-xl-2 col-form-label">NISN <small class="text-danger fst-italic">*</small></label>
+                                                    <div class="col-xl-10">
+                                                        <input type="text" class="form-control" id="nisnSiswa"
+                                                            placeholder="Masukan NISN" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3" class="col-xl-2 col-form-label">NIK <small class="text-danger fst-italic">*</small></label>
+                                                    <div class="col-xl-10">
+                                                        <input type="text" class="form-control" id="nikSiswa"
+                                                            placeholder="Masukan NIK">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3" class="col-xl-2 col-form-label">No Telp (Whatsapp) <small class="text-danger fst-italic">*</small></label>
+                                                    <div class="col-xl-10">
+                                                        <input type="text" class="form-control" id="notelpSiswa"
+                                                            placeholder="Masukan No Telp ( Whatsapp )">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3" class="col-xl-2 col-form-label">Tanggal
+                                                        Lahir <small class="text-danger fst-italic">*</small></label>
+                                                    <div class="col-xl-10">
+                                                        <input type="date" class="form-control" id="tglLahirSiswa"
+                                                            placeholder="yyyy-mm-dd">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3" class="col-xl-2 col-form-label">Tempat
+                                                        Lahir <small class="text-danger fst-italic">*</small></label>
+                                                    <div class="col-xl-10">
+                                                        <input type="text" class="form-control" id="tempatLahirSiswa"
+                                                            placeholder="Masukan Tempat lahir">
+
+                                                    </div>
+                                                </div>
+                                                <small class="text-danger fst-italic">Isi form dibwah ini dengan tempat
+                                                    tinggal anda saat ini</small>
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3"
+                                                        class="col-xl-2 col-form-label">Kecamatan <small class="text-danger fst-italic">*</small></label>
+                                                    <div class="col-xl-10">
+                                                        <select class="form-select" ng-model="form.idKecamatan"
+                                                            ng-change="getIdKecamatan()">
+                                                            <option value="">Pilih Kecamatan</option>
+                                                            <option class="form-control"
+                                                                ng-repeat="data in dataKecamatan | orderBy:'nama_kecamatan'"
+                                                                value="{{data.id_kecamatan}}">
+                                                                {{data.nama_kecamatan}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3"
+                                                        class="col-xl-2 col-form-label">Desa <small class="text-danger fst-italic">*</small></label>
+                                                    <div class="col-xl-10">
+                                                        <select class="form-select" ng-model="form.idDesa"
+                                                            ng-change="getIdDesa()">
+                                                            <option value="">Pilih Desa / Kelurahan</option>
+                                                            <option class="form-control"
+                                                                ng-repeat="data in dataDesa | orderBy:'nama_desa'"
+                                                                value="{{data.id_desa}}">
+                                                                {{data.nama_desa}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3" class="col-xl-2 col-form-label">Banjar/
+                                                        Dusun <small class="text-danger fst-italic">*</small></label>
+                                                    <div class="col-xl-10">
+                                                        <select class="form-select" ng-model="form.idBanjar"
+                                                            ng-change="getIdBanjar()">
+                                                            <option value="">Pilih Banjar </option>
+                                                            <option class="form-control"
+                                                                ng-repeat="data in dataBanjar | orderBy:'nama_banjar'"
+                                                                value="{{data.id_banjar}}">
+                                                                {{data.nama_banjar}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3"
+                                                        class="col-xl-2 col-form-label">Alamat <small class="text-danger fst-italic">*</small></label>
+                                                    <div class="col-xl-10">
+                                                        <input type="text" class="form-control mb-3" id="AlamatSiswa"
+                                                            placeholder="Masukan Alamat">
+                                                        <input type="text" class="form-control mb-3"
+                                                            id="Alamatkoordinat" placeholder="Masukan Koordinat Alamat">
+                                                        <small class="text-danger fst-italic">Untuk Koordinat Alamat,
+                                                            Anda dapat menggunakan Google Maps untuk
+                                                            mendapatkan Koordinat Alamat Anda</small>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3" class="col-xl-2 col-form-label">Sekolah
+                                                        Asal <small class="text-danger fst-italic">*</small></label>
+                                                    <div class="col-xl-10">
+                                                        <input type="text" class="form-control mb-3" id="sekolahSiswa"
+                                                            placeholder="Masukan Nama Sekolah">
+                                                        <input type="text" class="form-control" id="npsnSiswa"
+                                                            placeholder="Masukan NPSN Sekolah">
+                                                    </div>
+                                                </div>
+                                                <small class="text-danger fst-italic">Isi form data Orang tua /
+                                                    Wali</small>
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3" class="col-xl-2 col-form-label">Nama Ibu
+                                                        <small class="text-danger fst-italic">*</small></label>
+                                                    <div class="col-xl-10">
+                                                        <input type="text" class="form-control" id="namaIbu"
+                                                            placeholder="Masukan Nama Ibu">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3" class="col-xl-2 col-form-label">Pekerjaan
+                                                        Ibu <small class="text-danger fst-italic">*</small></label>
+                                                    <div class="col-xl-10">
+                                                        <input type="text" class="form-control" id="pekerjaanIbu"
+                                                            placeholder="Masukan Pekerjaan Ibu">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3" class="col-xl-2 col-form-label">Penghasilan
+                                                        Ibu <small class="text-danger fst-italic">*</small></label>
+                                                    <div class="col-xl-10">
+                                                        <input type="text" class="form-control" id="penghasilanIbu"
+                                                            placeholder="Masukan Penghasilan Ibu">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3" class="col-xl-2 col-form-label">Nama Ayah
+                                                        <small class="text-danger fst-italic">*</small></label>
+                                                    <div class="col-xl-10">
+                                                        <input type="text" class="form-control" id="namaAyah"
+                                                            placeholder="Masukan Nama Ayah">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3" class="col-xl-2 col-form-label">Pekerjaan
+                                                        Ayah <small class="text-danger fst-italic">*</small></label>
+                                                    <div class="col-xl-10">
+                                                        <input type="text" class="form-control" id="pekerjaanAyah"
+                                                            placeholder="Masukan Pekerjaan Ayah">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3" class="col-xl-2 col-form-label">Penghasilan
+                                                        Ayah <small class="text-danger fst-italic">*</small></label>
+                                                    <div class="col-xl-10">
+                                                        <input type="text" class="form-control" id="penghasilanAyah"
+                                                            placeholder="Masukan Penghasilan Ayah">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3" class="col-xl-2 col-form-label">Nama
+                                                        Wali</label>
+                                                    <div class="col-xl-10">
+                                                        <input type="text" class="form-control" id="namaWali"
+                                                            placeholder="Masukan Nama Wali">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3" class="col-xl-2 col-form-label">Pekerjaan
+                                                        Wali</label>
+                                                    <div class="col-xl-10">
+                                                        <input type="text" class="form-control" id="pekerjaanWali"
+                                                            placeholder="Masukan Pekerjaan Wali">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3" class="col-xl-2 col-form-label">Penghasilan
+                                                        Wali</label>
+                                                    <div class="col-xl-10">
+                                                        <input type="text" class="form-control" id="penghasilanWali"
+                                                            placeholder="Masukan Penghasilan Wali">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label for="inputEmail3" class="col-xl-2 col-form-label">Upload Asli
+                                                        Surat Keterangan Tidak Melamar di daerah asal</label>
+                                                    <div class="col-xl-10">
+                                                        <div class="container foto">
+                                                            <img id="fotolook" class="fotoSw"
+                                                                src="img/blank-image-upload.png" alt="">
+                                                        </div>
+                                                        <br>
+                                                        <input type="file" accept="image/*" class="form-control"
+                                                            id="UploadSurat" onchange="preview()"
+                                                            placeholder="Surat Keterangan Tidak melamar">
+                                                        <div class="ketentuan1">
+                                                            <small class="text-danger"
+                                                                style="font-size : 0.78rem"><em>*Ukuran file maksimum :
+                                                                    2mb
+                                                                    <br> *Ekstensi file yang diterima : jpg,
+                                                                    jpeg, png</em></small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <a id="btn-pendaftaran" ng-click="simpanTambahDataSiswa()"
+                                                    class="btn btn-primary shadow-sm float-end px-3 mt-3"><i
+                                                        class="fa fa-sm "></i>Registrasi Siswa</a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- HASIL -->
+                                <div class="alert alert-warning mt-3 no-print" role="alert" ng-if="registrasi == true">
+                                    <span class="fw-bold my-2"><span class><i class="fas fa-exclamation-circle"></i>
+                                            Perhatian
+                                        </span></span>
+                                    <p class="">
+                                        <span class="">
+                                            <br>
+                                            <span class="fw-bold">Registrasi Berhasil</span>
+                                            <br>
+                                            Selanjutnya akun Peserta PPDB online akan diverifikasi terlebih dahulu oleh pihak Dinas Pendidikan Pemuda dan Olahraga Kabupaten Buleleng.
+                                            <br>
+                                            Setelah terverifikasi anda dapat langsung Login menggunakan NISN yang di Registrasikan untuk melakukan Pendaftaran,
+                                            <br>
+                                            Untuk login NISN silahkan <a ui-sref="welcome()">klik disini</a>
+                                            <br>
+                                            Bila Ada yang kurang jelas atau ada pertanyaan silahkan <a href="https://sites.google.com/dinas.belajar.id/informasi-ppdb-buleleng/beranda/helpdesk#h.ljiozrl2lhg6" target=”_blank”>klik disini</a>
+
+                                            <!-- Untuk proses selanjutnya <span class="fw-bold">Mohon Perhatikan Status Pendaftaran
+                                          Anda</span>
+                                        Jika <span class="fw-bold">Status Pendaftaran</span> anda <span class="fw-bold">Belum
+                                          Valid</span>, berarti data pendaftaran nda <span class="fw-bold">Masih di Proses</span>
+                                        oleh
+                                        Sekolah terkait, jika <span class="fw-bold">Status Pendaftaran Belum Valid</span> sampai
+                                        batas
+                                        akhir masa Pendaftaran mohon hubungi Dinas Pendidikan -->
+                                        </span>
+                                    </p>
+                                    <p>Sekian dan Terima Kasih</p>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <!-- <div id="map" hidden></div> -->
+                    <footer class="ps-5 text-muted no-print" style="margin-bottom: 8vh;">
+                        <div>
+                            <span class=" fw-bold montserrat" style="font-size: small;"> © 2023 Copyright:</span>
+                            <span class=" fw-bold montserrat" style="font-size: small;"
+                                href="https://e-ppdb.bulelengkab.go.id/">e-PPDB</span>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </ion-content>
+</ion-view>

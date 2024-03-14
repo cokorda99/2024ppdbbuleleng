@@ -1,0 +1,123 @@
+<ion-view title="Pengaturan Detail Akun Admin SD" hide-nav-bar="true" cache-view="false" id="loginAdmin">
+  <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+    <div id="wrapper" class="bg-light">
+      <div id="nav-flex">
+        <div class="pt-5" id="sidebar-wrapper">
+          <div class="sidebar gmbr mb-4">
+            <img src="img/admin.png" alt="">
+          </div>
+          <div class="container">
+            <p id="nama" class="text-center text-light text-break">{{formData.nama}}</p>
+          </div>
+          <div class="d-grid gap-1 mx-3">
+            <button ng-click="beranda()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-home"></i> Beranda</span></button>
+            <button ng-click="data_siswa()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-user"></i> Data Siswa</span></button>
+            <button ui-sref="dataSiswaterdaftarSd()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-user-edit"></i> Data Siswa Terdaftar</span></button>
+            <button ui-sref="dataSiswaDiterimaSd()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-trophy"></i> Data Siswa Diterima</span></button>
+            <button ng-click="pengaturan()" class="btn text-light side-button side-active shadow py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-cogs"></i> Pengaturan</span></button>
+            <button ng-click="logout()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-sign-out-alt"></i> Keluar</span></button>
+          </div>
+        </div>
+      </div>
+      <div id="flexbox-wrapper" class="w-100">
+        <nav class="navbar navbar-expand navbar-light bg-light">
+          <div class="container-fluid">
+            <button class="btn" id="menu-toggle" ng-click="toogle()"><i class="fas fa-align-justify"></i></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+              </ul>
+              <div class="my-lg-0 d-flex">
+                <a id="nightmode" ng-click="nightmode()" class="btn text-dark" href=""><i id="icon-night"
+                    class="far fa-sun" style="font-size:24px" data-bs-toggle="tooltip" data-placement="top"
+                    title="Light/Night"></i></a>
+                <a class="btn text-dark" href=""><i class="far fa-question-circle" style="font-size:24px"
+                    data-bs-toggle="tooltip" data-placement="top" title="Bantuan"></i></a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div class="w-100 h-100" id="content-flex">
+          <div class="d-flex flex-column" style="min-height: 100vh;">
+            <div id="page-content-wrapper" style="flex :1">
+              <div id="main-content" class="container-fluid mt-5 px-5">
+                <div class="mb-3">
+                  <h5 id="page-header" class="text-dark fw-bold mb-0">
+                    Pengaturan Akun
+                  </h5>
+                  <span id="small-header" class="text-muted">{{formData.namaSekolah}}</span>
+                </div>
+                <div class="card shadow-sm mb-4 animated--grow-in">
+                  <div class="card-header py-3 bg-white">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <a onclick="history.back()"
+                        id="btn-back" class="btn btn-sm btn-outline-primary shadow-sm float-end px-3 ">Kembali</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body mx-5 p-5">
+                    <form>
+                      <div class="form-group row mb-3">
+                        <label for="inputEmail3" class="col-xl-2 col-form-label">Nama Admin</label>
+                        <div class="col-xl-10">
+                          <input type="text" class="form-control" id="edit_nama_lengkap" value="{{formData.nama}}">
+                        </div>
+                      </div>
+                      <div class="form-group row mb-3">
+                        <label for="inputPassword3" class="col-xl-2 col-form-label">Email</label>
+                        <div class="col-xl-10">
+                          <input type="text" class="form-control" id="daftar_nisn" value="{{formData.email}}" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group row mb-3">
+                        <label for="inputPassword3" class="col-xl-2 col-form-label">Password</label>
+                        <div class="col-xl-10">
+                          <div class="input-group">
+                            <input type="password" class="form-control" placeholder="Password"
+                              value="{{formData.passwordDisplay}}" id="edit_password">
+                            <button id="btn-look-pass" id="btn-look-pass" class="btn btn-outline-primary" type="button" ng-click="lookPassword()"><i
+                                class="fa fa-eye"></i></button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group row mb-3">
+                        <label for="inputPassword3" class="col-xl-2 col-form-label">Sekolah</label>
+                        <div class="col-xl-10">
+                          <input type="text" class="form-control" id="daftar_asal_sekolah"
+                            value="{{formData.namaSekolah}}" readonly>
+                        </div>
+                      </div>
+                    </form>
+                    <a ng-click="simpan_perubahanadmin()" class=" btn btn-primary shadow-sm float-end px-3 mt-3"><i
+                        class="fa fa-sm "></i>Simpan</a>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+            <footer class="ps-5 text-muted" style="margin-bottom: 8vh;">
+              <div>
+                <span class=" fw-bold montserrat" style="font-size: small;"> © 2023 Copyright:</span>
+                <span class=" fw-bold montserrat" style="font-size: small;"
+                  href="https://e-ppdb.bulelengkab.go.id/">e-PPDB</span>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </ion-content>
+</ion-view>

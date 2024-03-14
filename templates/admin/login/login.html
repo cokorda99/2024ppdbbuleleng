@@ -1,0 +1,43 @@
+<ion-view title="Login Admin" hide-nav-bar="true" cache-view="false" id="welcome">
+    <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+        <style>
+            body {
+                background-image: url(img/unnamed.jpg);
+                background-size: cover;
+            }
+        </style>
+        <section>
+            <div class="latar">
+                <div class="hitam">
+                    <div class="logo">
+                        <img src="img/logospensa.png" alt="">
+                    </div>
+                    <!-- Text -->
+                    <div class="tex">
+                        <h2>Login Admin</h2>
+                    </div>
+    
+                    <!-- Input -->
+                    <div class="inputan">
+                        <input type="email" placeholder="&#xf0e0   Email" style="font-family: FontAwesome;" ng-model="formData.email">
+                    </div>
+    
+                    <div class="inputan">
+                        <input type="password" placeholder="&#xf13e     Password" style="font-family: FontAwesome;" ng-model="formData.password">
+                    </div>
+    
+                    <!-- Button -->
+                    <div class="tombol">
+                        <button ng-click="masuk()"type="button" class="btn btn-secondary">Login</button>
+                    </div>
+    
+                    <!-- Note -->
+                    <!-- <div class="akun">
+                        <p>Belum punya akun, <a href="#">klik disini</a></p>
+                    </div> -->
+                </div>
+            </div>
+        </section>
+        
+    </ion-content>
+  </ion-view>

@@ -1,0 +1,945 @@
+<ion-view title="Dashboard e-PPDB Siswa" hide-nav-bar="true" cache-view="false" id="welcome">
+    <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+  
+      <div id="wrapper" class="bg-light">
+        <div id="nav-flex" class="bck no-print">
+          <div class="pt-5" id="sidebar-wrapper">
+            <div class="sidebar gmbr mb-4">
+              <img ng-if="CheckPhoto == 'Laki-laki'" src="img/student-male.png" alt="">
+              <img ng-if="CheckPhoto == 'Perempuan'" src="img/student-female.png" alt="">
+            </div>
+  
+            <div class="center container-fluid p-3 m-0">
+              <p class="text-center text-light text-decoration-none" id="nama">{{formData.nama}}</p>
+              <p class="text-center text-light text-decoration-none" id="nisn">{{formData.nisn}}</p>
+            </div>
+            <div class="d-grid gap-1 mx-3">
+              <button ng-click="dashboard()" class="btn text-light side-button py-3" type="button"><span
+                  class="float-start ms-3"><i class="fas fa-home"></i> Beranda</span></button>
+              <button ng-click="pendaftaran_ppdb()" class="btn text-light side-button side-active shadow py-3"
+                type="button"><span class="float-start ms-3"><i class="fas fa-user"></i> Pendaftaran</span></button>
+              <button ng-click="pengumumanUser()" class="btn text-light side-button py-3" type="button"><span
+                  class="float-start ms-3"><i class="fas fa-user-edit"></i> Pengumuman</span></button>
+              <button ng-click="pengaturanUser()" class="btn text-light side-button py-3" type="button"><span
+                  class="float-start ms-3"><i class="fas fa-cogs"></i> Pengaturan</span></button>
+              <button ng-click="logout()" class="btn text-light side-button py-3" type="button"><span
+                  class="float-start ms-3"><i class="fas fa-sign-out-alt"></i> Keluar</span></button>
+            </div>
+          </div>
+        </div>
+  
+        <div id="flexbox-wrapper" class="w-100">
+          <nav class="navbar navbar-expand navbar-light bg-light no-print">
+            <div class="container-fluid">
+              <button class="btn" id="menu-toggle" ng-click="toogle()"><i class="fas fa-align-justify"></i></button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  
+                </ul>
+                <div class="my-lg-0 d-flex">
+                  <a ng-click="pendaftaran_ppdb()" class="btn text-dark position-relative" href=""><i
+                      class="far fa-envelope" style="font-size:24px" data-bs-toggle="tooltip" data-placement="top"
+                      title="Pesan"></i>
+                    <!-- <span ng-if="statusdaftar===false && statusvalidasi===false && koreksi == NULL"
+                      class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger text-light">
+                      1
+                    </span> -->
+                  </a>
+                  <a id="nightmode" ng-click="nightmode()" class="btn text-dark" href=""><i id="icon-night"
+                      class="far fa-sun" style="font-size:24px" data-bs-toggle="tooltip" data-placement="top"
+                      title="Light/Night"></i></a>
+                  <a ng-click="alertDashboardUser()" class="btn text-dark" href=""><i class="far fa-question-circle"
+                      style="font-size:24px" data-bs-toggle="tooltip" data-placement="top" title="Bantuan"></i></a>
+                </div>
+              </div>
+            </div>
+          </nav>
+          <div class="w-100 h-100" id="content-flex">
+            <div class="d-flex flex-column" style="min-height: 100vh;">
+              <div id="page-content-wrapper" style="flex :1">
+  
+                <div id="main-content" class="container-fluid mt-5 px-5">
+                  <!-- Page Heading -->
+                  <div class="mb-3 no-print">
+                    <h5 id="page-header" class="text-dark fw-bold mb-0">
+                      Pendaftaran
+                    </h5>
+                    <span id="small-header" class="text-muted" ng-if = "cekPendaftaran.aktif == true">Isi form untuk menyelesaikan pendaftaran ke
+                      sekolah pilihan</span>
+                  </div>
+                  <!-- Alert Pesan -->
+                  <div ng-if="statusdaftar===false && koreksi != NULL" id="informasi-siswa" class="no-print">
+                    <div class="alert alert-danger mt-3" role="alert">
+                      <span class="fw-bold my-2"><span class><i class="fas fa-exclamation-circle"></i> Pesan Koreksi
+                        </span></span>
+                      <p class="">
+                        <span class="">
+                          <br>
+                          <b>"{{koreksi}}"</b>
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                  <!-- main content -->
+                  <div ng-if = "cekPendaftaran.aktif == true">
+                    
+                    <div class="card shadow mb-4 animated--grow-in" ng-if="statusSKL === false">
+                      <div class="card-body mx-5 p-5">
+                        <form class="pb-5">
+                          <h4 class="fw-bold">Data Diri </h4>
+                          <p class="text-danger">Pastikan data yang tertera sudah sesuai dengan data diri anda
+                          </p>
+                          <div class="form-group row mb-3">
+                            <label for="inputEmail3" class="col-xl-2 col-form-label">Nama Lengkap</label>
+                            <div class="col-xl-10">
+                              <input type="text" class="form-control" id="daftar_nama_lengkap" value="{{formData.nama}}"
+                                readonly>
+                            </div>
+                          </div>
+                          <div class="form-group row mb-3">
+                            <label for="inputPassword3" class="col-xl-2 col-form-label">Jenis Kelamin</label>
+                            <div class="col-xl-10">
+                              <input type="text" class="form-control" id="daftar_jenisKelamin" value="{{formData.jenis_kelamin}}" readonly>
+                            </div>
+                          </div>
+                          <div class="form-group row mb-3">
+                            <label for="inputPassword3" class="col-xl-2 col-form-label">NISN</label>
+                            <div class="col-xl-10">
+                              <input type="text" class="form-control" id="daftar_nisn" value="{{formData.nisn}}" readonly>
+                            </div>
+                          </div>
+                          <div class="form-group row mb-3">
+                            <label for="inputPassword3" class="col-xl-2 col-form-label">NIK</label>
+                            <div class="col-xl-10">
+                              <input type="number" class="form-control" id="daftar_nik" value="{{formData.nik}}" readonly>
+                            </div>
+                          </div>
+                          <div class="form-group row mb-3">
+                            <label for="inputPassword3" class="col-xl-2 col-form-label">Sekolah Asal</label>
+                            <div class="col-xl-10">
+                              <input type="text" class="form-control" id="daftar_asal_sekolah"
+                                value="{{formData.sekolah_asal}}" readonly>
+                            </div>
+                          </div>
+                          <div class="form-group row mb-3">
+                            <label for="inputPassword3" class="col-xl-2 col-form-label">Alamat Rumah</label>
+                            <div class="col-xl-10">
+                              <input type="text" class="form-control" id="daftar_alamat" value="{{formData.alamat}}"
+                                readonly>
+                            </div>
+                          </div>
+                          <div class="form-group row mb-3">
+                            <label for="inputPassword3" class="col-xl-2 col-form-label">Tempat Lahir</label>
+                            <div class="col-xl-10">
+                              <input type="text" name="tempat_lahir" id="daftar_tempat_lahir" class="tempat form-control"
+                                value="{{formData.tempat_lahir}}" readonly>
+                            </div>
+                          </div>
+                          <div class="form-group row mb-3">
+                            <label for="inputPassword3" class="col-xl-2 col-form-label">Tanggal Lahir</label>
+                            <div class="col-xl-10">
+                              <input type="text" name="tanggal_lahir" id="daftar_tanggal_lahir"
+                                class="tanggal form-control" value="{{formData.tanggal_lahir}}" readonly>
+                            </div>
+                          </div>
+  
+                          <div class="form-group row mb-3" hidden>
+                            <label for="inputPassword3" class="col-xl-2 col-form-label">Alamat Sesuai KK</label>
+                            <div class="col-xl-10">
+                              <select class="form-select" ng-model="form.idKecamatan" ng-change="getIdKecamatan()">
+                                <option value="">Pilih Kecamatan</option>
+                                <option class="form-control" ng-repeat="data in dataKecamatan | orderBy:'nama_kecamatan'"
+                                  value="{{data.id_kecamatan}}">
+                                  {{data.nama_kecamatan}}</option>
+                              </select>
+                              <br>
+                              <select class="form-select" ng-model="form.idDesa" ng-change="getIdDesa()">
+                                <option value="">Pilih Desa / Kelurahan</option>
+                                <option class="form-control" ng-repeat="data in dataDesa | orderBy:'nama_desa'"
+                                  value="{{data.id_desa}}">
+                                  {{data.nama_desa}}</option>
+                              </select>
+                              <br>
+                              <!-- <input type="text" class="form-control" id="daftar_alamatzonasi" placeholder="Detail Alamat"
+                                required> -->
+                              <div class="text-justify">
+                                <small class="text-danger" style="font-size: 0.78rem;"><em>Data Alamat sudah diambil
+                                    berdasarkan kordinat rumah tempat tinggal yang di Inputkan oleh Admin Sekolah
+                                    SD</em></small>
+                              </div>
+                            </div>
+                          </div>
+  
+                          <div class="form-group row mb-3">
+                            <label for="inputPassword3" class="col-xl-2 col-form-label">Alamat Sesuai KK</label>
+                            <div class="col-xl-10">
+                              <input type="text" class="form-control" id="daftar_namaKecamatan"
+                                value="Kecamatan {{formData.namaKecamatan}}" readonly>
+                              <br>
+                              <input type="text" class="form-control" id="daftar_namaDesa" value="Desa / Kelurahan {{formData.namaDesa}}"
+                                readonly>
+                              <br>
+                              <input type="text" class="form-control" id="daftar_namaBanjar" value="Banjar {{formData.namaDesa}}"
+                              readonly>
+                            <br>
+                              <input type="text" class="form-control" id="daftar_alamatzonasi"
+                                value="{{formData.alamatzonasi}}" readonly>
+                              <div class="text-justify">
+                                <small class="text-danger" style="font-size: 0.78rem;"><em>Data Alamat sudah diambil
+                                    berdasarkan kordinat rumah tempat tinggal yang di Inputkan oleh Admin Sekolah
+                                    SD</em></small>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group row mb-3">
+                            <label for="inputPassword3" class="col-xl-2 col-form-label">Rekomendasi Sekolah Zonasi</label>
+                            <div class="col-xl-10">
+                              <input type="text" class="form-control" style="text-transform:uppercase"
+                                value="{{formData.sekolahZonasi}}" readonly>
+                            </div>
+                          </div>
+                          <br>
+  
+                          <div class="form-group row mb-3">
+                            <label for="inputPassword3" class="col-xl-2 col-form-label">Mendaftar Di Sekolah
+                              Swasta Atau Sekolah Kementrian Agama</label>
+                            <div class="col">
+                              <select name="" id="daftar_swastaOnly" class="form-select">
+                                <option value=false>Tidak</option>
+                                <option value=true>Ya</option>
+                              </select>
+                              <small class="text-justify text-danger" style="font-size: 0.78rem;"><em>Pilih YA
+                                  jika anda
+                                  hanya
+                                  ingin mendaftar di sekolah swasta atau Kementrian Agama</em></small>
+                            </div>
+                          </div>
+  
+                          <div class="form-group row mb-3">
+                            <label for="inputPassword3" class="col-xl-2 col-form-label">Nomor KK</label>
+                            <div class="col-xl-10">
+                              <input type="text" name="no_kk" id="daftar_noKK" class="tempat form-control" value=""
+                                placeholder="Masukan Nomor KK">
+                            </div>
+                          </div>
+                          <div class="form-group row mb-3">
+                            <label for="inputPassword3" class="col-xl-2 col-form-label">Status dalam
+                              Keluarga</label>
+                            <div class="col-xl-10">
+                              <select name="" id="daftar_statusKK" class="form-select">
+                                <option>Anak Kandung</option>
+                                <option>Anak Tiri</option>
+                                <option>Anak Angkat</option>
+                                <option>Cucu</option>
+                                <option>Famili Lain</option>
+                              </select>
+                            </div>
+                          </div>
+                          <h5 class="fw-bold">Upload Berkas</h5>
+                          <div class="form-group row mb-3">
+                            <label for="inputPassword3" class="col-xl-2 col-form-label">Scan Kartu Keluarga</label>
+                            <div class="col-xl-10">
+                              <div class="input-group">
+                                <input type="file" class="inputSkl form-control" id="inputSkl" required="required"
+                                  class="form-control">
+                              </div>
+                              <div class="ketentuan1">
+                                <small class="text-danger" style="font-size : 0.78rem"><em>*Ukuran file
+                                    maksimum : 2mb
+                                    <br>
+                                    *Ekstensi file yang diterima : jpg,
+                                    jpeg, png, pdf</em></small>
+                              </div>
+                            </div>
+                          </div>
+  
+                          <a id="btn-pendaftaran" ng-click="simpan1()"
+                            class="btn btn-primary shadow-sm float-end px-3 mt-3"><i class="fa fa-sm "></i>Berikutnya</a>
+                        </form>
+                      </div>
+                    </div>
+                    <!-- Bukti Pendaftaran -->
+                    <div ng-if="statusdaftar===true">
+                      <div ng-if="statusvalidasi===false || statusvalidasi2===false">
+                        <div class="alert alert-warning mt-3 no-print" role="alert">
+                          <span class="fw-bold my-2"><span class><i class="fas fa-exclamation-circle"></i> Perhatian
+                            </span></span>
+                          <p class="">
+                            <span class="">
+                              Untuk proses selanjutnya <span class="fw-bold">Mohon Perhatikan Status Pendaftaran
+                                Anda</span>
+                              Jika <span class="fw-bold">Status Pendaftaran</span> anda <span class="fw-bold">Belum
+                                Valid</span>, berarti data pendaftaran nda <span class="fw-bold">Masih di Proses</span>
+                              oleh
+                              Sekolah terkait, jika <span class="fw-bold">Status Pendaftaran Belum Valid</span> sampai
+                              batas
+                              akhir masa Pendaftaran mohon hubungi Dinas Pendidikan
+                            </span>
+                          </p>
+                          <p>Sekian dan Terima Kasih</p>
+                        </div>
+                      </div>
+                      <div ng-if="statusvalidasi===true && statusvalidasi2===true">
+                        <div class="alert alert-success mt-3 no-print" role="alert">
+                          <span class="fw-bold my-2"><span class><i class="fas fa-exclamation-circle"></i> Perhatian
+                            </span></span>
+                          <p class="">
+                            <span class="">
+                              Proses Pendaftaran Telah Selesai <br>
+                              Untuk Pengumuman hasil penerimaan PPDB Buleleng 2022 dapat dilihat di halaman pengumuman
+                              pada
+                              tanggal <span class="fw-bold">1 Juli 2023</span>
+                            </span>
+                          </p>
+                          <p>Sekian dan Terima Kasih</p>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div>
+                      <div ng-if="statusdaftarJalur===true">
+                        <div class="card shadow mb-4 animated--grow-in" id="buktidaftarJalur">
+                          <div class="card-body" ng-if="statusdaftarJalur == true">
+                            <div ng-if="jalur2 == 'afirmasi'" class="card-header py-3 text-center  text-light"
+                              style="background-color: rgba(25,135,84, 1);">
+                              BUKTI PENDAFTARAN
+                            </div>
+                            <div ng-if="jalur2 == 'perpindahan'" class="card-header py-3 text-center  text-light"
+                              style="background-color: rgba(220,53,69, 1);">
+                              BUKTI PENDAFTARAN
+                            </div>
+                            <div ng-if="jalur2 == 'prestasi'" class="card-header py-3 text-center  text-light"
+                              style="background-color: rgba(245, 139, 0, 1);">
+                              BUKTI PENDAFTARAN
+                            </div>
+                            <div class="card-body mx-5 p-5">
+                              <h4 class="text-center">ANDA TERDAFTAR</h4>
+                              <!-- <p ng-if="jalur =='zonasi'" class="text-center">JALUR <b
+                                                                  style="text-transform: uppercase;">{{jalur}}</b> E-PPDB DI <b
+                                                                  style="text-transform: uppercase;">{{pilihanSekolah1}}</b></p> -->
+                              <p ng-if="jalur2 != 'zonasi'" class="text-center">JALUR <b
+                                  style="text-transform: uppercase;">{{jalur2}}</b>
+                                E-PPDB DI <b style="text-transform: uppercase;">{{pilihanSekolah2}}</b></p>
+                              <center>
+                                <table>
+                                  <tr>
+                                    <th scope="row">
+                                      <p>No Pendaftaran</p>
+                                    </th>
+                                    <td>
+                                      <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                    </td>
+                                    <td>
+                                      <p class="text-break">{{formData.no_pendaftaran2}}</p>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </center>
+                              <div class="d-flex justify-content-center py-3">
+                                <img ng-if="CheckPhoto == 'Laki-laki'" src="img/student-male.png" style="max-width: 150px;" alt="">
+                                <img ng-if="CheckPhoto == 'Perempuan'" src="img/student-female.png" style="max-width: 150px;" alt="">
+                              </div>
+                              <center ng-if="statusvalidasi2===false">
+                                <h4 class=" btn mt-2 mb-2" style="background-color: rgba(245, 139, 0, 1);; color: white;">MENUNGGU VERIFIKASI</h4><br>
+                              </center>
+                              <center ng-if="statusvalidasi2===true">
+                                <h4 class=" btn mt-2 mb-2" style="background-color: rgba(25,135,84, 1); color: white;">SUDAH TERVERIFIKASI</h4><br>
+                              </center>
+                              <br>
+                              <center>
+                                <table>
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">
+                                        <p>Nama</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p>{{formData.nama}}</p>
+                                      </td>
+                                    </tr>
+                                    <tr style="width: 100px;">
+                                      <th scope="row">
+                                        <p>NISN</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p>{{formData.nisn}}</p>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">
+                                        <p>Tanggal Lahir</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p>{{formData.tanggal_lahir}}</p>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <a ng-if="statusvalidasi2===true"
+                                  class="btn btn-md bg-primary shadow-sm text-white no-print"
+                                  style="border-radius:50px; width: 200px;" ng-click="printJalur()"><i
+                                    class="fas fa-print"></i>
+                                  Cetak</a>
+                              </center>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-if="statusdaftarZonasi===true">
+                        <div class="card shadow mb-4 animated--grow-in" id="buktidaftarZonasi">
+                          <div class="card-body" ng-if="statusdaftarZonasi===true">
+                            <div class="card-header py-3 text-center  text-light"
+                              style="background-color: rgba(13,110,253, 1);">
+                              BUKTI PENDAFTARAN
+                            </div>
+                            <div class="card-body mx-5 p-5">
+                              <h4 class="text-center">ANDA TERDAFTAR</h4>
+                              <p ng-if="jalur =='zonasi'" class="text-center">JALUR <b
+                                  style="text-transform: uppercase;">{{jalur}}</b>
+                                E-PPDB DI <b style="text-transform: uppercase;">{{pilihanSekolah1}}</b></p>
+                              <p ng-if="jalur != 'zonasi'" class="text-center">JALUR <b
+                                  style="text-transform: uppercase;">{{jalur}}</b>
+                                E-PPDB DI <b style="text-transform: uppercase;">{{pilihanSekolah2}}</b></p>
+                              <center>
+                                <table>
+                                  <tr>
+                                    <th scope="row">
+                                      <p>No Pendaftaran</p>
+                                    </th>
+                                    <td>
+                                      <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                    </td>
+                                    <td>
+                                      <p class="text-break">{{formData.no_pendaftaran}}</p>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </center>
+                              <div class="d-flex justify-content-center py-3">
+                                <img ng-if="CheckPhoto == 'Laki-laki'" src="img/student-male.png" style="max-width: 150px;" alt="">
+                                <img ng-if="CheckPhoto == 'Perempuan'" src="img/student-female.png" style="max-width: 150px;" alt="">
+                              </div>
+                              <center ng-if="statusvalidasi===false">
+                                <h4 class=" btn mt-2 mb-2" style="background-color: rgba(245, 139, 0, 1); color: white;">MENUNGGU VERIFIKASI</h4><br>
+                              </center>
+                              <center ng-if="statusvalidasi===true">
+                                <h4 class=" btn mt-2 mb-2" style="background-color: rgba(25,135,84, 1); color: white;">SUDAH TERVERIFIKASI</h4><br>
+                              </center>
+                              <br>
+                              <center>
+                                <table>
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">
+                                        <p>Nama</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p>{{formData.nama}}</p>
+                                      </td>
+                                    </tr>
+                                    <tr style="width: 100px;">
+                                      <th scope="row">
+                                        <p>NISN</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p>{{formData.nisn}}</p>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">
+                                        <p>Tanggal Lahir</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p>{{formData.tanggal_lahir}}</p>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <a ng-if="statusvalidasi===true"
+                                  class="btn btn-md bg-primary shadow-sm text-white no-print"
+                                  style="border-radius:50px; width: 200px;" ng-click="printZonasi()"><i
+                                    class="fas fa-print"></i>
+                                  Cetak</a>
+                              </center>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Pendaftaran 3 -->
+                    <div ng-if="statusdaftarSwasta == null">
+                      <div
+                      ng-if="statusSKL === true && statusdaftarZonasi===false  || statusdaftarZonasi===true && cekBukaJalurPilihan === true">
+                      
+                      <div ng-if="statusdaftar===false || statusdaftar===true && statusdaftarJalur===false">
+                        
+                        <div class="card shadow mb-4 animated--grow-in">
+                          <div class="card-body mx-5 p-5">
+                            <form>
+                              <div class="form-group row">
+                                <label for="inputPassword" class="col-xl-2 col-form-label">Jalur Seleksi</label>
+                                <div class="col-xl-10 ">
+                                  <div class="row">
+                                    <div class="col-xl-2 mb-2"
+                                      ng-if="cekBukaJalurZonasi === false && statusdaftarZonasi===false">
+                                      <button id="btn-jalur-zonasi" type="button"
+                                        class="btn btn-outline-primary btn-block" ng-click="myZone()">Zonasi</button>
+                                    </div>
+                                    <div class="col-xl-2 mb-2" ng-if="cekBukaJalurAfirmasi === false">
+                                      <button id="btn-jalur-afirmasi" type="button"
+                                        class="btn btn-outline-primary btn-block"
+                                        ng-click="myAfirmation()">Afirmasi</button>
+                                    </div>
+                                    <div class="col-xl-3 mb-2" ng-if="cekBukaJalurPerpindahan === false">
+                                      <button id="btn-jalur-pindahan" type="button"
+                                        class="btn btn-outline-primary btn-block"
+                                        ng-click="myPindahan()">Perpindahan</button>
+                                    </div>
+                                    <div class="col-xl-2 mb-2" ng-if="cekBukaJalurPrestasi === true">
+                                      <button id="btn-jalur-prestasi" type="button"
+                                        class="btn btn-outline-primary btn-block"
+                                        ng-click="myPrestasi()">Prestasi</button>
+                                    </div>
+                                  </div>
+  
+                                </div>
+  
+                              </div>
+                            </form>
+                            <div class="form-zonasi">
+                              <div id="zonasi">
+  
+                                <form>
+                                  <div class="form-group row">
+                                    <label for="inputPassword3" class="col-xl-2 col-form-label">Lokasi Sekolah</label>
+                                    <div class="col-xl-10">
+                                      <div id="map_zonasi" style="width: 100%; height: 50vh;"></div>
+                                    </div>
+                                  </div>
+  
+                                  <div class="form-group row">
+                                    <label for="inputPassword3" class="col-xl-2 col-form-label">Pilihan Sekolah</label>
+                                    <div class="col-xl-10 ">
+  
+                                      <div class="col">
+                                        <div class="input-group mb-3">
+                                          <input style="text-transform: uppercase;" type="text" class="form-control"
+                                            id="smpPil" placeholder="Sekolah Pilihan" value="{{pilihanSekolah1}}"
+                                            readonly>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label for="inputPassword3" class="col-xl-2 col-form-label">Jarak (meter)</label>
+                                    <div class="col-xl-10 ">
+  
+                                      <div class="col">
+                                        <div class="input-group mb-3">
+                                          <input id="jarak" type="text" class="form-control" placeholder="Jarak"
+                                            value="{{jarak}}" readonly>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+  
+  
+                                </form>
+  
+                                <!-- <a id="btn-pendaftaran" data-toggle="modal" data-target="#modal_simpan_zonasi"
+                                  class=" my-5 px-3 py-2 btn btn-sm btn-primary shadow-sm float-right"
+                                  style="border-radius:20px;">
+                                  Daftar Zonasi</a> -->
+  
+                                <a id="btn-pendaftaran" class="btn btn-primary shadow-sm float-end px-3 mt-3"
+                                  style="border-radius:20px;" ng-click="daftarzonasi()">
+                                  Daftar Zonasi</a>
+                              </div>
+                            </div>
+  
+                            <div class="form-afirmasi">
+                              <div id="afirmasi">
+                                <div class="form-group row">
+                                  <label for="inputPassword3" class="col-xl-2 col-form-label">Dokumen Bukti Keikutsertaan
+                                    Program
+                                    :</label>
+                                  <div class="col-xl-10">
+                                    <select name="" id="jenisDokumen" class="form-control">
+                                      <option value="">Pilih Jenis Dokumen</option>
+                                      <option>KIS PBI</option>
+                                      <option>KIP</option>
+                                      <option>PKH</option>
+                                      <option>KPS</option>
+                                      <option>Surat Keterangan DTKS</option>
+                                      <option>Surat Keterangan Penyandang Disabilitas</option>
+                                    </select>
+                                    <br>
+                                    <input required="required" type="file" id="inputberkas" class="p-0">
+                                    <br>
+                                    <div class="ketentuan1">
+                                      <small class="text-danger" style="font-size : 0.78rem"><em>*Ukuran file maksimum :
+                                          2mb
+                                          <br> *Ekstensi file yang diterima : jpg,
+                                          jpeg, png, pdf</em></small>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <label for="inputPassword3" class="col-xl-2 col-form-label">Pilih Sekolah
+                                    Afirmasi</label>
+                                  <div class="col-xl-10">
+                                    <select class="form-control" ng-model="form.idSekolahAfirmasi"
+                                      ng-change="getIdSekolahAfirmasi()">
+                                      <option value="">Pilih Sekolah</option>
+                                      <option class="form-control" ng-repeat="data in dataSekolah | orderBy:'sekolah'"
+                                        value="{{data.npsn}}">
+                                        {{data.sekolah}}</option>
+                                    </select>
+                                    <br>
+                                    <small class="text-danger" style="font-size : 0.78rem"><em> Jika nanti anda tidak
+                                        lulus
+                                        jalur afirmasi sesuai dengan sekolah pilihan anda , maka kemungkinan anda
+                                        akan
+                                        diterima di sekolah dibawah ini , sesuai dengan zonasi anda</em></small>
+                                  </div>
+                                </div>
+  
+  
+                                <div class="form-group row">
+                                  <label for="inputPassword3" class="col-xl-2 col-form-label">Sekolah Zonasi</label>
+                                  <div class="col-xl-10">
+                                    <input style="text-transform: uppercase;" type="text" class="form-control"
+                                      placeholder="Sekolah Pilihan" value="{{pilihanSekolah1}}" readonly>
+                                  </div>
+                                </div>
+                                <a ng-click="daftarafirmasi()"
+                                  class="btn btn-primary shadow-sm float-end px-3 mt-3">Daftar
+                                  Afirmasi</a>
+                              </div>
+                            </div>
+  
+                            <div class="form-prestasi">
+                              <div id="prestasi">
+  
+                                <div class="form-group row">
+                                  <label for="inputPassword3" class="col-xl-2 col-form-label">Jenis Prestasi</label>
+                                  <div class="col-xl-10">
+                                    <div class="">
+                                      <div class="">
+                                        <select name="" id="jenisPrestasi" ng-model="form.jenisPrestasi" class="form-control" ng-change="pilihanjenisprestasi()">
+                                          <option value="">Pilih Jenis Prestasi</option>
+                                          <option value="akademik">Akademik</option>
+                                          <option value="nonakademik">Non Akademik</option>
+                                          <option value="keterampilan">Keterampilan Lainnya</option>
+                                          <option value="rapor">Raport</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <br>
+  
+                                <p ng-if="statusRaport === false && statusKeterampilan === false" class=" text-danger">*
+                                  Masukan 1 prestasi tertinggi yang anda
+                                  miliki</p>
+                                <div class="form-group row"
+                                  ng-if="statusRaport === false && statusKeterampilan === false">
+                                  <label for="inputPassword3" class="col-xl-2 col-form-label">Tingkat Prestasi</label>
+                                  <div class="col-xl-10">
+                                    <select name="" id="tingkatprestasi" class="form-control">
+                                      <option value="">Pilih Tingkat Prestasi</option>
+                                      <option value="Internasional">Internasional</option>
+                                      <option value="Nasional">Nasional</option>
+                                      <option value="Provinsi">Provinsi</option>
+                                      <option value="Kabupaten">Kabupaten</option>
+                                    </select>
+                                  </div>
+                                </div>
+  
+                                <div class="form-group row"
+                                  ng-if="statusRaport === false && statusKeterampilan === false">
+                                  <label for="inputPassword3" class="col-xl-2 col-form-label">Nama Kompetisi /
+                                    Deskripsi</label>
+                                  <div class="col-xl-10">
+                                    <input type="text" class="form-control" id="namaKompetisi"
+                                      placeholder="Masukan Nama Kompetisi / Deskripsi">
+                                  </div>
+                                </div>
+                                <div class="form-group row"
+                                  ng-if="statusRaport === false && statusKeterampilan === false">
+                                  <label for="inputPassword3" class="col-xl-2 col-form-label">Cabang Kompetisi</label>
+                                  <div class="col-xl-10">
+                                    <input type="text" class="form-control" id="cabangKompetisi"
+                                      placeholder="Masukan Cabang Kompetisi">
+                                  </div>
+                                </div>
+                                <div class="form-group row"
+                                  ng-if="statusRaport === false && statusKeterampilan === false">
+                                  <label for="inputPassword3" class="col-xl-2 col-form-label">Peringkat</label>
+                                  <div class="col-xl-10">
+                                    <select name="" id="juaraPrestasi" class="form-control">
+                                      <option value="">Pilih Peringkat</option>
+                                      <option value="Juara I">Juara I</option>
+                                      <option value="Juara II">Juara II</option>
+                                      <option value="Juara III">Juara III</option>
+                                      <option value="Juara Harapan">Juara Harapan</option>
+                                    </select>
+                                  </div>
+                                </div>
+  
+                                <div class="form-group row"
+                                  ng-if="statusRaport === false && statusKeterampilan === false">
+                                  <label for="inputPassword3" class="col-xl-2 col-form-label">Berkas Sertifikat</label>
+                                  <div class="col-xl-10">
+                                    <input type="file" class="inputprestasi" id="berkasprestasi" class="p-0">
+                                    <br>
+                                    <div class="ketentuan1">
+                                      <small class="text-danger" style="font-size : 0.78rem"><em>*Ukuran file maksimum :
+                                          2mb
+                                          <br> *Ekstensi file yang diterima : jpg,
+                                          jpeg, png, pdf</em></small>
+                                    </div>
+  
+                                  </div>
+                                </div>
+                                <div class="form-group row" ng-if="statusKeterampilan === true">
+                                  <label for="inputPassword3" class="col-xl-2 col-form-label">Deskripsi
+                                    Keterampilan</label>
+                                  <div class="col-xl-10">
+                                    <input type="text" class="form-control" id="deskripsi"
+                                      placeholder="Deskripsi Keterampilan">
+                                  </div>
+                                </div>
+                                <br>
+                                <div class="form-group row" ng-if="statusKeterampilan === true">
+                                  <label for="inputPassword3" class="col-xl-2 col-form-label">Berkas Bukti
+                                    Keterampilan</label>
+                                  <div class="col-xl-10">
+                                    <input type="file" class="inputprestasi" class="p-0" id="berkasketerampilan">
+                                    <br>
+                                    <div class="ketentuan1">
+                                      <small class="text-danger" style="font-size : 0.78rem"><em>*Ukuran file maksimum :
+                                          2mb
+                                          <br> *Ekstensi file yang diterima : jpg,
+                                          jpeg, png, pdf</em></small>
+                                    </div>
+  
+                                  </div>
+                                </div>
+  
+                                <div class="form-group row" ng-if="statusRaport === true">
+                                  <label for="inputPassword3" class="col-xl-2 col-form-label">Surat Ketrangan nilai
+                                    Raport</label>
+                                  <div class="col-xl-10">
+                                    <input type="file" class="inputprestasi" id="berkasraport" class="p-0">
+                                    <br>
+                                    <div class="ketentuan1">
+                                      <small class="text-danger" style="font-size : 0.78rem"><em>*Ukuran file maksimum :
+                                          2mb
+                                          <br> *Ekstensi file yang diterima : jpg,
+                                          jpeg, png, pdf</em></small>
+                                    </div>
+  
+                                  </div>
+                                </div>
+                                <div class="form-group row" ng-if="statusRaport === true">
+                                  <label for="inputPassword3" class="col-xl-2 col-form-label">Peringkat Raport</label>
+                                  <div class="col-xl-10">
+                                    <input type="number" class="form-control" id="peringkatraport"
+                                      placeholder="Masukan Peringkat Raport">
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <label for="inputNilaiRpt" class="col-xl-2 col-form-label">Akumulasi Nilai
+                                    Raport</label>
+                                  <div class="col-xl-10">
+                                    <input type="text" class="form-control" id="akumulasiRaportPrestasi"
+                                      placeholder="Masukan Akumulasi Nilai Raport">
+                                    <small class="text-justify text-danger" style="font-size: 0.78rem;"><em>Nilai total
+                                        semua
+                                        mata pelajaran murni nilai raport 5 semester terakhir (Dijumlahkan)</em></small>
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <label class="col-xl-2 col-form-label">Pilihan Sekolah</label>
+                                  <div class="col-xl-10">
+                                    <div class="">
+                                      <div class="input-group mb-3">
+                                        <select class="form-control" ng-model="form.idSekolahPrestasi">
+                                          <option value="">Pilih Sekolah</option>
+                                          <option class="form-control" ng-repeat="data in dataSekolah | orderBy:'sekolah'"
+                                            value="{{data.npsn}}">
+                                            {{data.sekolah}}</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <br>
+                                    <small class="text-danger" style="font-size : 0.78rem"><em> Jika nanti anda tidak
+                                        lulus
+                                        jalur prestasi sesuai dengan sekolah pilihan anda , maka kemungkinan anda
+                                        akan
+                                        diterima di sekolah dibawah ini , sesuai dengan zonasi anda</em></small>
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <label class="col-xl-2 col-form-label">Sekolah Zonasi</label>
+                                  <div class="col-xl-10">
+                                    <div class="input-group mb-3">
+                                      <input style="text-transform: uppercase;" type="text" class="form-control"
+                                        placeholder="Pilihan Sekolah 2 ( sesuai zonasi )" value="{{pilihanSekolah1}}"
+                                        readonly>
+                                    </div>
+                                  </div>
+                                </div>
+                                <a ng-click="daftarprestasi()"
+                                  class="btn btn-primary shadow-sm float-end px-3 mt-3">Daftar
+                                  Prestasi</a>
+                              </div>
+                            </div>
+  
+                            <div class="form-pindahan">
+                              <div id="pindahan">
+                                <div class="form-group row">
+                                  <label for="inputPassword3" class="col-xl-2 col-form-label">Berkas Surat Penugasan Orang
+                                    Tua/Wali</label>
+                                  <div class="col-xl-10">
+                                    <br>
+                                    <input required="required" type="file" id="berkasPerpindahan" class="p-0">
+                                    <div class="ketentuan1">
+                                      <small class="text-danger" style="font-size : 0.78rem"><em>*Ukuran file maksimum :
+                                          2mb
+                                          <br> *Ekstensi file yang diterima : jpg,
+                                          jpeg, png, pdf</em></small>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <label class="col-xl-2 col-form-label">Pilihan Sekolah</label>
+                                  <div class="col-xl-10 ">
+                                    <div class="col">
+                                      <div class="input-group mb-3">
+                                        <select class="form-control" ng-model="form.idSekolahPerpindahan"
+                                          ng-change="getIdSekolahPerpindahan()">
+                                          <option value="">Pilih Sekolah</option>
+                                          <option class="form-control" ng-repeat="data in dataSekolah | orderBy:'sekolah'"
+                                            value="{{data.npsn}}">
+                                            {{data.sekolah}}</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <br>
+                                    <small class="text-danger" style="font-size : 0.78rem"><em> Jika nanti anda tidak
+                                        lulus
+                                        jalur prestasi sesuai dengan sekolah pilihan anda , maka kemungkinan anda
+                                        akan
+                                        diterima di sekolah dibawah ini , sesuai dengan zonasi anda</em></small>
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <label class="col-xl-2 col-form-label">Sekolah Zonasi</label>
+                                  <div class="col-xl-10">
+                                    <div class="input-group mb-3">
+                                      <input style="text-transform: uppercase;" type="text" class="form-control"
+                                        placeholder="Pilihan Sekolah 2 ( sesuai zonasi )" value="{{pilihanSekolah1}}"
+                                        readonly>
+                                    </div>
+                                  </div>
+                                </div>
+  
+                                <a ng-click="daftarperpindahan()"
+                                  class="btn btn-primary shadow-sm float-end px-3 mt-3">Daftar Perpindahan</a>
+                              </div>
+                            </div>
+  
+                          </div>
+                        </div>
+  
+                      </div>
+                    </div>
+                    </div>
+  
+  
+                    <div ng-if="statusdaftarSwasta == true">
+                      <div class="card shadow mb-4 animated--grow-in" ng-if="statusdaftar===false">
+                        <div class="card-body mx-5 p-5">
+                          <div>
+                            <div>
+  
+                              <form>
+                                <div class="form-group row">
+                                  <label for="inputPassword3" class="col-xl-2 col-form-label">Pilihan Sekolah Swasta / Kemenag</label>
+                                  <div class="col-xl-10 ">
+  
+                                    <div class="col">
+                                      <div class="input-group mb-3">
+                                        <select class="form-control" id="pilihanSekolahSwasta">
+                                        <option value="">Pilih Sekolah</option>
+                                        <option class="form-control" ng-repeat="data in dataSekolahSwasta | orderBy:'sekolah'"
+                                          value="{{data.npsn}}">
+                                          {{data.sekolah}}</option>
+                                      </select>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+  
+                              <a id="btn-pendaftaran" class="btn btn-primary shadow-sm float-end px-3 mt-3"
+                                style="border-radius:20px;" ng-click="daftarzonasiSwasta()">
+                                Daftar</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <div ng-if = "cekPendaftaran.aktif == false">
+                    <div class="alert alert-warning mt-3" role="alert">
+                      <span class="fw-bold my-2"><span class><i class="fas fa-exclamation-circle"></i> Perhatian
+                        </span></span>
+                      <p class="">
+                        <span class="">
+                          Pendaftaran Belum Dibuka
+                        </span>
+                      </p>
+                      <p>Sekian dan Terima Kasih</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+            </div>
+            <div id="map" hidden></div>
+            <footer class="ps-5 text-muted no-print" style="margin-bottom: 8vh;">
+              <div>
+                <span class=" fw-bold montserrat" style="font-size: small;"> © 2023 Copyright:</span>
+                <span class=" fw-bold montserrat" style="font-size: small;"
+                  href="https://e-ppdb.bulelengkab.go.id/">e-PPDB</span>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+  
+      </div>
+    </ion-content>
+  </ion-view>

@@ -1,0 +1,108 @@
+<ion-view title="PENDAFTARAN SD Kelas 1" hide-nav-bar="true" cache-view="false" id="welcome">
+    <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+        <div id="wrapper" class="bg-light">
+            <!-- <div id="nav-flex" class="bck no-print">
+                <div class="pt-5" id="sidebar-wrapper">
+                    <div class="d-grid gap-1 mx-3">
+                        <button ui-sref="welcome()" class="btn text-light side-button py-3" type="button"><span
+                                class="float-start ms-3"><i class="fas fa-sign-out-alt"></i> Kembali</span></button>
+                    </div>
+                </div>
+            </div> -->
+
+            <div id="flexbox-wrapper" class="w-100" style="background-image:url('img/bghome.jpg'); ;">
+                <div class="w-100 h-100" id="content-flex">
+                    <div class="d-flex flex-column" style="min-height: 100vh;">
+                        <div id="page-content-wrapper" style="flex :1">
+
+                            <div id="main-content" class="container-fluid mt-5 px-5">
+                                <!-- Page Heading -->
+                                <center>
+                                    <div class="mb-3 no-print">
+                                        <h5 id="page-header" class="text-dark fw-bold mb-0">
+                                            Pendaftaran Siswa ke SD
+                                        </h5>
+                                    </div>
+                                </center>
+                                <div class="alert alert-warning mt-3 no-print" role="alert" ng-if="cekBukaPPDBSD == false">
+                                    <span class="fw-bold my-2"><span class><i class="fas fa-exclamation-circle"></i>
+                                            PENDAFTARAN BELUM DIBUKA
+                                        </span></span>
+                                    <p class="">
+                                        <span class="">
+                                            <br>
+                                            <span class="fw-bold">PENDAFTARAN AKAN DIBUKA PADA TANGAL 19 JUNI 2023</span>
+                                            <br>
+                                            Menu Pendaftaran ini nantinya akan digunakan untuk pihak <span class="fw-bold">TK
+                                            </span>atau <span class="fw-bold">Orang Tua </span> yang akan mendaftarkan
+                                            Anak / Peserta Didik Ke Sekolah Dasar dibawah ini :
+                                            <br><span class="fw-bold">1. SD NEGERI 1 BANJAR JAWA</span>
+                                            <br><span class="fw-bold">2. SD NEGERI 3 BANJAR JAWA</span>
+                                            <br><span class="fw-bold">3. SD NEGERI 1 PAKET AGUNG</span>
+                                        </span>
+                                    </p>
+                                    <p>Sekian dan Terima Kasih</p>
+                                </div>
+                                <div ng-if="cekBukaPPDBSD == true">
+                                    <div class="alert alert-success mt-3 no-print" role="alert">
+                                        <span class="fw-bold my-2"><span class><i class="fas fa-exclamation-circle"></i>
+                                                Perhatian
+                                            </span></span>
+                                        <p class="">
+                                            <span class="">
+                                                <br>
+                                                Menu Pendaftaran ini digunakan untuk pihak <span class="fw-bold">TK
+                                                </span>atau <span class="fw-bold">Orang Tua </span> yang akan mendaftarkan
+                                                Anak / Peserta Didik Ke Sekolah Dasar dibawah ini :
+                                                <br>
+                                                <br><span class="fw-bold">1. SD NEGERI 1 BANJAR JAWA</span>
+                                                <br><span class="fw-bold">2. SD NEGERI 3 BANJAR JAWA</span>
+                                                <br><span class="fw-bold">3. SD NEGERI 1 PAKET AGUNG</span>
+                                            </span>
+                                        </p>
+                                        <p>Sekian dan Terima Kasih</p>
+                                    </div>
+                                    <!-- main content -->
+                                    <div>
+                                        <div class="card shadow mb-4 animated--grow-in">
+                                            <div class="card-body mx-5 p-5">
+                                                <form class="pb-5">
+                                                    <center>
+                                                        <h4 class="fw-bold">FORM NOMOR INDUK KEPENDUDUKAN</h4>
+                                                    </center>
+                                                    <div class="form-group row mb-3">
+                                                        <label for="inputEmail3"
+                                                            class="col-xl-2 col-form-label">NIK</label>
+                                                        <div class="col-xl-10">
+                                                            <input type="text" class="form-control" id="nikSiswaSD"
+                                                                placeholder="Masukan NIK Pendaftar">
+                                                        </div>
+                                                    </div>
+                                                    <center>
+                                                        <a id="btn-pendaftaran" ng-click="ChecknikSiswa()"
+                                                        class="btn btn-primary shadow-sm float-end px-3 mt-3"><i
+                                                            class="fa fa-sm "></i>CEK NIK</a>
+                                                    </center>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="map" hidden></div>
+                    <footer class="ps-5 text-muted no-print" style="margin-bottom: 8vh;">
+                        <div>
+                            <span class=" fw-bold montserrat" style="font-size: small;"> © 2023 Copyright:</span>
+                            <span class=" fw-bold montserrat" style="font-size: small;"
+                                href="https://e-ppdb.bulelengkab.go.id/">e-PPDB</span>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+        </div>
+    </ion-content>
+</ion-view>

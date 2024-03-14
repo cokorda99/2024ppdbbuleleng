@@ -1,0 +1,327 @@
+<ion-view title="Ranking Siswa" hide-nav-bar="true" cache-view="false" id="loginAdmin">
+    <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+        <div id="wrapper" class="bg-light">
+            <div id="nav-flex">
+                <div class="pt-5" id="sidebar-wrapper">
+                    <div class="sidebar gmbr mb-4">
+                        <img src="img/admin.png" alt="">
+                    </div>
+                    <div class="container">
+                        <p id="nama" class="text-center text-light text-break">{{formData.nama}}</p>
+                    </div>
+                    <div class="d-grid gap-1 mx-3">
+                        <button ng-click="beranda()" class="btn text-light side-button py-3" type="button"><span
+                                class="float-start ms-3"><i class="fas fa-home"></i> Beranda</span></button>
+                        <button ng-click="data_siswa()" class="btn text-light side-button side-active shadow py-3"
+                            type="button"><span class="float-start ms-3"><i class="fas fa-user"></i> Data
+                                Siswa</span></button>
+                        <button ui-sref="dataSiswaterdaftarSd()" class="btn text-light side-button py-3"
+                            type="button"><span class="float-start ms-3"><i class="fas fa-user-edit"></i> Data Siswa
+                                Terdaftar</span></button>
+                        <button ui-sref="dataSiswaDiterimaSd()" class="btn text-light side-button py-3"
+                            type="button"><span class="float-start ms-3"><i class="fas fa-trophy"></i> Data Siswa
+                                Diterima</span></button>
+                        <button ng-click="pengaturan()" class="btn text-light side-button py-3" type="button"><span
+                                class="float-start ms-3"><i class="fas fa-cogs"></i> Pengaturan</span></button>
+                        <button ng-click="logout()" class="btn text-light side-button py-3" type="button"><span
+                                class="float-start ms-3"><i class="fas fa-sign-out-alt"></i> Keluar</span></button>
+                    </div>
+                </div>
+            </div>
+            <div id="flexbox-wrapper" class="w-100">
+                <nav class="navbar navbar-expand navbar-light bg-light">
+                    <div class="container-fluid">
+                        <button class="btn" id="menu-toggle" ng-click="toogle()"><i
+                                class="fas fa-align-justify"></i></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                            </ul>
+                            <div class="my-lg-0 d-flex">
+                                <a id="nightmode" ng-click="nightmode()" class="btn text-dark" href=""><i
+                                        id="icon-night" class="far fa-sun" style="font-size:24px"
+                                        data-bs-toggle="tooltip" data-placement="top" title="Light/Night"></i></a>
+                                <a class="btn text-dark" href=""><i class="far fa-question-circle"
+                                        style="font-size:24px" data-bs-toggle="tooltip" data-placement="top"
+                                        title="Bantuan"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <div class="w-100 h-100" id="content-flex">
+                    <div class="d-flex flex-column" style="min-height: 100vh;">
+
+                        <div id="page-content-wrapper" style="flex :1">
+
+                            <div id="main-content" class="container-fluid mt-5 px-5"
+                                style="min-height:100vh !important;">
+                                <div class=" ">
+                                    <div class="mb-3">
+                                        <h5 id="page-header" class="text-dark fw-bold mb-0">
+                                            Ranking Calon Siswa Kelas 1
+                                        </h5>
+                                        <span id="small-header" class="text-muted">{{formData.sekolah}}</span>
+                                    </div>
+                                    <div class="card shadow-sm mb-4 animated--grow-in">
+                                        <div class="card-header py-3 bg-white">
+                                            <div class="row">
+                                                <div id="icon-group-1" class="col-xl-8">
+                                                    <a ng-click="cetak()"
+                                                        class="btn btn-sm btn-primary shadow-sm px-3"><i
+                                                            class="fa fa-print fa-sm "></i> Export XLS</a>
+                                                    <a ng-click="getRank()"
+                                                        class="btn btn-sm btn-outline-secondary shadow-sm px-3"><i
+                                                            class="fa fa-print fa-sm "></i> Get Data Rank</a>
+                                                </div>
+                                                <div id="icon-group-2" class="col-xl-4 d-flex">
+                                                    <div class="input-group input-group-sm float-end me-2 flex-grow-1">
+                                                        <input type="text" class="search form-control"
+                                                            placeholder="Search" aria-label="Search"
+                                                            aria-describedby="basic-addon2" ng-model="searchData">
+                                                        <span class="input-group-text" id="basic-addon2"><i
+                                                                class="fa-solid fa-magnifying-glass"></i></span>
+                                                    </div>
+                                                    <a onclick="history.back()" id="btn-back"
+                                                        class="btn btn-sm btn-outline-primary shadow-sm float-end px-3 ">Kembali</a>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div id="icon-group-1" class="col-xl-8">
+                                                    <a ng-click="" class="btn btn-sm btn-warning shadow-sm px-3"><i
+                                                            class="fa fa-trophy fa-sm "></i> Zonasi</a>
+                                                    <a ng-click="" class="btn btn-sm btn-success shadow-sm px-3"><i
+                                                            class="fa fa-trophy fa-sm "></i> Afirmasi</a>
+                                                    <a ng-click="" class="btn btn-sm btn-danger shadow-sm px-3"><i
+                                                            class="fa fa-trophy fa-sm "></i> Perpindahan</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div class="table-responsive-sm">
+                                                <table class="table table-fit" id="tbl-data-siswa-sd">
+                                                    <thead class="">
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>NIK</th>
+                                                            <th><span>Nama</span></th>
+                                                            <th>Jalur</th>
+                                                            <th>Nomor Telp Orang Tua</th>
+                                                            <th><span>Status Verifikasi</span></th>
+                                                            <th>Aksi</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr
+                                                            ng-repeat="data in siswa | orderBy: 'jalurSiswa' | filter:searchData">
+                                                            <td>{{$index+1}}</td>
+                                                            <td><span>'{{data.nikSiswa}}</span></td>
+                                                            <td><span>{{data.namaSiswa}}</span></td>
+                                                            <td><span>{{data.jalurSiswa}}</span></td>
+                                                            <td><span>'{{data.noHpSiswa}}</span></td>
+                                                            <td ng-if="data.statusVerif===true">
+                                                                <!-- <p style="color: green;">LOLOS</p> -->
+                                                                <div class="container bg-success py-1">
+                                                                    <p class="text-center text-light my-1">LOLOS</p>
+                                                                </div>
+
+                                                            </td>
+                                                            <td ng-if="data.statusVerif===false">
+                                                                <!-- <p style="color: red;">TIDAK LOLOS</p> -->
+                                                                <div class="container bg-danger py-1">
+                                                                    <p class="text-center text-light my-1">TIDAK LOLOS
+                                                                    </p>
+                                                                </div>
+
+                                                            </td>
+                                                            <td>
+
+                                                                <a data-id="{{data.$id}}" data-bs-toggle="modal"
+                                                                    data-bs-target="#modal_edit" title="Detail"
+                                                                    class="detailData btn bg-warning"><span
+                                                                        class="fas fa-pen text-light"></span></a>
+
+                                                                <!-- <a data-id="{{data.$id}}" data-bs-toggle="modal"
+                                                                    data-bs-target="#modal_hapus" title="Delete"
+                                                                    class="removeData btn bg-danger "><span
+                                                                        class="fas fa-fw fa-trash text-light"></span></a> -->
+
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                                <!--modal edit -->
+                                                <div class="modal fade" id="modal_edit" tabindex="-1" role="dialog"
+                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header border-0">
+                                                                <h5 class="modal-title fw-bold text-dark"
+                                                                    id="exampleModalLabel">Verifikasi Data Siswa
+                                                                </h5>
+                                                                <button type="button" class="btn-close text-light"
+                                                                    data-bs-dismiss="modal" aria-label="Close"
+                                                                    ng-click="clearInput()"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form>
+                                                                    <div class="form-group row mb-3">
+                                                                        <label for="inputEmail3"
+                                                                            class="col-xl-2 col-form-label">NISN</label>
+                                                                        <div class="col-xl-10">
+                                                                            <input readonly id="nisnEdit" type="number"
+                                                                                class="form-control">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group row mb-3">
+                                                                        <label for="inputEmail3"
+                                                                            class="col-xl-2 col-form-label">NIK</label>
+                                                                        <div class="col-xl-10">
+                                                                            <input id="nikEdit" type="number"
+                                                                                class="form-control" readonly>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group row mb-3">
+                                                                        <label for="inputEmail3"
+                                                                            class="col-xl-2 col-form-label">Nama</label>
+                                                                        <div class="col-xl-10">
+                                                                            <input id="namaEdit" type="text"
+                                                                                class="form-control" readonly>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group row mb-3">
+                                                                        <label for="inputEmail3"
+                                                                            class="col-xl-2 col-form-label">Tanggal
+                                                                            Lahir</label>
+                                                                        <div class="col-xl-10">
+                                                                            <input id="tglLahirEdit" type="date"
+                                                                                class="form-control" readonly>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group row mb-3">
+                                                                        <label for="inputEmail3"
+                                                                            class="col-xl-2 col-form-label">Tempat
+                                                                            Lahir</label>
+                                                                        <div class="col-xl-10">
+                                                                            <input id="tempatLahirEdit" type="text"
+                                                                                class="form-control" readonly>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group row mb-3">
+                                                                        <label for="inputEmail3"
+                                                                            class="col-xl-2 col-form-label">Kecamatan</label>
+                                                                        <div class="col-xl-10">
+                                                                            <input id="KecamatanEdit" type="text"
+                                                                                class="form-control" readonly>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group row mb-3">
+                                                                        <label for="inputEmail3"
+                                                                            class="col-xl-2 col-form-label">Desa</label>
+                                                                        <div class="col-xl-10">
+                                                                            <input id="DesaEdit" type="text"
+                                                                                class="form-control" readonly>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!-- <div class="form-group row mb-3">
+                                                                        <label for="inputEmail3"
+                                                                            class="col-xl-2 col-form-label">File</label>
+                                                                        <div class="col-xl-10">
+                                                                            <button ng-click="lihatFileKK()"
+                                                                                class="btn btn-success"><i
+                                                                                    class="fa fa-file"></i>
+                                                                                FILE Kartu Keluarga </button>
+                                                                        </div>
+                                                                    </div> -->
+
+
+
+                                                                    <!-- <div class="form-group row mb-3">
+                                                                        <label for="inputEmail3"
+                                                                            class="col-xl-2 col-form-label">File</label>
+                                                                        <div class="col-xl-10">
+                                                                            <button ng-click="lihatFilelain()"
+                                                                                class="btn btn-primary"><i
+                                                                                    class="fa fa-file"></i>
+                                                                                FILE Afirmasi atau Perpindahan </button>
+                                                                        </div>
+                                                                    </div> -->
+
+
+                                                                </form>
+                                                            </div>
+                                                            <div class="modal-footer border-0">
+                                                                <button type="button" class="btn btn-danger"
+                                                                    data-bs-dismiss="modal"
+                                                                    ng-click="BatalVerifikasi()">Batal
+                                                                    Verifikasi</button>
+                                                                <button type="button" ng-click="Verifikasi()"
+                                                                    class="btn btn-success">Verifikasi</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--modal hapus  -->
+                                                <div class="modal fade" id="modal_hapus" tabindex="-1" role="dialog"
+                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header border-0">
+                                                                <h5 class="modal-title fw-bold text-dark"
+                                                                    id="exampleModalLabel">Hapus Data
+                                                                </h5>
+                                                                <button type="button" class="btn-close text-light"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <center>
+                                                                    <i class="fas fa-exclamation-triangle text-warning my-3"
+                                                                        style="font-size:50px;"></i>
+                                                                    <h6>Apakah Siswa yakin ingin menghapus data <span
+                                                                            class="fw-bold">Siswa
+                                                                        </span>?, data yg sudah
+                                                                        di
+                                                                        hapus tidak dapat dikembalikan lagi</h6>
+                                                                </center>
+
+                                                            </div>
+                                                            <div class="modal-footer border-0">
+                                                                <button type="button" class="btn btn-outline-secondary"
+                                                                    data-bs-dismiss="modal">Tutup</button>
+                                                                <button type="button"
+                                                                    class="deleteRecord btn btn-danger">Hapus</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <footer class="ps-5 text-muted" style="margin-bottom: 8vh;">
+                            <div>
+                                <span class=" fw-bold montserrat" style="font-size: small;"> © 2023 Copyright:</span>
+                                <span class=" fw-bold montserrat" style="font-size: small;"
+                                    href="https://e-ppdb.bulelengkab.go.id/">e-PPDB</span>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </ion-content>
+</ion-view>

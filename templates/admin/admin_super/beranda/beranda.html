@@ -1,0 +1,667 @@
+<ion-view title="Beranda Admin" hide-nav-bar="true" cache-view="false" id="loginAdmin">
+  <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+    <div id="wrapper" class="bg-light">
+      <div id="nav-flex" class="bck">
+        <div class="pt-5 " id="sidebar-wrapper">
+          <div class="sidebar gmbr mb-4">
+            <img src="img/buleleng.png" alt="">
+          </div>
+          <div class="container">
+            <p id="nama" class="text-center text-light text-break">{{formData.nama}}</p>
+          </div>
+          <div class="d-grid gap-1 mx-3">
+            <button ui-serf="berandaAdminSuper()" class="btn text-light side-button side-active shadow py-3"
+              type="button"><span class="float-start ms-3"><i class="fas fa-home"></i> Beranda</span></button>
+            <button data-bs-toggle="collapse" href="#data-admin" role="button" aria-expanded="false"
+              aria-controls="data-admin" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-user-edit"></i> Data Admin</span><i
+                class="ms-4 fas fa-angle-down float-end"></i></button>
+            <div class="collapse" id="data-admin">
+              <div class="d-grid gap-1">
+                <button ui-sref="dataAdminSd()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> SD</span></button>
+                <button ui-sref="dataAdminSmp()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> SMP</span></button>
+                <button ui-sref="dataAdminSuperDinas()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> Super</span></button>
+              </div>
+            </div>
+            <button ui-sref="dataSiswa()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-users"></i> Data Siswa</span></button>
+            <button data-bs-toggle="collapse" href="#data-siswa" role="button" aria-expanded="false"
+              aria-controls="data-siswa" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-users"></i> Data Pendaftar</span><i
+                class="ms-4 fas fa-angle-down float-end"></i></button>
+            <div class="collapse" id="data-siswa">
+              <div class="d-grid gap-1">
+                <button ui-sref="dataPendaftarSeluruhSMP()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-users"></i> Seluruh</span></button>
+                <button ui-sref="dataPendaftarAdminSuper()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-users"></i> Per SMP</span></button>
+              </div>
+            </div>
+            <button data-bs-toggle="collapse" href="#data-sekolah" role="button" aria-expanded="false"
+              aria-controls="data-sekolah" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-school"></i> Data Sekolah</span><i
+                class="ms-4 fas fa-angle-down float-end"></i></button>
+            <div class="collapse" id="data-sekolah">
+              <div class="d-grid gap-1">
+                <button ui-sref="dataSekolahSd()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-school"></i> SD</span></button>
+                <button ui-sref="dataSekolahSmp()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-school"></i> SMP</span></button>
+              </div>
+            </div>
+            <button ui-sref="pengaturanAdminSuper()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-cogs"></i> Pengaturan</span></button>
+            <button ng-click="logout()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-sign-out-alt"></i> Keluar</span></button>
+          </div>
+        </div>
+      </div>
+      <div id="flexbox-wrapper" class="w-100">
+        <nav class="navbar navbar-expand navbar-light bg-light">
+          <div class="container-fluid">
+            <button class="btn" id="menu-toggle" ng-click="toogle()"><i class="fas fa-align-justify"></i></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              </ul>
+              <div class="my-lg-0 d-flex">
+                <a id="nightmode" ng-click="nightmode()" class="btn text-dark" href=""><i id="icon-night"
+                    class="far fa-sun" style="font-size:24px" data-bs-toggle="tooltip" data-placement="top"
+                    title="Light/Night"></i></a>
+                <a class="btn text-dark" href=""><i class="far fa-question-circle" style="font-size:24px"
+                    data-bs-toggle="tooltip" data-placement="top" title="Bantuan"></i></a>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <div class="w-100 h-100" id="content-flex">
+          <div class="d-flex flex-column" style="min-height: 100vh;">
+
+            <div id="page-content-wrapper" style="flex :1">
+
+              <div id="main-content" class="container-fluid mt-5 px-5">
+                <div class="">
+                  <div class="mb-3">
+                    <h5 id="page-header" class="text-dark fw-bold mb-0">
+                      Beranda
+                    </h5>
+                    <span id="small-header" class="text-muted">{{formData.nama}}</span>
+                  </div>
+
+                  <!-- <a class="btn btn-sm btn-success shadow-sm px-3" data-bs-toggle="modal"
+                    data-bs-target="#modal_tambah"><i class="fa fa-plus fa-sm"></i>
+                    Tambah Data Siswa Luar Rayon</a> -->
+
+                  <a ui-sref="dataSiswaPenyaluran()" class="btn btn-sm btn-danger shadow-sm px-3"><i
+                      class="fa fa-users fa-sm"></i>
+                    Data Siswa Penyaluran</a>
+
+
+                  <!-- <a class="btn btn-sm btn-success shadow-sm px-3" ng-click="jalanUpdateSiswa()"><i class="fa fa-plus fa-sm"></i>
+                    Jalan</a> -->
+
+                  <div class="accordion accordion-flush mb-4" id="accordionPanelsStayOpen">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                          aria-controls="panelsStayOpen-collapseOne">
+                          Informasi Umum
+                        </button>
+                      </h2>
+
+                      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                        aria-labelledby="panelsStayOpen-headingOne">
+                        <div class="accordion-body  m-0 p-0">
+                          <div class="row">
+                            <div class="col-lg-12 mb-4">
+                              <div class="row">
+                                <div class="col-lg-3 mb-4" ui-sref="dataSiswaLuarRayon()">
+                                  <div id="menu1" class="card shadow-sm card-border-light card-border-primary">
+                                    <div class="card-body">
+                                      <div class="row">
+                                        <div class="col">
+                                          <p class="text-small text-muted fw-bold">Registrasi Siswa luar Rayon</p>
+                                          <span class="fw-bold fs-5">{{formJumlah.jumlah_siswaLuarRayon}}</span>
+                                        </div>
+                                        <div class="col">
+                                          <div class="float-end bg-primary py-3 px-3 rounded-circle shadow"><i
+                                              class="fa-solid fa-user-shield text-light"></i></div>
+                                        </div>
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-3 mb-4" ui-sref="dataSiswa()">
+                                  <div id="menu1" class="card shadow-sm card-border-light card-border-primary">
+                                    <div class="card-body">
+                                      <div class="row">
+                                        <div class="col">
+                                          <p class="text-small text-muted fw-bold">Jumlah Siswa</p>
+                                          <span class="fw-bold fs-5">{{formJumlah.jumlah_siswa}}</span>
+                                        </div>
+                                        <div class="col">
+                                          <div class="float-end bg-primary py-3 px-3 rounded-circle shadow"><i
+                                              class="fa-solid fa-user text-light px-1"></i></div>
+                                        </div>
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-3 mb-4" ui-sref="dataPendaftarSeluruhSMP()">
+                                  <div id="menu1" class="card shadow-sm card-border-light card-border-success">
+                                    <div class="card-body">
+                                      <div class="row">
+                                        <div class="col">
+                                          <p class="text-small text-muted fw-bold">Sudah Mendaftar</p>
+                                          <span class="fw-bold fs-5">{{formJumlah.jumlah_siswaTerdaftar}}</span>
+                                        </div>
+                                        <div class="col">
+                                          <div class="float-end bg-success py-3 px-3 rounded-circle shadow"><i
+                                              class="fa-solid fa-user text-light px-1"></i></div>
+                                        </div>
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-3 mb-4" ui-sref="dataSiswaBelumDaftar()">
+                                  <div id="menu1" class="card shadow-sm card-border-light card-border-danger">
+                                    <div class="card-body">
+                                      <div class="row">
+                                        <div class="col">
+                                          <p class="text-small text-muted fw-bold">Belum Mendaftar</p>
+                                          <span class="fw-bold fs-5">{{formJumlah.jumlah_siswaBelumDaftar}}</span>
+                                        </div>
+                                        <div class="col">
+                                          <div class="float-end bg-danger py-3 px-3 rounded-circle shadow"><i
+                                              class="fa-solid fa-user text-light px-1"></i></div>
+                                        </div>
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                            <div class="col-lg-12">
+                              <div class="row">
+                                <div class="col-lg-6 mb-4">
+                                  <div id="chart-s" class="card shadow-sm">
+                                    <div class="card-header bg-white">
+                                      <div class="row">
+                                        <div class="col-sm-12">
+                                          <span class="fw-light float-start text-dark"><i
+                                              class="fa-solid fa-chart-simple"></i> Persebaran Seluruh Pendaftar Per
+                                            Jalur</span>
+                                          <a ng-click='dataPendaftarSeluruhSMP()'
+                                            class="btn btn-sm btn-outline-primary shadow-sm float-end ms-2 px-3 "><i
+                                              class="fa-solid fa-arrows-rotate"></i></a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="card-body">
+                                      <canvas id="chart-jalur" width="100" height="50"></canvas>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-3 mb-4">
+                                  <div id="chart-s" class="card shadow-sm">
+                                    <div class="card-header bg-white">
+                                      <div class="row">
+                                        <div class="col-sm-12">
+                                          <span class="fw-light float-start text-dark"><i
+                                              class="fa-solid fa-chart-simple"></i> Ratio Status Pendaftar</span>
+                                          <a ng-click='dataPendaftarSeluruhSMP()'
+                                            class="btn btn-sm btn-outline-primary shadow-sm float-end px-3 "><i
+                                              class="fa-solid fa-arrows-rotate"></i></a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="card-body">
+                                      <canvas id="chart-pendaftar" width="100" height="108"></canvas>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-3 mb-4">
+                                  <div id="jadwal" class="card shadow-sm">
+                                    <div class="card-header bg-white">
+                                      <span class="fw-light text-dark"><i class="fa-solid fa-calendar-days"></i> Jadwal
+                                        e-PPDB</span>
+                                    </div>
+                                    <div class="card-body">
+                                      <ul class="nav nav-pills nav-fill mb-3" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                          <button class="nav-link active" id="pendaftaran-tab" data-bs-toggle="tab"
+                                            data-bs-target="#pendaftaran" type="button" role="tab"
+                                            aria-controls="pendaftaran" aria-selected="true">Pendaftaran</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                          <button class="nav-link" id="perankingan-tab" data-bs-toggle="tab"
+                                            data-bs-target="#perankingan" type="button" role="tab"
+                                            aria-controls="perankingan" aria-selected="false">Pemetaan</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                          <button class="nav-link" id="pengumuman-tab" data-bs-toggle="tab"
+                                            data-bs-target="#pengumuman" type="button" role="tab"
+                                            aria-controls="pengumuman" aria-selected="false">Pengumuman</button>
+                                        </li>
+                                      </ul>
+                                      <div class="tab-content" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="pendaftaran" role="tabpanel"
+                                          aria-labelledby="pendaftaran-tab">
+                                          <ul class="list-group list-group-flush">
+                                            <li class="list-group-item font-weight-normal montserrat">Jalur Zonasi
+                                              <ul>
+                                                <li class="ms-2 font-weight-normal montserrat "
+                                                  style="font-size : 14px">Pendaftaran :
+                                                  19 s.d. 21 Juni 2023</li>
+                                              </ul>
+                                            </li>
+                                            <li class="list-group-item font-weight-normal montserrat">Jalur Afirmasi
+                                              <ul>
+                                                <li class="ms-2 font-weight-normal montserrat "
+                                                  style="font-size : 14px">Pendaftaran :
+                                                  19 s.d. 21 Juni 2023</li>
+                                              </ul>
+                                            </li>
+                                            <li class="list-group-item font-weight-normal montserrat">Jalur Perpindahan
+                                              Tugas Orang Tua
+                                              <ul>
+                                                <li class="ms-2 font-weight-normal montserrat "
+                                                  style="font-size : 14px">Pendaftaran :
+                                                  21 s.d. 22 Juni 2023</li>
+                                              </ul>
+                                            </li>
+                                            <li class="list-group-item font-weight-normal montserrat">Jalur Prestasi
+                                              <ul>
+                                                <li class="ms-2 font-weight-normal montserrat "
+                                                  style="font-size : 14px">Pendaftaran :
+                                                  26 s.d 27 Juni 2023</li>
+                                              </ul>
+                                            </li>
+                                          </ul>
+                                        </div>
+                                        <div class="tab-pane fade" id="perankingan" role="tabpanel"
+                                          aria-labelledby="perankingan-tab">
+                                          <ul class="list-group list-group-flush">
+                                            <li class="list-group-item font-weight-normal montserrat">Pemetaan
+                                              <ul>
+                                                <li class="ms-2 font-weight-normal montserrat "
+                                                  style="font-size : 14px">27 Juni s/d 29
+                                                  Juni 2022</li>
+                                              </ul>
+                                            </li>
+                                          </ul>
+                                        </div>
+                                        <div class="tab-pane fade" id="pengumuman" role="tabpanel"
+                                          aria-labelledby="pengumuman-tab">
+                                          <ul class="list-group list-group-flush">
+                                            <li class="list-group-item font-weight-normal montserrat">Pengumuman
+                                              <ul>
+                                                <li class="ms-2 font-weight-normal montserrat "
+                                                  style="font-size : 14px">1 Juli 2023
+                                                </li>
+                                              </ul>
+                                            </li>
+                                          </ul>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true"
+                          aria-controls="panelsStayOpen-collapseTwo">
+                          Informasi Grafik Persebaran Pendaftar
+                        </button>
+                      </h2>
+                      <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show"
+                        aria-labelledby="panelsStayOpen-headingTwo">
+                        <div class="accordion-body m-0 p-0">
+                          <div class="row">
+                            <div class="col-lg-12">
+                              <div class="row">
+                                <div class="col-lg-12 mb-4">
+                                  <div id="chart-s" class="card shadow-sm">
+                                    <div class="card-header bg-white">
+                                      <div class="row">
+                                        <div class="col-sm-12">
+                                          <span class="fw-light float-start text-dark"><i
+                                              class="fa-solid fa-chart-simple"></i> Persebaran Pendaftar Per
+                                            Kecamatan</span>
+                                          <a ng-click='dataPendaftarSeluruhSMP()'
+                                            class="btn btn-sm btn-outline-primary shadow-sm float-end ms-2 px-3 "><i
+                                              class="fa-solid fa-arrows-rotate"></i></a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="card-body">
+                                      <canvas id="chart-persebaran-kecamatan" width="100" height="50"></canvas>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                  <div id="chart-s" class="card shadow-sm">
+                                    <div class="card-header bg-white">
+                                      <div class="row">
+                                        <div class="col-sm-12">
+                                          <span class="fw-light float-start text-dark"><i
+                                              class="fa-solid fa-chart-simple"></i> Persebaran Pendaftar Per Jalur
+                                            Kecamatan Banjar</span>
+                                          <a ng-click='dataPendaftarSeluruhSMP()'
+                                            class="btn btn-sm btn-outline-primary shadow-sm float-end ms-2 px-3 "><i
+                                              class="fa-solid fa-arrows-rotate"></i></a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="card-body">
+                                      <canvas id="chart-perjalur-kecamatan-banjar" width="100" height="50"></canvas>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                  <div id="chart-s" class="card shadow-sm">
+                                    <div class="card-header bg-white">
+                                      <div class="row">
+                                        <div class="col-sm-12">
+                                          <span class="fw-light float-start text-dark"><i
+                                              class="fa-solid fa-chart-simple"></i> Persebaran Pendaftar Per Jalur
+                                            Kecamatan Buleleng</span>
+                                          <a ng-click='dataPendaftarSeluruhSMP()'
+                                            class="btn btn-sm btn-outline-primary shadow-sm float-end ms-2 px-3 "><i
+                                              class="fa-solid fa-arrows-rotate"></i></a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="card-body">
+                                      <canvas id="chart-perjalur-kecamatan-buleleng" width="100" height="50"></canvas>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                  <div id="chart-s" class="card shadow-sm">
+                                    <div class="card-header bg-white">
+                                      <div class="row">
+                                        <div class="col-sm-12">
+                                          <span class="fw-light float-start text-dark"><i
+                                              class="fa-solid fa-chart-simple"></i> Persebaran Pendaftar Per Jalur
+                                            Kecamatan Busung Biu</span>
+                                          <a ng-click='dataPendaftarSeluruhSMP()'
+                                            class="btn btn-sm btn-outline-primary shadow-sm float-end ms-2 px-3 "><i
+                                              class="fa-solid fa-arrows-rotate"></i></a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="card-body">
+                                      <canvas id="chart-perjalur-kecamatan-busungbiu" width="100" height="50"></canvas>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                  <div id="chart-s" class="card shadow-sm">
+                                    <div class="card-header bg-white">
+                                      <div class="row">
+                                        <div class="col-sm-12">
+                                          <span class="fw-light float-start text-dark"><i
+                                              class="fa-solid fa-chart-simple"></i> Persebaran Pendaftar Per Jalur
+                                            Kecamatan Gerokgak</span>
+                                          <a ng-click='dataPendaftarSeluruhSMP()'
+                                            class="btn btn-sm btn-outline-primary shadow-sm float-end ms-2 px-3 "><i
+                                              class="fa-solid fa-arrows-rotate"></i></a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="card-body">
+                                      <canvas id="chart-perjalur-kecamatan-gerokgak" width="100" height="50"></canvas>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                  <div id="chart-s" class="card shadow-sm">
+                                    <div class="card-header bg-white">
+                                      <div class="row">
+                                        <div class="col-sm-12">
+                                          <span class="fw-light float-start text-dark"><i
+                                              class="fa-solid fa-chart-simple"></i> Persebaran Pendaftar Per Jalur
+                                            Kecamatan Kubutambahan</span>
+                                          <a ng-click='dataPendaftarSeluruhSMP()'
+                                            class="btn btn-sm btn-outline-primary shadow-sm float-end ms-2 px-3 "><i
+                                              class="fa-solid fa-arrows-rotate"></i></a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="card-body">
+                                      <canvas id="chart-perjalur-kecamatan-kubutambahan" width="100"
+                                        height="50"></canvas>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                  <div id="chart-s" class="card shadow-sm">
+                                    <div class="card-header bg-white">
+                                      <div class="row">
+                                        <div class="col-sm-12">
+                                          <span class="fw-light float-start text-dark"><i
+                                              class="fa-solid fa-chart-simple"></i> Persebaran Pendaftar Per Jalur
+                                            Kecamatan Sawan</span>
+                                          <a ng-click='dataPendaftarSeluruhSMP()'
+                                            class="btn btn-sm btn-outline-primary shadow-sm float-end ms-2 px-3 "><i
+                                              class="fa-solid fa-arrows-rotate"></i></a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="card-body">
+                                      <canvas id="chart-perjalur-kecamatan-sawan" width="100" height="50"></canvas>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                  <div id="chart-s" class="card shadow-sm">
+                                    <div class="card-header bg-white">
+                                      <div class="row">
+                                        <div class="col-sm-12">
+                                          <span class="fw-light float-start text-dark"><i
+                                              class="fa-solid fa-chart-simple"></i> Persebaran Pendaftar Per Jalur
+                                            Kecamatan Seririt</span>
+                                          <a ng-click='dataPendaftarSeluruhSMP()'
+                                            class="btn btn-sm btn-outline-primary shadow-sm float-end ms-2 px-3 "><i
+                                              class="fa-solid fa-arrows-rotate"></i></a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="card-body">
+                                      <canvas id="chart-perjalur-kecamatan-seririt" width="100" height="50"></canvas>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                  <div id="chart-s" class="card shadow-sm">
+                                    <div class="card-header bg-white">
+                                      <div class="row">
+                                        <div class="col-sm-12">
+                                          <span class="fw-light float-start text-dark"><i
+                                              class="fa-solid fa-chart-simple"></i> Persebaran Pendaftar Per Jalur
+                                            Kecamatan Sukasada</span>
+                                          <a ng-click='dataPendaftarSeluruhSMP()'
+                                            class="btn btn-sm btn-outline-primary shadow-sm float-end ms-2 px-3 "><i
+                                              class="fa-solid fa-arrows-rotate"></i></a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="card-body">
+                                      <canvas id="chart-perjalur-kecamatan-sukasada" width="100" height="50"></canvas>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                  <div id="chart-s" class="card shadow-sm">
+                                    <div class="card-header bg-white">
+                                      <div class="row">
+                                        <div class="col-sm-12">
+                                          <span class="fw-light float-start text-dark"><i
+                                              class="fa-solid fa-chart-simple"></i> Persebaran Pendaftar Per Jalur
+                                            Kecamatan Tejakula</span>
+                                          <a ng-click='dataPendaftarSeluruhSMP()'
+                                            class="btn btn-sm btn-outline-primary shadow-sm float-end ms-2 px-3 "><i
+                                              class="fa-solid fa-arrows-rotate"></i></a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="card-body">
+                                      <canvas id="chart-perjalur-kecamatan-tejakula" width="100" height="50"></canvas>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+                    <!-- <div style="width:5%;">
+                      <a class="btn btn-sm btn-primary shadow-sm px-3" ng-click="perangkinganZonasi()"><i class="fa fa-champ fa-sm"></i>
+                      Perangkingan Zonasi Seluruh</a>
+                    </div>
+
+
+                    <div style="width:5%;">
+                      <a class="btn btn-sm btn-warning shadow-sm px-3" ng-click="perangkinganJalur()"><i class="fa fa-champ fa-sm"></i>
+                      Perangkingan Afirmasi , Perpindahan , Prestasi Seluruh</a>
+                    </div> -->
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+            <footer class="ps-5 text-muted" style="margin-bottom: 8vh;">
+              <div>
+                <span class=" fw-bold montserrat" style="font-size: small;"> © 2023 Copyright:</span>
+                <span class=" fw-bold montserrat" style="font-size: small;"
+                  href="https://e-ppdb.bulelengkab.go.id/">e-PPDB</span>
+              </div>
+            </footer>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="modal_tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <h5 class="modal-title fw-bold" id="exampleModalLabel" style="color: black;">Registrasi Siswa Non Dapodik
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="form-tambah-siswa-rayon">
+              <div class="form-group row mb-3">
+                <label for="inputEmail3" class="col-xl-2 col-form-label" style="color: black;">Nama</label>
+                <div class="col-xl-10">
+                  <input type="text" class="form-control" id="namaSiswa" placeholder="Masukan Nama Lengkap">
+                </div>
+              </div>
+              <div class="form-group row mb-3">
+                <label for="inputEmail3" class="col-xl-2 col-form-label" style="color: black;">NISN</label>
+                <div class="col-xl-10">
+                  <input type="text" class="form-control" id="nisnSiswa" placeholder="Masukan NISN">
+                </div>
+              </div>
+              <div class="form-group row mb-3">
+                <label for="inputEmail3" class="col-xl-2 col-form-label" style="color: black;">NIK</label>
+                <div class="col-xl-10">
+                  <input type="text" class="form-control" id="nikSiswa" placeholder="Masukan NIK">
+                </div>
+              </div>
+              <div class="form-group row mb-3">
+                <label for="inputEmail3" class="col-xl-2 col-form-label" style="color: black;">Tanggal
+                  Lahir</label>
+                <div class="col-xl-10">
+                  <input type="date" class="form-control" id="tglLahirSiswa" placeholder="yyyy-mm-dd">
+                </div>
+              </div>
+              <div class="form-group row mb-3">
+                <label for="inputEmail3" class="col-xl-2 col-form-label" style="color: black;">Tempat
+                  Lahir</label>
+                <div class="col-xl-10">
+                  <input type="text" class="form-control" id="tempatLahirSiswa" placeholder="Masukan Tempat lahir">
+
+                </div>
+              </div>
+              <small class="text-danger fst-italic">Isi form dibwah ini dengan tempat tinggal anda saat ini</small>
+              <div class="form-group row mb-3">
+                <label for="inputEmail3" class="col-xl-2 col-form-label" style="color: black;">Kecamatan</label>
+                <div class="col-xl-10">
+                  <select class="form-select" ng-model="form.idKecamatan" ng-change="getIdKecamatan()">
+                    <option value="">Pilih Kecamatan</option>
+                    <option class="form-control" ng-repeat="data in dataKecamatan | orderBy:'nama_kecamatan'"
+                      value="{{data.id_kecamatan}}">
+                      {{data.nama_kecamatan}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row mb-3">
+                <label for="inputEmail3" class="col-xl-2 col-form-label" style="color: black;">Desa</label>
+                <div class="col-xl-10">
+                  <select class="form-select" ng-model="form.idDesa" ng-change="getIdDesa()">
+                    <option value="">Pilih Desa / Kelurahan</option>
+                    <option class="form-control" ng-repeat="data in dataDesa | orderBy:'nama_desa'"
+                      value="{{data.id_desa}}">
+                      {{data.nama_desa}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row mb-3">
+                <label for="inputEmail3" class="col-xl-2 col-form-label" style="color: black;">Alamat</label>
+                <div class="col-xl-10">
+                  <input type="text" class="form-control mb-3" id="AlamatSiswa" placeholder="Masukan Alamat">
+                  <input type="text" class="form-control mb-3" id="Alamatkoordinat"
+                    placeholder="Masukan Koordinat Alamat">
+                  <small class="text-danger fst-italic">Untuk Koordinat Alamat, Anda dapat menggunakan Google Maps untuk
+                    mendapatkan Koordinat Alamat Anda</small>
+                </div>
+              </div>
+              <div class="form-group row mb-3">
+                <label for="inputEmail3" class="col-xl-2 col-form-label" style="color: black;">Sekolah
+                  Asal</label>
+                <div class="col-xl-10">
+                  <input type="text" class="form-control mb-3" id="sekolahSiswa" placeholder="Masukan Nama Sekolah">
+                  <input type="text" class="form-control" id="npsnSiswa" placeholder="Masukan NPSN Sekolah">
+                </div>
+              </div>
+
+            </form>
+          </div>
+          <div class="modal-footer border-0">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Tutup</button>
+            <button type="button" class="btn btn-success" ng-click="simpanTambahDataSiswa()"
+              data-bs-dismiss="modal">Daftar</button>
+            <!-- <button type="button" class="btn btn-success" ng-click="simpanTambahDataSiswa()"
+              data-bs-dismiss="modal">Daftar</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,507 @@
+<ion-view title="Beranda Admin SD" hide-nav-bar="true" cache-view="false" id="loginAdmin">
+  <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+    <div id="wrapper" class="bg-light">
+      <div id="nav-flex">
+        <div class="pt-5" id="sidebar-wrapper">
+          <div class="sidebar gmbr mb-4">
+            <img src="img/admin.png" alt="">
+          </div>
+          <div class="container">
+            <p id="nama" class="text-center text-light text-break">{{formData.nama}}</p>
+          </div>
+          <div class="d-grid gap-1 mx-3">
+            <button ng-click="beranda()" class="btn text-light side-button side-active shadow py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-home"></i> Beranda</span></button>
+            <button ng-click="data_siswa()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-user"></i> Data Siswa</span></button>
+            <button ui-sref="dataSiswaterdaftarSd()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-user-edit"></i> Data Siswa Terdaftar</span></button>
+            <button ui-sref="dataSiswaDiterimaSd()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-trophy"></i> Data Siswa Diterima</span></button>
+            <button ng-click="pengaturan()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-cogs"></i> Pengaturan</span></button>
+            <button ng-click="logout()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-sign-out-alt"></i> Keluar</span></button>
+          </div>
+        </div>
+      </div>
+      <div id="flexbox-wrapper" class="w-100">
+        <nav class="navbar navbar-expand navbar-light bg-light">
+          <div class="container-fluid">
+            <button class="btn" id="menu-toggle" ng-click="toogle()"><i class="fas fa-align-justify"></i></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+              </ul>
+              <div class="my-lg-0 d-flex">
+                <a id="nightmode" ng-click="nightmode()" class="btn text-dark" href=""><i id="icon-night"
+                    class="far fa-sun" style="font-size:24px" data-bs-toggle="tooltip" data-placement="top"
+                    title="Light/Night"></i></a>
+                <a ng-click="alertDashboardUser()" class="btn text-dark" href=""><i class="far fa-question-circle"
+                    style="font-size:24px" data-bs-toggle="tooltip" data-placement="top" title="Bantuan"></i></a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div class="w-100 h-100" id="content-flex">
+          <div class="d-flex flex-column" style="min-height: 100vh;">
+
+            <div id="page-content-wrapper" style="flex :1">
+
+              <div id="main-content" class="container-fluid mt-5 px-5">
+                <div class="">
+                  <div class="mb-3">
+                    <h5 id="page-header" class="text-dark fw-bold mb-0">
+                      Beranda
+                    </h5>
+                    <span id="small-header" class="text-muted">Beranda anda berisi informasi perihal e-PPDB</span>
+                  </div>
+                  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="pills-informasi-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-informasi" type="button" role="tab" aria-controls="pills-informasi"
+                        aria-selected="true">Informasi</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="pills-jadwal-tab" data-bs-toggle="pill" data-bs-target="#pills-jadwal"
+                        type="button" role="tab" aria-controls="pills-jadwal" aria-selected="false">Jadwal e-PPDB</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="pills-wilayah-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-wilayah" type="button" role="tab" aria-controls="pills-wilayah"
+                        aria-selected="false" ng-click="removestring()">Pembagian Wilayah</button>
+                    </li>
+                  </ul>
+                  <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-informasi" role="tabpanel"
+                      aria-labelledby="pills-informasi-tab">
+                      <div class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button ng-class="{'collapsed' : notifikasi==NULL}" class="accordion-button" type="button"
+                              data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                              aria-controls="panelsStayOpen-collapseOne">
+                              Pengumuman
+                            </button>
+                          </h2>
+                          <div id="panelsStayOpen-collapseOne" ng-class="{'show' : notifikasi!=NULL}"
+                            class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body m-0 p-0">
+                              <div ng-repeat="data in notifikasi | orderBy: 'jenis'">
+                                <div ng-if="data.jenis=='Perhatian'" class="alert alert-warning mt-1" role="alert">
+                                  <p class="fw-bold my-2"><span class><i class="fas fa-exclamation-circle"></i>
+                                      {{data.jenis}}
+                                    </span></p>
+                                  <p class="">
+                                    <span class="">
+                                      {{data.pesan}}
+                                    </span>
+                                  </p>
+                                  <p>Sekian dan Terima Kasih</p>
+                                </div>
+                                <div ng-if="data.jenis=='Pengumuman'" class="alert alert-success mt-1" role="alert">
+                                  <p class="fw-bold my-2"><span class><i class="fas fa-exclamation-circle"></i>
+                                      {{data.jenis}}
+                                    </span></p>
+                                  <p class="">
+                                    <span class="">
+                                      {{data.pesan}}
+                                    </span>
+                                  </p>
+                                  <p>Sekian dan Terima Kasih</p>
+                                </div>
+                              </div>
+    
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button  " type="button" data-bs-toggle="collapse"
+                              data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true"
+                              aria-controls="panelsStayOpen-collapseTwo">
+                              Menu
+                            </button>
+                          </h2>
+                          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show"
+                            aria-labelledby="panelsStayOpen-headingTwo">
+                            <div class="accordion-body m-0 p-0">
+    
+                              <div class="row mt-3">
+                                <div class="col-xl-4 col-md-6 mb-4">
+                                  <div id="menu1" class="card shadow-sm card-border-light card-border-primary">
+                                    <div class="card-body">
+                                      <div class="row">
+                                        <div class="col">
+                                          <p class="text-small text-muted fw-bold">Siswa</p>
+                                          <span class="fw-bold fs-5">{{formJumlah.jumlah_admin}}</span>
+                                        </div>
+                                        <div class="col">
+                                          <div class="float-end bg-primary py-3 px-3 rounded-circle"><i
+                                              class="fa-solid fa-user text-light px-1"></i></div>
+                                        </div>
+                                      </div>
+    
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-xl-4 col-md-6 mb-4">
+                                  <div id="menu1" class="card card-border-light shadow-sm card-border-success">
+                                    <div class="card-body">
+                                      <div class="row">
+                                        <div class="col">
+                                          <p class="text-small text-muted fw-bold">Siswa Diterima</p>
+                                          <span class="fw-bold fs-5">{{formJumlah.jumlah_admin}}</span>
+                                        </div>
+                                        <div class="col">
+                                          <div class="float-end bg-success py-3 px-3 rounded-circle"><i
+                                              class="fa-solid fa-user text-light px-1"></i></div>
+                                        </div>
+                                      </div>
+    
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div ng-if="penerimaanSD == true" class="col-xl-4 col-md-6 mb-4" ui-sref="calonSiswaSD()">
+                                  <div id="menu1" class="card card-border-light shadow-sm card-border-danger">
+                                    <div class="card-body">
+                                      <div class="row">
+                                        <div class="col">
+                                          <p class="text-small text-muted fw-bold">Calon Siswa Kelas 1 Baru </p>
+                                          <span class="fw-bold fs-5">{{formJumlah.jumlah_admin}}</span>
+                                        </div>
+                                        <div class="col">
+                                          <div class="float-end bg-danger py-3 px-3 rounded-circle"><i
+                                              class="fa-solid fa-user text-light px-1"></i></div>
+                                        </div>
+                                      </div>
+    
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-jadwal" role="tabpanel" aria-labelledby="pills-jadwal-tab">
+                      <ul class="nav nav-pills" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link active" id="pendaftaran-tab" data-bs-toggle="tab"
+                            data-bs-target="#pendaftaran" type="button" role="tab" aria-controls="pendaftaran"
+                            aria-selected="true">Pendaftaran</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link" id="perankingan-tab" data-bs-toggle="tab" data-bs-target="#perankingan"
+                            type="button" role="tab" aria-controls="perankingan"
+                            aria-selected="false">Perankingan</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link" id="pengumuman-tab" data-bs-toggle="tab" data-bs-target="#pengumuman"
+                            type="button" role="tab" aria-controls="pengumuman" aria-selected="false">Pengumuman</button>
+                        </li>
+                      </ul>
+                      <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="pendaftaran" role="tabpanel"
+                          aria-labelledby="pendaftaran-tab">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item font-weight-normal montserrat">Jalur Zonasi
+                              <ul>
+                                <li class="ms-2 font-weight-normal montserrat " style="font-size : 14px">Pendaftaran :
+                                  19 s.d. 21 Juni 2023</li>
+                              </ul>
+                            </li>
+                            <li class="list-group-item font-weight-normal montserrat">Jalur Afirmasi
+                              <ul>
+                                <li class="ms-2 font-weight-normal montserrat " style="font-size : 14px">Pendaftaran :
+                                  19 s.d. 21 Juni 2023</li>
+                              </ul>
+                            </li>
+                            <li class="list-group-item font-weight-normal montserrat">Jalur Perpindahan Tugas Orang Tua
+                              <ul>
+                                <li class="ms-2 font-weight-normal montserrat " style="font-size : 14px">Pendaftaran :
+                                 21 s.d. 22 Juni 2023</li>
+                              </ul>
+                            </li>
+                            <li class="list-group-item font-weight-normal montserrat">Jalur Prestasi
+                              <ul>
+                                <li class="ms-2 font-weight-normal montserrat " style="font-size : 14px">Pendaftaran :
+                                  26 s.d 27 Juni 2023</li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="tab-pane fade" id="perankingan" role="tabpanel" aria-labelledby="perankingan-tab">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item font-weight-normal montserrat">Pemetaan
+                              <ul>
+                                <li class="ms-2 font-weight-normal montserrat " style="font-size : 14px">27 Juni s/d 29
+                                  Juni 2022</li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="tab-pane fade" id="pengumuman" role="tabpanel" aria-labelledby="pengumuman-tab">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item font-weight-normal montserrat">Pengumuman
+                              <ul>
+                                <li class="ms-2 font-weight-normal montserrat " style="font-size : 14px">1 Juli 2023
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-wilayah" role="tabpanel" aria-labelledby="pills-wilayah-tab">
+                      <nav>
+                        <div class="nav nav-pills  " id="nav-tab" role="tablist">
+                          <button class="nav-link active" id="nav-banjar-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-banjar" type="button" role="tab" aria-controls="nav-banjar"
+                            aria-selected="true">Banjar</button>
+                          <button class="nav-link" id="nav-buleleng-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-buleleng" type="button" role="tab" aria-controls="nav-buleleng"
+                            aria-selected="false">Buleleng</button>
+                          <button class="nav-link" id="nav-busungbiu-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-busungbiu" type="button" role="tab" aria-controls="nav-busungbiu"
+                            aria-selected="false">Busung Biu</button>
+                          <button class="nav-link" id="nav-gerokgak-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-gerokgak" type="button" role="tab" aria-controls="nav-gerokgak"
+                            aria-selected="false">Gerokgak</button>
+                          <button class="nav-link" id="nav-kubutambahan-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-kubutambahan" type="button" role="tab" aria-controls="nav-kubutambahan"
+                            aria-selected="false">Kubutambahan</button>
+                          <button class="nav-link" id="nav-sawan-tab" data-bs-toggle="tab" data-bs-target="#nav-sawan"
+                            type="button" role="tab" aria-controls="nav-sawan" aria-selected="false">Sawan</button>
+                          <button class="nav-link" id="nav-seririt-tab" data-bs-toggle="tab" data-bs-target="#nav-seririt"
+                            type="button" role="tab" aria-controls="nav-seririt" aria-selected="false">Seririt</button>
+                          <button class="nav-link" id="nav-suksada-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-sukasada" type="button" role="tab" aria-controls="nav-sukasada"
+                            aria-selected="false">Sukasada</button>
+                          <button class="nav-link" id="nav-tejakula-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-tejakula" type="button" role="tab" aria-controls="nav-tejakula"
+                            aria-selected="false">Tejakula</button>
+                        </div>
+                      </nav>
+                      <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-banjar" role="tabpanel"
+                          aria-labelledby="nav-banjar-tab">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Desa</th>
+                                <th scope="col">Sekolah Pilihan 1</th>
+                                <th scope="col">Sekolah Pilihan 2</th>
+                                <th scope="col">Sekolah Pilihan 3</th>
+                                <th scope="col">Sekolah Pilihan 4</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr ng-repeat="data in wilayah_desa | orderBy: 'id_kecamatan' | filter:searchData">
+                                <td id="td-desa" scope="row" ng-if="data.id_kecamatan=='id-kecBanjar'">{{data.id_desa}}
+                                </td>
+                                <td ng-if="data.id_kecamatan=='id-kecBanjar'">{{data.nama_smp}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecBanjar'">{{data.nama_smp2}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecBanjar'">{{data.nama_smp3}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecBanjar'">{{data.nama_smp4}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="tab-pane fade" id="nav-buleleng" role="tabpanel" aria-labelledby="nav-buleleng-tab">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Desa</th>
+                                <th scope="col">Sekolah Pilihan 1</th>
+                                <th scope="col">Sekolah Pilihan 2</th>
+                                <th scope="col">Sekolah Pilihan 3</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr ng-repeat="data in wilayah_desa | orderBy: 'id_kecamatan' | filter:searchData">
+                                <td id="td-desa" scope="row" ng-if="data.id_kecamatan=='id-kecBuleleng'">{{data.id_desa}}
+                                </td>
+                                <td ng-if="data.id_kecamatan=='id-kecBuleleng'">{{data.nama_smp}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecBuleleng'">{{data.nama_smp2}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecBuleleng'">{{data.nama_smp3}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="tab-pane fade" id="nav-busungbiu" role="tabpanel" aria-labelledby="nav-busungbiu-tab">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Desa</th>
+                                <th scope="col">Sekolah Pilihan 1</th>
+                                <th scope="col">Sekolah Pilihan 2</th>
+                                <th scope="col">Sekolah Pilihan 3</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr ng-repeat="data in wilayah_desa | orderBy: 'id_kecamatan' | filter:searchData">
+                                <td id="td-desa" scope="row" ng-if="data.id_kecamatan=='id-kecBusungbiu'">{{data.id_desa}}
+                                </td>
+                                <td ng-if="data.id_kecamatan=='id-kecBusungbiu'">{{data.nama_smp}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecBusungbiu'">{{data.nama_smp2}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecBusungbiu'">{{data.nama_smp3}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="tab-pane fade" id="nav-gerokgak" role="tabpanel" aria-labelledby="nav-gerokgak-tab">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Desa</th>
+                                <th scope="col">Sekolah Pilihan 1</th>
+                                <th scope="col">Sekolah Pilihan 2</th>
+                                <th scope="col">Sekolah Pilihan 3</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr ng-repeat="data in wilayah_desa | orderBy: 'id_kecamatan' | filter:searchData">
+                                <td id="td-desa" scope="row" ng-if="data.id_kecamatan=='id-kecGerokgak'">{{data.id_desa}}
+                                </td>
+                                <td ng-if="data.id_kecamatan=='id-kecGerokgak'">{{data.nama_smp}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecGerokgak'">{{data.nama_smp2}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecGerokgak'">{{data.nama_smp3}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="tab-pane fade" id="nav-kubutambahan" role="tabpanel"
+                          aria-labelledby="nav-kubutambahan-tab">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Desa</th>
+                                <th scope="col">Sekolah Pilihan 1</th>
+                                <th scope="col">Sekolah Pilihan 2</th>
+                                <th scope="col">Sekolah Pilihan 3</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr ng-repeat="data in wilayah_desa | orderBy: 'id_kecamatan' | filter:searchData">
+                                <td id="td-desa" scope="row" ng-if="data.id_kecamatan=='id-kecKubutambahan'">
+                                  {{data.id_desa}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecKubutambahan'">{{data.nama_smp}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecKubutambahan'">{{data.nama_smp2}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecKubutambahan'">{{data.nama_smp3}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="tab-pane fade" id="nav-sawan" role="tabpanel" aria-labelledby="nav-sawan-tab">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Desa</th>
+                                <th scope="col">Sekolah Pilihan 1</th>
+                                <th scope="col">Sekolah Pilihan 2</th>
+                                <th scope="col">Sekolah Pilihan 3</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr ng-repeat="data in wilayah_desa | orderBy: 'id_kecamatan' | filter:searchData">
+                                <td id="td-desa" scope="row" ng-if="data.id_kecamatan=='id-kecSawan'">{{data.id_desa}}
+                                </td>
+                                <td ng-if="data.id_kecamatan=='id-kecSawan'">{{data.nama_smp}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecSawan'">{{data.nama_smp2}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecSawan'">{{data.nama_smp3}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="tab-pane fade" id="nav-seririt" role="tabpanel" aria-labelledby="nav-seririt-tab">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Desa</th>
+                                <th scope="col">Sekolah Pilihan 1</th>
+                                <th scope="col">Sekolah Pilihan 2</th>
+                                <th scope="col">Sekolah Pilihan 3</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr ng-repeat="data in wilayah_desa | orderBy: 'id_kecamatan' | filter:searchData">
+                                <td id="td-desa" scope="row" ng-if="data.id_kecamatan=='id-kecSeririt'">{{data.id_desa}}
+                                </td>
+                                <td ng-if="data.id_kecamatan=='id-kecSeririt'">{{data.nama_smp}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecSeririt'">{{data.nama_smp2}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecSeririt'">{{data.nama_smp3}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="tab-pane fade" id="nav-sukasada" role="tabpanel" aria-labelledby="nav-sukasada-tab">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Desa</th>
+                                <th scope="col">Sekolah Pilihan 1</th>
+                                <th scope="col">Sekolah Pilihan 2</th>
+                                <th scope="col">Sekolah Pilihan 3</th>
+                                <th scope="col">Sekolah Pilihan 4</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr ng-repeat="data in wilayah_desa | orderBy: 'id_kecamatan' | filter:searchData">
+                                <td id="td-desa" scope="row" ng-if="data.id_kecamatan=='id-kecSukasada'">{{data.id_desa}}
+                                </td>
+                                <td ng-if="data.id_kecamatan=='id-kecSukasada'">{{data.nama_smp}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecSukasada'">{{data.nama_smp2}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecSukasada'">{{data.nama_smp3}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecSukasada'">{{data.nama_smp4}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="tab-pane fade" id="nav-tejakula" role="tabpanel" aria-labelledby="nav-tejakula-tab">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Desa</th>
+                                <th scope="col">Sekolah Pilihan 1</th>
+                                <th scope="col">Sekolah Pilihan 2</th>
+                                <th scope="col">Sekolah Pilihan 3</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr ng-repeat="data in wilayah_desa | orderBy: 'id_kecamatan' | filter:searchData">
+                                <td id="td-desa" scope="row" ng-if="data.id_kecamatan=='id-kecTejakula'">{{data.id_desa}}
+                                </td>
+                                <td ng-if="data.id_kecamatan=='id-kecTejakula'">{{data.nama_smp}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecTejakula'">{{data.nama_smp2}}</td>
+                                <td ng-if="data.id_kecamatan=='id-kecTejakula'">{{data.nama_smp3}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <footer class="ps-5 text-muted" style="margin-bottom: 8vh;">
+              <div>
+                <span class=" fw-bold montserrat" style="font-size: small;"> © 2023 Copyright:</span>
+                <span class=" fw-bold montserrat" style="font-size: small;"
+                  href="https://e-ppdb.bulelengkab.go.id/">e-PPDB</span>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </ion-content>
+</ion-view>

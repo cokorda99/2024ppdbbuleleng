@@ -1,0 +1,124 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+#wrapper {
+  overflow-x: hidden;
+}
+
+#sidebar-wrapper {
+min-height: 100vh;
+margin-left: -15rem;
+-webkit-transition: margin .25s ease-out;
+-moz-transition: margin .25s ease-out;
+-o-transition: margin .25s ease-out;
+transition: margin .25s ease-out;
+}
+
+.bck{
+background-color: #1f1039;
+}
+
+#sidebar-wrapper .sidebar-heading {
+padding: 0.875rem 1.25rem;
+font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+width: 15rem;
+}
+
+#page-content-wrapper {
+min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+margin-left: 0;
+}
+
+@media (min-width: 768px) {
+#sidebar-wrapper {
+  margin-left: 0;
+}
+
+#page-content-wrapper {
+  min-width: 0;
+  width: 100%;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: -15rem;
+}
+}
+
+.siden ul li{
+  padding: 15px;
+  border-bottom: 1px solid #bdb8d7;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}    
+
+.siden ul li a{
+  color: black;
+  display: block;
+}
+
+.siden ul li a .fas{
+  width: 25px;
+}
+
+.siden ul li:hover{
+  background-color: #6936be;
+}
+    
+.siden ul li:hover a{
+  color: #fff;
+}
+button.nee:hover {
+  background-color: #1f1039;
+}
+
+.btndaftar{
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.sidebar.gmbr img{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+
+.sidebar.gmbr p{
+  margin-top: 10px;
+  text-align: center;
+  color: #e9ebee;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card-horizontal {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+img.gamvar{
+  width: 100px;
+  height: 150px;
+}
+
+.card{
+  padding: 15px;
+}
+
+.container-fluid{
+  margin-top: 20px;
+}

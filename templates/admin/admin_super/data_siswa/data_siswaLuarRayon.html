@@ -1,0 +1,479 @@
+<ion-view title="Data Siswa Luar Rayon" hide-nav-bar="true" cache-view="false" id="">
+    <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+      <div id="wrapper" class="bg-light">
+        <div id="nav-flex" class="bck">
+          <div class="pt-5" id="sidebar-wrapper">
+            <div class="sidebar gmbr mb-4">
+              <img src="img/buleleng.png" alt="">
+            </div>
+            <div class="container">
+              <p id="nama" class="text-center text-light text-break">{{formData.nama}}</p>
+            </div>
+            <div class="d-grid gap-1 mx-3">
+              <button ng-click="beranda()" class="btn text-light side-button py-3" type="button"><span
+                  class="float-start ms-3"><i class="fas fa-home"></i> Beranda</span></button>
+              <button data-bs-toggle="collapse" href="#data-admin" role="button" aria-expanded="false"
+                aria-controls="data-admin" class="btn text-light side-button py-3" type="button"><span
+                  class="float-start ms-3"><i class="fas fa-user-edit"></i> Data Admin</span><i
+                  class="ms-4 fas fa-angle-down float-end"></i></button>
+              <div class="collapse" id="data-admin">
+                <div class="d-grid gap-1 mx-3">
+                  <button ui-sref="dataAdminSd()" class="btn text-light side-button py-3" type="button"><span
+                      class="float-start ms-4"><i class="fas fa-user-edit"></i> SD</span></button>
+                  <button ui-sref="dataAdminSmp()" class="btn text-light side-button py-3" type="button"><span
+                      class="float-start ms-4"><i class="fas fa-user-edit"></i> SMP</span></button>
+                  <button ui-sref="dataAdminSuperDinas()" class="btn text-light side-button py-3" type="button"><span
+                      class="float-start ms-4"><i class="fas fa-user-edit"></i> Super</span></button>
+                </div>
+              </div>
+              <button ui-sref="dataSiswa()" class="btn text-light side-button py-3" type="button"><span
+                  class="float-start ms-3"><i class="fas fa-users"></i> Data Siswa</span></button>
+              <button data-bs-toggle="collapse" href="#data-siswa" role="button" aria-expanded="false"
+                aria-controls="data-siswa" class="btn text-light side-button py-3" type="button"><span
+                  class="float-start ms-3"><i class="fas fa-users"></i> Data Pendaftar</span><i
+                  class="ms-4 fas fa-angle-down float-end"></i></button>
+              <div class="collapse" id="data-siswa">
+                <div class="d-grid gap-1 mx-3">
+                  <button ui-sref="dataPendaftarSeluruhSMP()" class="btn text-light side-button py-3" type="button"><span
+                      class="float-start ms-4"><i class="fas fa-users"></i> Seluruh</span></button>
+                  <button ui-sref="dataPendaftarAdminSuper()" class="btn text-light side-button py-3" type="button"><span
+                      class="float-start ms-4"><i class="fas fa-users"></i> Per SMP</span></button>
+                </div>
+              </div>
+              <button data-bs-toggle="collapse" href="#data-sekolah" role="button" aria-expanded="false"
+                aria-controls="data-sekolah" class="btn text-light side-button py-3" type="button"><span
+                  class="float-start ms-3"><i class="fas fa-school"></i> Data Sekolah</span><i
+                  class="ms-4 fas fa-angle-down float-end"></i></button>
+              <div class="collapse" id="data-sekolah">
+                <div class="d-grid gap-1 mx-3">
+                  <button ui-sref="dataSekolahSd()" class="btn text-light side-button py-3" type="button"><span
+                      class="float-start ms-4"><i class="fas fa-school"></i> SD</span></button>
+                  <button ui-sref="dataSekolahSmp()" class="btn text-light side-button py-3" type="button"><span
+                      class="float-start ms-4"><i class="fas fa-school"></i> SMP</span></button>
+                </div>
+              </div>
+              <button ng-click="pengaturan()" class="btn text-light side-button py-3" type="button"><span
+                  class="float-start ms-3"><i class="fas fa-cogs"></i> Pengaturan</span></button>
+              <button ng-click="logout()" class="btn text-light side-button py-3" type="button"><span
+                  class="float-start ms-3"><i class="fas fa-sign-out-alt"></i> Keluar</span></button>
+            </div>
+          </div>
+        </div>
+        <div id="flexbox-wrapper" class="w-100">
+          <nav class="navbar navbar-expand navbar-light bg-light">
+            <div class="container-fluid">
+              <button class="btn" id="menu-toggle" ng-click="toogle()"><i class="fas fa-align-justify"></i></button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  
+                </ul>
+                <div class="my-lg-0 d-flex">
+                  <a id="nightmode" ng-click="nightmode()" class="btn text-dark" href=""><i id="icon-night"
+                      class="far fa-sun" style="font-size:24px" data-bs-toggle="tooltip" data-placement="top"
+                      title="Light/Night"></i></a>
+                  <a class="btn text-dark" href=""><i class="far fa-question-circle" style="font-size:24px"
+                      data-bs-toggle="tooltip" data-placement="top" title="Bantuan"></i></a>
+                </div>
+              </div>
+            </div>
+          </nav>
+  
+          <div class="w-100 h-100" id="content-flex">
+            <div class="d-flex flex-column" style="min-height: 100vh;">
+  
+              <div id="page-content-wrapper" style="flex :1">
+  
+                <div id="main-content" class="container-fluid mt-5 px-5">
+                  <div class="">
+                    <div class="mb-5">
+                      <h5 id="page-header" class="text-dark fw-bold mb-0">
+                        Data Siswa Luar Rayon
+                      </h5>
+                      <span id="small-header" class="text-muted">Registrasi Luar Rayon</span>
+                    </div>
+                    <div class="card shadow-sm mb-4 animated--grow-in">
+                      <div class="card-header py-3 bg-white">
+                        <div class="row">
+                          <div id="icon-group-1" class="col-xl-8">
+                            <!-- <a class="btn btn-sm btn-success shadow-sm px-3" data-bs-toggle="modal"
+                              data-bs-target="#modal_tambah_sekolahSD"><i class="fa fa-plus fa-sm"></i>
+                              Tambah Data</a> -->
+                            <a ng-click="cetak()" class="btn btn-sm btn-primary shadow-sm px-3"><i
+                                class="fa fa-print fa-sm "></i> Export XLS</a>
+                            <!-- <a ng-click="jalan()" class="btn btn-sm btn-danger shadow-sm px-3"><i
+                                class="fa fa-question-circle fa-sm "></i> Jalankan</a> -->
+                          </div>
+                          <div id="icon-group-2" class="col-xl-4 d-flex">
+                            <div class="input-group input-group-sm float-end me-2 flex-grow-1">
+                              <input type="text" class="search form-control" placeholder="Search" aria-label="Search"
+                                aria-describedby="basic-addon2" ng-model="searchData">
+                              <span class="input-group-text" id="basic-addon2"><i
+                                  class="fa-solid fa-magnifying-glass"></i></span>
+                            </div>
+                            <a onclick="history.back()" id="btn-back"
+                              class="btn btn-sm btn-outline-primary shadow-sm float-end px-3 ">Kembali</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-body">
+  
+                        <div class="table-responsive">
+                          <table class="table" width="100%" cellspacing="0" id="tbl-data-siswa">
+                            <thead>
+                              <tr>
+                                <th width="5%">No</th>
+                                <th width="25%">Nama</th>
+                                <th width="10%">NISN</th>
+                                <th width="10%">Asal Sekolah</th>
+                                <th width="10%">No Telp</th>
+                                <th width="8%">Status Check</th>
+                                <th width="10%">Aksi</th>
+                              </tr>
+                            </thead>
+  
+                            <tbody>
+  
+                              <tr ng-repeat="data in siswa | orderBy: '-sekolah_asal' | filter:searchData">
+                                <td width="5%">{{$index+1}}</td>
+                                <td width="25%">{{data.nama}}</td>
+                                <td width="5%">'{{data.nisn}}</td>
+                                <td width="15%">{{data.sekolah_asal}}</td>
+                                <td width="15%">{{data.noHp}}</td>
+                                <td ng-if="data.status_verif===true" width="">
+                                  <div class="container bg-success py-1">
+                                    <p class="text-center text-light my-1">SUDAH</p>
+                                  </div>
+  
+                                </td>
+                                <td ng-if="data.status_verif===false" width="">
+                                  <div class="container bg-danger py-1">
+                                    <p class="text-center text-light my-1">BELUM</p>
+                                  </div>
+  
+                                </td>
+                                <td ng-if="data.status_verif===0" width="">
+                                  <div class="container bg-warning py-1">
+                                    <p class="text-center text-light my-1">Menunggu</p>
+                                  </div>
+  
+                                </td>
+                                <td width="10%">
+                                  <a data-id="{{data.$id}}" data-bs-toggle="modal" data-bs-target="#modal_edit"
+                                    title="Detail" class="updateData btn bg-warning text-light"><span
+                                      class="fas fa-pen"></span></a>
+  
+                                  <a data-id="{{data.$id}}"
+                                    title="Delete" class="removeData btn bg-danger text-light"><span
+                                      class="fas fa-fw fa-trash"></span></a>
+  
+                                </td>
+                              </tr>
+  
+                            </tbody>
+                          </table>
+                          <!--modal tambah -->
+                          <div class="modal fade" id="modal_tambah" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header border-0">
+                                  <h5 class="modal-title fw-bold text-dark" id="exampleModalLabel">Tambah Data
+                                  </h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <form id="form-tambah-siswa-rayon">
+                                    <div class="form-group row mb-3">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">Nama</label>
+                                      <div class="col-xl-10">
+                                        <input type="text" class="form-control" id="namaSiswa" placeholder="Nama Lengkap">
+                                      </div>
+                                    </div>
+                                    <div class="form-group row mb-3">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">NISN</label>
+                                      <div class="col-xl-10">
+                                        <input type="text" class="form-control" id="nisnSiswa" placeholder="NISN">
+                                      </div>
+                                    </div>
+                                    <div class="form-group row mb-3">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">NIK</label>
+                                      <div class="col-xl-10">
+                                        <input type="text" class="form-control" id="nikSiswa" placeholder="NIK">
+                                      </div>
+                                    </div>
+                                    <div class="form-group row mb-3">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">Tanggal
+                                        Lahir</label>
+                                      <div class="col-xl-10">
+                                        <input type="text" class="form-control" id="tglLahirSiswa"
+                                          placeholder="yyyy-mm-dd">
+                                      </div>
+                                    </div>
+                                    <div class="form-group row mb-3">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">Tempat
+                                        Lahir</label>
+                                      <div class="col-xl-10">
+                                        <input type="text" class="form-control" id="tempatLahirSiswa"
+                                          placeholder="tempat lahir">
+                                      </div>
+                                    </div>
+                                    <div class="form-group row mb-3">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">Alamat</label>
+                                      <div class="col-xl-10">
+                                        <input type="text" class="form-control" id="AlamatSiswa" placeholder="alamat">
+                                      </div>
+                                    </div>
+                                    <div class="form-group row mb-3">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">Sekolah
+                                        Asal</label>
+                                      <div class="col-xl-10">
+                                        <input type="text" class="form-control" id="sekolahSiswa"
+                                          placeholder="Nama Sekolah">
+                                        <input type="text" class="form-control" id="npsnSiswa" placeholder="NPSN Sekolah">
+                                      </div>
+                                      <!-- <div class="col-xl-10">
+                                                                  <select class="form-control"
+                                                                      ng-model="form.idKecamatan"
+                                                                      ng-change="getIdKecamatan()">
+                                                                      <option value="">Pilih Kabupaten</option>
+                                                                  </select>
+                                                                  <br>
+                                                                  <select class="form-control"
+                                                                      ng-model="form.idKecamatan"
+                                                                      ng-change="getIdKecamatan()">
+                                                                      <option value="">Pilih Kecamatan</option>
+                                                                      <option class="form-control"
+                                                                          ng-repeat="data in dataKecamatan | orderBy:'nama_kecamatan'"
+                                                                          value="{{data.id_kecamatan}}">
+                                                                          {{data.nama_kecamatan}}</option>
+                                                                  </select>
+                                                                  <br>
+                                                                  <select class="form-control"
+                                                                      ng-model="form.idDesa"
+                                                                      ng-change="getIdDesa()">
+                                                                      <option value="">Pilih Desa / Kelurahan
+                                                                      </option>
+                                                                      <option class="form-control"
+                                                                          ng-repeat="data in dataDesa | orderBy:'nama_desa'"
+                                                                          value="{{data.id_desa}}">
+                                                                          {{data.nama_desa}}</option>
+                                                                  </select>
+                                                                  <br>
+  
+                                                                  <select class="form-control"
+                                                                      ng-model="form.idSekolahAfirmasi"
+                                                                      ng-change="getIdSekolahAfirmasi()">
+                                                                      <option value="">Pilih Sekolah</option>
+                                                                      <option class="form-control"
+                                                                          ng-repeat="data in dataSekolah | orderBy:'sekolah'"
+                                                                          value="{{data.npsn}}">
+                                                                          {{data.sekolah}}</option>
+                                                                  </select>
+                                                              </div> -->
+                                    </div>
+  
+                                  </form>
+                                </div>
+                                <div class="modal-footer border-0">
+                                  <button type="button" class="btn btn-outline-secondary"
+                                    data-bs-dismiss="modal">Tutup</button>
+                                  <button type="button" class="btn btn-success"
+                                    ng-click="simpanTambahDataSiswa()">Simpan</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--modal edit -->
+                          <div class="modal fade" id="modal_edit" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header border-0">
+                                  <h5 class="modal-title fw-bold text-dark" id="exampleModalLabel">Edit Data
+                                  </h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <form>
+                                    <div class="form-group row mb-3">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">NISN</label>
+                                      <div class="col-xl-10">
+                                        <input readonly id="nisnEdit" type="number" class="form-control">
+                                      </div>
+                                    </div>
+  
+                                    <div class="form-group row mb-3">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">NIK</label>
+                                      <div class="col-xl-10">
+                                        <input readonly  id="nikEdit" type="number" class="form-control" readonly>
+                                      </div>
+                                    </div>
+  
+                                    <div class="form-group row mb-3">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">Nama</label>
+                                      <div class="col-xl-10">
+                                        <input readonly  id="namaEdit" type="text" class="form-control">
+                                      </div>
+                                    </div>
+  
+                                    <div class="form-group row mb-3">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">Tanggal
+                                        Lahir</label>
+                                      <div class="col-xl-10">
+                                        <input readonly  id="tglLahirEdit" type="date" class="form-control" readonly>
+                                      </div>
+                                    </div>
+  
+                                    <div class="form-group row mb-3">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">Tempat Lahir</label>
+                                      <div class="col-xl-10">
+                                        <input readonly  id="tempatLahirEdit" type="text" class="form-control">
+                                      </div>
+                                    </div>
+  
+                                    <div class="form-group row mb-3">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">Alamat Siswa</label>
+                                      <div class="col-xl-10">
+                                        <input readonly  id="alamatEdit" type="text" class="form-control">
+                                      </div>
+                                    </div>
+  
+  
+                                    <div class="form-group row mb-3">
+                                      <div class="form-group row mb-3">
+                                        <label for="inputEmail3" class="col-xl-2 col-form-label">Kecamatan</label>
+                                        <div class="col-xl-10">
+                                          <input readonly  id="KecamatanEdit" type="text" class="form-control">
+                                          <!-- <select class="form-select" ng-model="form.idKecamatan"
+                                            ng-change="getIdKecamatan()" id="KecamatanEdit">
+                                            <option value="">Pilih Kecamatan</option>
+                                            <option class="form-control"
+                                              ng-repeat="data in dataKecamatan | orderBy:'nama_kecamatan'"
+                                              value="{{data.id_kecamatan}}">
+                                              {{data.nama_kecamatan}}</option>
+                                          </select> -->
+                                        </div>
+                                      </div>
+    
+                                      <div class="form-group row mb-3">
+                                        <label for="inputEmail3" class="col-xl-2 col-form-label">Desa</label>
+                                        <div class="col-xl-10">
+                                          <input readonly  id="DesaEdit" type="text" class="form-control">
+                                          <!-- <select class="form-select" ng-model="form.idDesa" ng-change="getIdDesa()"
+                                            id="DesaEdit">
+                                            <option value="">Pilih Desa / Kelurahan</option>
+                                            <option class="form-control" ng-repeat="data in dataDesa | orderBy:'nama_desa'"
+                                              value="{{data.id_desa}}">
+                                              {{data.nama_desa}}</option>
+                                          </select> -->
+                                        </div>
+                                      </div>
+
+                                          
+                                      <div class="form-group row mb-3">
+                                        <label for="inputEmail3" class="col-xl-2 col-form-label">Banjar / Dusun</label>
+                                        <div class="col-xl-10">
+                                          <input readonly  id="BanjarEdit" type="text" class="form-control">
+                                          <!-- <select class="form-select" ng-model="form.idDesa" ng-change="getIdDesa()"
+                                            id="DesaEdit">
+                                            <option value="">Pilih Desa / Kelurahan</option>
+                                            <option class="form-control" ng-repeat="data in dataDesa | orderBy:'nama_desa'"
+                                              value="{{data.id_desa}}">
+                                              {{data.nama_desa}}</option>
+                                          </select> -->
+                                        </div>
+                                      </div>
+  
+                                    <div class="form-group row mb-3">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">Kordinat tempat
+                                        tinggal</label>
+                                      <div class="col-xl-10">
+                                        <input id="kordinatEdit" type="text" class="form-control"
+                                          placeholder="Lintang, Bujur">
+                                      </div>
+                                    </div>
+                                    <div class="form-group row mb-3">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">File</label>
+                                      <div class="col-xl-10">
+                                        <button ng-click="lihatFileSK()" class="btn btn-success"><i
+                                            class="fa fa-file"></i>
+                                          FILE Surat Keterangan</button>
+                                      </div>
+                                    </div>
+                                    <div class="form-group row mb-3">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">Validasi Data</label>
+                                      <div class="col-xl-10">
+                                        <select class="form-select" id="ValidasiEdit">
+                                          <option value="true">Sudah Terverifikasi</option>
+                                          <option value="false">Belum Verifikasi</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer border-0">
+                                      <button type="button" class="btn btn-outline-secondary"
+                                        data-bs-dismiss="modal">Tutup</button>
+                                      <button type="button" ng-click="simpanEditSiswaAdmin()"
+                                        class="btn btn-primary">Simpan</button>
+                                    </div>
+                                  </form>
+                                </div>
+  
+                              </div>
+                            </div>
+                          </div>
+  
+                          <!--modal hapus  -->
+                          <div class="modal fade" id="modal_hapus" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header border-0">
+                                  <h5 class="modal-title fw-bold text-dark" id="exampleModalLabel">Hapus Data new
+                                  </h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <center>
+                                    <i class="fas fa-exclamation-triangle text-warning my-3" style="font-size:50px;"></i>
+                                    <h6>Apakah Anda yakin ingin menghapus data <span class="fw-bold">Siswa
+                                      </span>?, data yang
+                                      sudah di
+                                      hapus tidak dapat dikembalikan lagi</h6>
+                                  </center>
+                                </div>
+                                <div class="modal-footer border-0">
+                                  <button type="button" class="btn btn-outline-secondary"
+                                    data-bs-dismiss="modal">Tutup</button>
+                                  <button type="button"class="deleteSiswa btn btn-danger" >Hapus</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+  
+                    </div>
+  
+                  </div>
+                </div>
+  
+              </div>
+              <footer class="ps-5 text-muted" style="margin-bottom: 8vh;">
+                <div>
+                  <span class=" fw-bold montserrat" style="font-size: small;"> © 2023 Copyright:</span>
+                  <span class=" fw-bold montserrat" style="font-size: small;"
+                    href="https://e-ppdb.bulelengkab.go.id/">e-PPDB</span>
+                </div>
+              </footer>
+            </div>
+          </div>
+  
+        </div>
+  
+  
+      </div>
+    </ion-content>
+  </ion-view>

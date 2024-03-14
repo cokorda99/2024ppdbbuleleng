@@ -1,0 +1,161 @@
+<ion-view title="Dashboard e-PPDB Siswa" hide-nav-bar="true" cache-view="false" id="welcome">
+  <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+    <div id="wrapper" class="bg-light">
+      <div id="nav-flex" class="bck">
+        <div class="pt-5" id="sidebar-wrapper">
+          <div class="sidebar gmbr mb-4">
+            <img ng-if="CheckPhoto == 'Laki-laki'" src="img/student-male.png" alt="">
+            <img ng-if="CheckPhoto == 'Perempuan'" src="img/student-female.png" alt="">
+          </div>
+
+          <div class="center container-fluid p-3 m-0">
+            <p class="text-center text-light text-decoration-none" id="nama">{{formData.nama}}</p>
+            <p class="text-center text-light text-decoration-none" id="nisn">{{formData.nisn}}</p>
+          </div>
+          <div class="d-grid gap-1 mx-3">
+            <button ng-click="dashboard()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-home"></i> Beranda</span></button>
+            <button ng-click="pendaftaran_ppdb()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-user"></i> Pendaftaran</span></button>
+            <button ng-click="pengumumanUser()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-user-edit"></i> Pengumuman</span></button>
+            <button ng-click="pengaturanUser()" class="btn text-light side-button side-active shadow py-3"
+              type="button"><span class="float-start ms-3"><i class="fas fa-cogs"></i> Pengaturan</span></button>
+            <button ng-click="logout()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-sign-out-alt"></i> Keluar</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flexbox-wrapper" class="w-100">
+        <nav class="navbar navbar-expand navbar-light bg-light">
+          <div class="container-fluid">
+            <button class="btn" id="menu-toggle" ng-click="toogle()"><i class="fas fa-align-justify"></i></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+              </ul>
+              <div class="my-lg-0 d-flex">
+                <a ng-click="pendaftaran_ppdb()" class="btn text-dark position-relative" href=""><i
+                    class="far fa-envelope" style="font-size:24px" data-bs-toggle="tooltip" data-placement="top"
+                    title="Pesan"></i>
+                  <!-- <span ng-if="statusdaftar===false && statusvalidasi===false && koreksi == NULL"
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger text-light">
+                    1
+                  </span> -->
+                </a>
+                <a id="nightmode" ng-click="nightmode()" class="btn text-dark" href=""><i id="icon-night"
+                    class="far fa-sun" style="font-size:24px" data-bs-toggle="tooltip" data-placement="top"
+                    title="Light/Night"></i></a>
+                <a ng-click="alertDashboardUser()" class="btn text-dark" href=""><i class="far fa-question-circle"
+                    style="font-size:24px" data-bs-toggle="tooltip" data-placement="top" title="Bantuan"></i></a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div class="w-100 h-100" id="content-flex">
+          <div class="d-flex flex-column" style="min-height: 100vh;">
+            <div id="page-content-wrapper" style="flex :1">
+              <div id="main-content" class="container-fluid mt-5 px-5">
+                <div class="mb-3">
+                  <h5 id="page-header" class="text-dark fw-bold mb-0">
+                    Profil
+                  </h5>
+                  <span id="small-header" class="text-muted">Anda dapat melihat Profil akun anda disini</span>
+                </div>
+                <div class="card shadow mb-4 animated--grow-in">
+                  <div class="card-body mx-5 p-5">
+                    <form>
+                      <div class="form-group row mb-3">
+                        <label for="inputEmail3" class="col-xl-2 col-form-label">Nama Lengkap</label>
+                        <div class="col-xl-10">
+                          <input type="text" class="form-control" id="edit_nama_lengkap" value="{{formData.nama}}"
+                            readonly>
+                        </div>
+                      </div>
+                      <div class="form-group row mb-3">
+                        <label for="inputPassword3" class="col-xl-2 col-form-label">Jenis Kelamin</label>
+                        <div class="col-xl-10">
+                          <input type="text" class="form-control" id="daftar_jenisKelamin"
+                            value="{{formData.jenis_kelamin}}" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group row mb-3">
+                        <label for="inputPassword3" class="col-xl-2 col-form-label">NISN</label>
+                        <div class="col-xl-10">
+                          <input type="text" class="form-control" id="daftar_nisn" value="{{formData.nisn}}" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group row mb-3">
+                        <label for="inputPassword3" class="col-xl-2 col-form-label">NIK</label>
+                        <div class="col-xl-10">
+                          <input type="number" class="form-control" id="daftar_nik" value="{{formData.nik}}" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group row mb-3">
+                        <label for="inputPassword3" class="col-xl-2 col-form-label">Sekolah Asal</label>
+                        <div class="col-xl-10">
+                          <input type="text" class="form-control" id="daftar_asal_sekolah"
+                            value="{{formData.sekolah_asal}}" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group row mb-3">
+                        <label for="inputPassword3" class="col-xl-2 col-form-label">Alamat Rumah</label>
+                        <div class="col-xl-10">
+                          <input type="text" class="form-control" id="daftar_alamat" value="{{formData.alamat}}"
+                            readonly>
+                        </div>
+                      </div>
+                      <div class="form-group row mb-3">
+                        <label for="inputPassword3" class="col-xl-2 col-form-label">Tempat Lahir</label>
+                        <div class="col-xl-10">
+                          <input type="text" name="tanggal_lahir" id="daftar_tempat_lahir" class="tanggal form-control"
+                            value="{{formData.tempat_lahir}}" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group row mb-3">
+                        <label for="inputPassword3" class="col-xl-2 col-form-label">Tanggal Lahir</label>
+                        <div class="col-xl-10">
+                          <input type="text" name="tanggal_lahir" id="daftar_tanggal_lahir" class="tanggal form-control"
+                            value="{{formData.tanggal_lahir}}" readonly>
+                        </div>
+                      </div>
+                      <!-- <div class="form-group row mb-3">
+                              <label for="inputPassword3" class="col-xl-2 col-form-label">Nomor Surat Keterangan Lulus</label>
+                              <div class="col-xl-10">
+                                <input type="number" class="form-control" id="daftar_noijazah" placeholder="Masukan Nomor SKL">
+                              </div>
+                            </div>
+                            <div class="form-group row mb-3">
+                              <label for="inputPassword3" class="col-xl-2 col-form-label">Nilai Rata-Rata SKL</label>
+                              <div class="col-xl-10">
+                                <input type="number" class="form-control" id="daftar_nilaiebtanas"
+                                  placeholder="Masukan Rata-rata nilai">
+                              </div>
+                            </div> -->
+                    </form>
+                    <!-- <a ng-click="simpan_perubahan()" class="btn btn-primary shadow-sm float-end px-4 mt-3"><i
+                        class="fa fa-sm "></i>Simpan</a> -->
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+            <footer class="ps-5 text-muted" style="margin-bottom: 8vh;">
+              <div>
+                <span class=" fw-bold montserrat" style="font-size: small;"> © 2023 Copyright:</span>
+                <span class=" fw-bold montserrat" style="font-size: small;"
+                  href="https://e-ppdb.bulelengkab.go.id/">e-PPDB</span>
+              </div>
+            </footer>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>

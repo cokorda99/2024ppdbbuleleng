@@ -1,0 +1,384 @@
+<ion-view title="Data Siswa Terdaftar" hide-nav-bar="true" cache-view="false" id="loginAdmin">
+  <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+    <div id="wrapper" class="bg-light">
+      <div id="nav-flex">
+        <div class="pt-5" id="sidebar-wrapper">
+          <div class="sidebar gmbr mb-4">
+            <img src="img/admin.png" alt="">
+          </div>
+          <div class="container">
+            <p id="nama" class="text-center text-light text-break">{{formData.nama}}</p>
+          </div>
+          <div class="d-grid gap-1 mx-3">
+            <button ng-click="beranda()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-home"></i> Beranda</span></button>
+            <button ng-click="data_siswa()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-user"></i> Data Siswa</span></button>
+            <button ui-sref="dataSiswaterdaftarSd()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-user-edit"></i> Data Siswa Terdaftar</span></button>
+            <button ui-sref="dataSiswaDiterimaSd()" class="btn text-light side-button side-active shadow py-3"
+              type="button"><span class="float-start ms-3"><i class="fas fa-trophy"></i> Data Siswa
+                Diterima</span></button>
+            <button ng-click="pengaturan()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-cogs"></i> Pengaturan</span></button>
+            <button ng-click="logout()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-sign-out-alt"></i> Keluar</span></button>
+          </div>
+        </div>
+      </div>
+      <div id="flexbox-wrapper" class="w-100">
+        <nav class="navbar navbar-expand navbar-light bg-light">
+          <div class="container-fluid">
+            <button class="btn" id="menu-toggle" ng-click="toogle()"><i class="fas fa-align-justify"></i></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+              </ul>
+              <div class="my-lg-0 d-flex">
+                <a id="nightmode" ng-click="nightmode()" class="btn text-dark" href=""><i id="icon-night"
+                    class="far fa-sun" style="font-size:24px" data-bs-toggle="tooltip" data-placement="top"
+                    title="Light/Night"></i></a>
+                <a class="btn text-dark" href=""><i class="far fa-question-circle" style="font-size:24px"
+                    data-bs-toggle="tooltip" data-placement="top" title="Bantuan"></i></a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div class="w-100 h-100" id="content-flex">
+          <div class="d-flex flex-column" style="min-height: 100vh;">
+
+            <div id="page-content-wrapper" style="flex :1">
+              <div id="main-content" class="container-fluid mt-5 px-5">
+                <div class="">
+                  <div class=" ">
+                    <div class="mb-3">
+                      <h5 id="page-header" class="text-dark fw-bold mb-0">
+                        Data Siswa Diterima
+                      </h5>
+                      <span id="small-header" class="text-muted">{{formData.sekolah}}</span>
+                    </div>
+                    <div class="card shadow-sm mb-4 animated--grow-in">
+                      <div class="card-header py-3 bg-white">
+                        <div class="row">
+                          <div id="icon-group-1" class="col-xl-8">
+                            <a ng-click="cetak()" class="btn btn-sm btn-primary shadow-sm px-3"><i
+                                class="fa fa-print fa-sm "></i> Export XLS</a>
+                          </div>
+                          <div id="icon-group-2" class="col-xl-4 d-flex">
+                            <div class="input-group input-group-sm float-end me-2 flex-grow-1">
+                              <input type="text" class="search form-control" placeholder="Search" aria-label="Search"
+                                aria-describedby="basic-addon2" ng-model="searchData">
+                              <span class="input-group-text" id="basic-addon2"><i
+                                  class="fa-solid fa-magnifying-glass"></i></span>
+                            </div>
+                            <a onclick="history.back()" id="btn-back"
+                              class="btn btn-sm btn-outline-primary shadow-sm float-end px-3 ">Kembali</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table" id="tbl-siswa-diterima" width="100%" cellspacing="0">
+                            <thead>
+                              <tr>
+                                <th width="">No</th>
+                                <th width="">NISN</th>
+                                <th width="">Nama</th>
+                                <th width="10%">SMP Zonasi</th>
+                                <th width="10%">SMP Pilihan</th>
+                                <th width="">Jalur 1</th>
+                                <th width="">Jalur 2</th>
+                                <th width="5%">Status Jalur 1</th>
+                                <th width="5%">Status Jalur 2</th>
+                              </tr>
+                            </thead>
+
+                            <tbody>
+
+                              <tr ng-repeat="data in siswa | orderBy: '-jalur' | filter:searchData">
+                                <td width="">{{$index+1}}</td>
+                                <td width="">'{{data.nisn}}</td>
+                                <td width="">{{data.nama}}</td>
+                                <td width="10%" style="text-transform: uppercase;">
+                                  <p ng-if="data.smpPilZonasi!==NULL && data.smpPil===NULL">
+                                    {{data.smpPilZonasi}}
+                                  </p>
+                                  <p ng-if="data.smpPilZonasi===NULL && data.smpPil===NULL">
+                                    Kosong
+                                  </p>
+                                  <p ng-if="data.smpPilZonasi!==NULL && data.smpPil!==NULL">
+                                    {{data.smpPilZonasi}}
+                                  </p>
+                                </td>
+                                <td width="10%" style="text-transform: uppercase;">
+                                  <p ng-if="data.smpPilZonasi!==NULL && data.smpPil!==NULL">
+                                    {{data.smpPil}}
+                                  </p>
+                                  <p ng-if="data.smpPilZonasi!==NULL && data.smpPil===NULL">
+                                    Kosong
+                                  </p>
+                                </td>
+                                <td width="" style="text-transform: uppercase;">
+                                  <p ng-if="data.jalur!==NULL">
+                                    {{data.jalur}}
+                                  </p>
+                                  <p ng-if="data.jalur===NULL">
+                                    Kosong
+                                  </p>
+                                </td>
+                                <td width="" style="text-transform: uppercase;">
+                                  <p ng-if="data.jalur2!==NULL">
+                                    {{data.jalur2}}
+                                  </p>
+                                  <p ng-if="data.jalur2===NULL">
+                                    Kosong
+                                  </p>
+                                </td>
+                                <td ng-if="status_penyaluran===NULL" width="5%">
+                                  <div ng-if="data.status_terima===true">
+                                    <div class="container bg-success py-1">
+                                      <p class="text-center text-light my-1">DITERIMA</p>
+                                    </div>
+                                  </div>
+
+                                  <div ng-if="data.status_terima===false">
+                                    <div class="container bg-warning py-1">
+                                      <p class="text-center text-light my-1">CADANGAN</p>
+                                    </div>
+                                  </div>
+                                  <div ng-if="data.status_terima===NULL">
+                                    <div class="container bg-dark py-1">
+                                      <p class="text-center text-light my-1">KOSONG</p>
+                                    </div>
+                                  </div>
+
+                                </td>
+                                <td ng-if="status_penyaluran!==NULL && status_penyaluran===true" width="5%">
+
+                                  <div>
+                                    <div class="container bg-danger py-1">
+                                      <p class="text-center text-light my-1">BELUM DITERIMA</p>
+                                    </div>
+                                  </div>
+                                </td>
+
+                                <td ng-if="status_penyaluran===NULL" width="5%">
+                                  <div ng-if="data.status_terima2===true">
+                                    <div class="container bg-success py-1">
+                                      <p class="text-center text-light my-1">DITERIMA</p>
+                                    </div>
+                                  </div>
+                                  <div ng-if="data.status_terima2===false">
+                                    <div class="container bg-warning py-1">
+                                      <p class="text-center text-light my-1">CADANGAN</p>
+                                    </div>
+                                  </div>
+                                  <div ng-if="data.status_terima2===NULL">
+                                    <div class="container bg-dark py-1">
+                                      <p class="text-center text-light my-1">KOSONG</p>
+                                    </div>
+                                  </div>
+
+                                </td>
+                                <td ng-if="status_penyaluran!==NULL && status_penyaluran===true" width="5%">
+
+                                  <div>
+                                    <div class="container bg-danger py-1">
+                                      <p class="text-center text-light my-1">BELUM DITERIMA</p>
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+
+                            </tbody>
+                          </table>
+                          <!--modal tambah -->
+                          <div class="modal fade" id="modal_tambah" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header bg-success">
+                                  <h5 class="modal-title fw-bold text-light" id="exampleModalLabel">Tambah Data
+                                  </h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <form>
+                                    <div class="form-group row">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">NISN</label>
+                                      <div class="col-xl-10">
+                                        <input type="number" class="form-control" ng-model="form.nisn">
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">NIK</label>
+                                      <div class="col-xl-10">
+                                        <input type="number" class="form-control" ng-model="form.nik">
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">Nama</label>
+                                      <div class="col-xl-10">
+                                        <input type="text" class="form-control" ng-model="form.nama">
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">Tanggal
+                                        Lahir</label>
+                                      <div class="col-xl-10">
+                                        <input type="date" class="form-control" ng-model="form.tglLahir">
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">Tempat Lahir</label>
+                                      <div class="col-xl-10">
+                                        <input type="text" class="form-control" ng-model="form.tempatLahir">
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">Alamat Siswa</label>
+                                      <div class="col-xl-10">
+                                        <input type="text" class="form-control" ng-model="form.alamat">
+                                      </div>
+                                    </div>
+                                  </form>
+                                </div>
+                                <div class="modal-footer border-0">
+                                  <button type="button" class="btn btn-outline-secondary"
+                                    data-bs-dismiss="modal">Tutup</button>
+                                  <button type="button" class="btn btn-primary" ng-click="simpan()">Simpan</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--modal edit -->
+                          <div class="modal fade" id="modal_edit" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header bg-warning">
+                                  <h5 class="modal-title fw-bold text-light" id="exampleModalLabel">Edit Data
+                                  </h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <form>
+                                    <div class="form-group row">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">NISN</label>
+                                      <div class="col-xl-10">
+                                        <input readonly id="nisnEdit" type="number" class="form-control">
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">NIK</label>
+                                      <div class="col-xl-10">
+                                        <input id="nikEdit" type="number" class="form-control" readonly>
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">Nama</label>
+                                      <div class="col-xl-10">
+                                        <input id="namaEdit" type="text" class="form-control">
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">Tanggal
+                                        Lahir</label>
+                                      <div class="col-xl-10">
+                                        <input id="tglLahirEdit" type="date" class="form-control" readonly>
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">Tempat Lahir</label>
+                                      <div class="col-xl-10">
+                                        <input id="tempatLahirEdit" type="text" class="form-control">
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label for="inputEmail3" class="col-xl-2 col-form-label">Alamat Siswa</label>
+                                      <div class="col-xl-10">
+                                        <input id="alamatEdit" type="text" class="form-control">
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer border-0">
+                                      <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Batal</button>
+                                      <button type="button"
+                                        class="updateSklh btn btn-primary text-light">Simpan</button>
+                                    </div>
+                                  </form>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+
+                          <!--modal hapus  -->
+                          <div class="modal fade" id="modal_hapus" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header bg-danger">
+                                  <h5 class="modal-title fw-bold text-light" id="exampleModalLabel">Hapus Data
+                                  </h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <center>
+                                    <i class="fas fa-exclamation-triangle text-warning my-3"
+                                      style="font-size:50px;"></i>
+                                    <h6>Apakah Anda yakin ingin menghapus data <span class="fw-bold">Siswa
+                                      </span>?, data yg sudah
+                                      di
+                                      hapus tidak dapat dikembalikan lagi</h6>
+                                  </center>
+
+                                </div>
+                                <div class="modal-footer border-0">
+                                  <button type="button" class="btn btn-outline-secondary"
+                                    data-bs-dismiss="modal">Tutup</button>
+                                  <button type="button" class="deleteRecord btn btn-danger">Hapus</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- End of Content Wrapper -->
+              </div>
+            </div>
+
+            <footer class="ps-5 text-muted" style="margin-bottom: 8vh;">
+              <div>
+                <span class=" fw-bold montserrat" style="font-size: small;"> © 2023 Copyright:</span>
+                <span class=" fw-bold montserrat" style="font-size: small;"
+                  href="https://e-ppdb.bulelengkab.go.id/">e-PPDB</span>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,210 @@
+<ion-view title="Data Pendaftar" hide-nav-bar="true" cache-view="false" id="loginAdmin">
+  <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+    <div id="wrapper" class="bg-light">
+      <div id="nav-flex" class="bck">
+        <div class="pt-5" id="sidebar-wrapper">
+          <div class="sidebar gmbr mb-4">
+            <img src="img/admin.png" alt="">
+          </div>
+          <div class="container">
+            <p id="nama" class="text-center text-light text-break">{{formData.nama}}</p>
+          </div>
+          <div class="d-grid gap-1 mx-3">
+            <button ng-click="beranda()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-home"></i> Beranda</span></button>
+            <button data-bs-toggle="collapse" href="#data-pendaftar" role="button" aria-expanded="false"
+            aria-controls="data-ranking" class="btn text-light side-button py-3" type="button"><span
+              class="float-start ms-3"><i class="fas fa-user-edit"></i> Data Pendaftar</span><i
+              class="ms-4 fas fa-angle-down float-end"></i></button>
+            <div class="collapse" id="data-pendaftar">
+              <div class="d-grid gap-1 mx-3">
+                <button ui-sref="dataPendaftarZonasi()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> Zonasi</span></button>
+                <button ui-sref="dataPendaftarAfirmasi()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> Afirmasi</span></button>
+                <button ui-sref="dataPendaftarPerpindahan()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> Perpindahan</span></button>
+                <button ui-sref="dataPendaftarPrestasi()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> Prestasi</span></button>
+              </div>
+            </div>
+            <!-- <button ng-click="data_luar_rayon()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-user-edit"></i> Siswa Luar Rayon</span></button> -->
+            <button ng-if="cekBukaRanking == true"   data-bs-toggle="collapse" href="#data-ranking" role="button" aria-expanded="false"
+              aria-controls="data-ranking" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-trophy"></i> Data Ranking</span><i
+                class="ms-4 fas fa-angle-down float-end"></i></button>
+            <div class="collapse" id="data-ranking">
+              <div class="d-grid gap-1 mx-3">
+                <button ng-click="ranking_zonasi()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-trophy"></i> Zonasi</span></button>
+                <button ng-click="ranking_afirmasi()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-trophy"></i> Afirmasi</span></button>
+                <button ng-click="ranking_perpindahan()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-trophy"></i> Perpindahan</span></button>
+                <button ng-click="ranking_prestasi()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-trophy"></i> Prestasi</span></button>
+              </div>
+            </div>
+            <button ng-click="pengaturan()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-cogs"></i> Pengaturan</span></button>
+            <button ng-click="logout()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-sign-out-alt"></i> Keluar</span></button>
+          </div>
+        </div>
+      </div>
+      <div id="flexbox-wrapper" class="w-100">
+        <nav class="navbar navbar-expand navbar-light bg-light">
+          <div class="container-fluid">
+            <button class="btn" id="menu-toggle" ng-click="toogle()"><i
+              class="fas fa-align-justify"></i></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+              </ul>
+              <div class="my-lg-0 d-flex">
+                <div class="navbar-brand form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                  <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                </div>
+                <a class="btn text-dark" href=""><i class="far fa-question-circle"
+                    style="font-size:24px" data-bs-toggle="tooltip" data-placement="top" title="Bantuan"></i></a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div class="w-100 h-100" id="content-flex">
+          <div class="d-flex flex-column" style="min-height: 100vh;">
+  
+            <div id="page-content-wrapper" style="flex: 1;">
+      
+              <div id="main-content"class="container-fluid mt-5 px-5" >
+                <!-- Begin Page Content -->
+    
+                    <h5 class="mb-5"><a ng-click="dashboard()" class="text-dark fw-bold"
+                      style="text-decoration: none;font-size: 40px;">Data Pendaftar
+                    </a> <br> <a ng-click="dashboard()" class="text-muted"
+                      style="text-decoration: none;font-size:20px">Disini anda dapat melihat data jumlah pendaftar perjalur</a></h5>
+                      <div class="row">
+                        <div class="col-xl-4">
+                          <div class="card shadow-sm" style="border-radius: 10px;">
+                            <div class="card-header text-center bg-primary text-light bck" style="border-radius: 10px 10px 0px 0px;">
+                              <h6 class="montserrat my-2">Jumlah Pendaftar Per Jalur</h6>
+                            </div>
+                            <div class="card-body">
+                              <canvas id="myChart" width="50" height="32"></canvas>
+                            </div>
+                            <div class="card-footer text-center bck py-0" style="border-radius: 0px 0px 10px 10px;">
+                              <p class="text-light montserrat my-2">Total : <span id="total_pendaftarSpan"> </span> Pendaftar</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xl-8">
+                          <div class="row">
+                            <div class="col-xl-6">
+                              <div class="mb-3">
+                                <div class="card border-left-light shadow-sm h-100 py-2 bck" style="border-radius: 10px;">
+                                  <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                      <div class="col me-2">
+                                        <div class="text-xs fw-bold text-light text-uppercase">ZONASI</div>
+                                      </div>
+                                      <div class="col-auto">
+                                        <i class="fas fa-users fa-3x text-light"></i>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="card-footer bg-transparent">
+                                    <a ng-click="pendaftar_zonasi()" class="btn btn-outline-light montserrat px-4 fw-bold" style="border-radius: 50px;">Lihat</a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="mb-3">
+                                <div class="card border-left-light shadow-sm h-100 py-2 bck" style="border-radius: 10px;">
+                                  <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                      <div class="col me-2">
+                                        <div class="text-xs fw-bold text-light text-uppercase">Afirmasi</div>
+    
+                                      </div>
+                                      <div class="col-auto">
+                                        <i class="fas fa-users fa-3x text-light"></i>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="card-footer">
+                                    <a ng-click="pendaftar_afirmasi()" class="btn btn-outline-light montserrat px-4 fw-bold" style="border-radius: 50px;">Lihat</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-xl-6">
+                              <div class="mb-3">
+                                <div class="card border-left-light shadow-sm h-100 py-2 bck" style="border-radius: 10px;">
+                                  <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                      <div class="col me-2">
+                                        <div class="text-xs fw-bold text-light text-uppercase">Prestasi</div>
+    
+                                      </div>
+                                      <div class="col-auto">
+                                        <i class="fas fa-users fa-3x text-light"></i>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="card-footer bg-transparent">
+                                    <a ng-click="pendaftar_prestasi()" class="btn btn-outline-light montserrat px-4 fw-bold" style="border-radius: 50px;">Lihat</a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="mb-3">
+                                <div class="card border-left-light shadow-sm h-100 py-2 bck" style="border-radius: 10px;">
+                                  <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                      <div class="col me-2">
+                                        <div class="text-xs fw-bold text-light text-uppercase">Perpindahan Orang Tua</div>
+    
+                                      </div>
+                                      <div class="col-auto">
+                                        <i class="fas fa-users fa-3x text-light"></i>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="card-footer bg-transparent">
+                                    <a ng-click="pendaftar_perpindahan()" class="btn btn-outline-light montserrat px-4 fw-bold" style="border-radius: 50px;">Lihat</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+    
+                          </div>
+                        </div>
+    
+                      </div>
+    
+                <!-- <div class="card shadow-sm mb-4 animated--grow-in">
+                          <div class="card-body mx-5 p-4">
+                            <h5 class="text-xs fw-bold text-success text-uppercase mb-3">TOTAL PENDAFTAR : {{jumlahsiswazonasi}}</h5>
+                          </div>
+                        </div> -->
+      
+      
+              </div>
+      
+            </div>
+            <footer class="ps-5 text-muted" style="margin-bottom: 8vh;">
+              <div>
+                <span class=" fw-bold montserrat" style="font-size: small;"> © 2023 Copyright:</span>
+                <span class=" fw-bold montserrat" style="font-size: small;"
+                  href="https://e-ppdb.bulelengkab.go.id/">e-PPDB</span>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </ion-content>
+</ion-view>

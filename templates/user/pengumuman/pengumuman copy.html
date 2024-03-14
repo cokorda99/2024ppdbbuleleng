@@ -1,0 +1,1354 @@
+<ion-view title="Dashboard e-PPDB Siswa" hide-nav-bar="true" cache-view="false" id="welcome">
+  <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+
+    <div id="wrapper" class="bg-light">
+      <div id="nav-flex" class="bck">
+        <div class="pt-5" id="sidebar-wrapper">
+          <div class="sidebar gmbr mb-4">
+            <img src="img/student-male.png" alt="">
+          </div>
+
+          <div class="center container-fluid p-3 m-0">
+            <p class="text-center text-light text-decoration-none" id="nama">{{formData.nama}}</p>
+            <p class="text-center text-light text-decoration-none" id="nisn">{{formData.nisn}}</p>
+          </div>
+          <div class="d-grid gap-1 mx-3">
+            <button ng-click="dashboard()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-home"></i> Beranda</span></button>
+            <button ng-click="pendaftaran_ppdb()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-user"></i> Pendaftaran</span></button>
+            <button ng-click="pengumumanUser()" class="btn text-light side-button side-active shadow py-3"
+              type="button"><span class="float-start ms-3"><i class="fas fa-user-edit"></i> Pengumuman</span></button>
+            <button ng-click="pengaturanUser()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-cogs"></i> Pengaturan</span></button>
+            <button ng-click="logout()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-sign-out-alt"></i> Keluar</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flexbox-wrapper" class="w-100">
+        <nav class="navbar navbar-expand navbar-light bg-light">
+          <div class="container-fluid">
+            <button class="btn" id="menu-toggle" ng-click="toogle()"><i class="fas fa-align-justify"></i></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+              </ul>
+              <div class="my-lg-0 d-flex">
+                <a ng-click="pendaftaran_ppdb()" class="btn text-dark position-relative" href=""><i
+                    class="far fa-envelope" style="font-size:24px" data-bs-toggle="tooltip" data-placement="top"
+                    title="Pesan"></i>
+                    <span ng-if="statusdaftar===false && statusvalidasi===false && koreksi == NULL"
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger text-light">
+                    1
+                  </span>
+                </a>
+                <a id="nightmode" ng-click="nightmode()" class="btn text-dark" href=""><i id="icon-night"
+                  class="far fa-sun" style="font-size:24px" data-bs-toggle="tooltip" data-placement="top"
+                  title="Light/Night"></i></a>
+                <a ng-click="alertDashboardUser()" class="btn text-dark" href=""><i class="far fa-question-circle"
+                    style="font-size:24px" data-bs-toggle="tooltip" data-placement="top" title="Bantuan"></i></a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div class="w-100 h-100" id="content-flex">
+          <div class="d-flex flex-column" style="min-height: 100vh;">
+            <div id="page-content-wrapper" style="flex :1">
+
+              <div id="main-content" class="container-fluid mt-5 px-5">
+                <div class="mb-3">
+                  <h5 id="page-header" class="text-dark fw-bold mb-0">
+                    Pengumuman
+                  </h5>
+                  <span id="small-header" class="text-muted">Anda dapat
+                    melihat hasil e-PPDB anda disini</span>
+                </div>
+                <div ng-if="cekBukaPengumuman.aktif===true">
+
+                  <div ng-if="sekolahJalurId===NULL">
+
+                    <div ng-if="status_penyaluran===NULL">
+
+                      <div>
+                        <div class="card shadow mb-4 animated--grow-in mb-3">
+                          <div class="card-body mx-5 p-5">
+                            <h4 class="text-center fw-bold">SELAMAT ANDA <span ng-if="status_terima===true">SUDAH
+                                DITERIMA</span><span ng-if="status_terima===false">MASUK KUOTA CADANGAN</span></h4>
+                            <p class="text-center">JALUR <b style="text-transform: uppercase;">{{formData.jalur}}</b>
+                              E-PPDB DI <b style="text-transform: uppercase;">{{sekolahZonasi}}</b></p>
+                            <center>
+                              <table>
+                                <tr>
+                                  <th scope="row">
+                                    <p>No Pendaftaran</p>
+                                  </th>
+                                  <td>
+                                    <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                  </td>
+                                  <td>
+                                    <p class="text-break">{{formData.no_pendaftaran}}</p>
+                                  </td>
+                                </tr>
+                              </table>
+                            </center>
+                            <div>
+                              <div class="d-flex justify-content-center py-3">
+                                <img src="img/medal.png" style="max-width: 100px;" alt="">
+                              </div>
+                            </div>
+                            <center ng-if="status_terima===false">
+                              <h4 class=" btn-status-cadangan mt-2 mb-2 fw-bold montserrat">CADANGAN</h4><br>
+                            </center>
+                            <center ng-if="status_terima===true">
+                              <h4 class=" btn-status-diterima mt-2 mb-2 fw-bold montserrat">DITERIMA</h4><br>
+                            </center>
+                            <br>
+                            <center>
+                              <table>
+                                <tbody>
+                                  <tr>
+                                    <th scope="row">
+                                      <p>Nama</p>
+                                    </th>
+                                    <td>
+                                      <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                    </td>
+                                    <td>
+                                      <p>{{formData.nama}}</p>
+                                    </td>
+                                  </tr>
+                                  <tr style="width: 100px;">
+                                    <th scope="row">
+                                      <p>NISN</p>
+                                    </th>
+                                    <td>
+                                      <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                    </td>
+                                    <td>
+                                      <p>{{formData.nisn}}</p>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">
+                                      <p>Tanggal Lahir</p>
+                                    </th>
+                                    <td>
+                                      <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                    </td>
+                                    <td>
+                                      <p>{{formData.tanggal_lahir}}</p>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <a class="btn btn-md bg-primary shadow-sm text-white no-print"
+                                style="border-radius:50px; width: 200px;" ng-click="test()"><i class="fas fa-print"></i>
+                                Cetak</a>
+                              <div ng-if="status_terima===true" class="my-2">
+                                <p class="text-center text-success"> Untuk informasi terkait pendaftaran kembali,
+                                  silahkan hubungi sekolah mulai tanggal 2 s/d 7 Juli 2022</p>
+                              </div>
+                              <div ng-if="status_terima===false" class="my-2">
+                                <p class="text-center text-danger"> Untuk informasi lebih lanjut, silahkan hubungi
+                                  sekolah mulai tangga 2 s/d 7 Juli 2022</p>
+                              </div>
+                            </center>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div ng-if="status_penyaluran!==NULL">
+
+                      <div ng-if="status_terima===true">
+                        <div class="card shadow mb-4 animated--grow-in mb-3">
+                          <div class="card-body mx-5 p-5">
+                            <h4 class="text-center fw-bold">SELAMAT ANDA <span ng-if="status_terima===true">SUDAH
+                                DITERIMA</span><span ng-if="status_terima===false">MASUK KUOTA CADANGAN</span></h4>
+                            <p class="text-center">JALUR <b style="text-transform: uppercase;">{{formData.jalur}}</b>
+                              E-PPDB DI <b style="text-transform: uppercase;">{{sekolahZonasi}}</b></p>
+                            <center>
+                              <table>
+                                <tr>
+                                  <th scope="row">
+                                    <p>No Pendaftaran</p>
+                                  </th>
+                                  <td>
+                                    <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                  </td>
+                                  <td>
+                                    <p class="text-break">{{formData.no_pendaftaran}}</p>
+                                  </td>
+                                </tr>
+                              </table>
+                            </center>
+                            <div>
+                              <div class="d-flex justify-content-center py-3">
+                                <img src="img/medal.png" style="max-width: 100px;" alt="">
+                              </div>
+                            </div>
+                            <center ng-if="status_terima===false">
+                              <h4 class=" btn-status-cadangan mt-2 mb-2 fw-bold montserrat">CADANGAN</h4><br>
+                            </center>
+                            <center ng-if="status_terima===true">
+                              <h4 class=" btn-status-diterima mt-2 mb-2 fw-bold montserrat">DITERIMA</h4><br>
+                            </center>
+                            <br>
+                            <center>
+                              <table>
+                                <tbody>
+                                  <tr>
+                                    <th scope="row">
+                                      <p>Nama</p>
+                                    </th>
+                                    <td>
+                                      <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                    </td>
+                                    <td>
+                                      <p>{{formData.nama}}</p>
+                                    </td>
+                                  </tr>
+                                  <tr style="width: 100px;">
+                                    <th scope="row">
+                                      <p>NISN</p>
+                                    </th>
+                                    <td>
+                                      <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                    </td>
+                                    <td>
+                                      <p>{{formData.nisn}}</p>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">
+                                      <p>Tanggal Lahir</p>
+                                    </th>
+                                    <td>
+                                      <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                    </td>
+                                    <td>
+                                      <p>{{formData.tanggal_lahir}}</p>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <a class="btn btn-md bg-primary shadow-sm text-white no-print"
+                                style="border-radius:50px; width: 200px;" ng-click="test()"><i class="fas fa-print"></i>
+                                Cetak</a>
+                              <div ng-if="status_terima===true" class="my-2">
+                                <p class="text-center text-success"> Untuk informasi terkait pendaftaran kembali,
+                                  silahkan hubungi sekolah mulai tanggal 2 s/d 7 Juli 2022</p>
+                              </div>
+                              <div ng-if="status_terima===false" class="my-2">
+                                <p class="text-center"> Untuk informasi lebih lanjut, silahkan hubungi sekolah mulai
+                                  tangga 2 s/d 7 Juli 2022</p>
+                              </div>
+                            </center>
+                          </div>
+                        </div>
+                      </div>
+                      <div ng-if="status_terima===false && status_penyaluran===true">
+                        <div class="card shadow mb-4 animated--grow-in mb-3">
+                          <div class="card-body mx-5 p-5">
+                            <h4 class="text-center fw-bold">MOHON MAAF ANDA BELUM DAPAT DITERIMA</h4>
+                            <p class="text-center">JALUR <b style="text-transform: uppercase;">{{formData.jalur}}</b>
+                              E-PPDB DI <b style="text-transform: uppercase;">{{sekolahZonasi}}</b></p>
+                            <center>
+                              <table>
+                                <tr>
+                                  <th scope="row">
+                                    <p>No Pendaftaran</p>
+                                  </th>
+                                  <td>
+                                    <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                  </td>
+                                  <td>
+                                    <p class="text-break">{{formData.no_pendaftaran}}</p>
+                                  </td>
+                                </tr>
+                              </table>
+                            </center>
+                            <div>
+                              <div class="d-flex justify-content-center py-3">
+                                <img src="img/logosiswa.png" style="max-width: 100px;" alt="">
+                              </div>
+                            </div>
+                            <center>
+                              <h4 class=" btn-status-belum-diterima mt-2 mb-2 fw-bold montserrat">BELUM
+                                DITERIMA</h4><br>
+                            </center>
+                            <br>
+                            <center>
+                              <table>
+                                <tbody>
+                                  <tr>
+                                    <th scope="row">
+                                      <p>Nama</p>
+                                    </th>
+                                    <td>
+                                      <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                    </td>
+                                    <td>
+                                      <p>{{formData.nama}}</p>
+                                    </td>
+                                  </tr>
+                                  <tr style="width: 100px;">
+                                    <th scope="row">
+                                      <p>NISN</p>
+                                    </th>
+                                    <td>
+                                      <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                    </td>
+                                    <td>
+                                      <p>{{formData.nisn}}</p>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">
+                                      <p>Tanggal Lahir</p>
+                                    </th>
+                                    <td>
+                                      <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                    </td>
+                                    <td>
+                                      <p>{{formData.tanggal_lahir}}</p>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <a class="btn btn-md bg-primary shadow-sm text-white no-print"
+                                style="border-radius:50px; width: 200px;" ng-click="test()"><i class="fas fa-print"></i>
+                                Cetak</a>
+                              <div class="my-2">
+                                <p class="text-center text-danger">Silahkan melanjutkan di sekolah terdekat sepanjang
+                                  kuota masih tersedia</p>
+                              </div>
+                            </center>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  <div ng-if="sekolahJalurId!==NULL">
+                    <div ng-if="sekolahZonasiId!==sekolahJalurId">
+
+                      <div ng-if="status_penyaluran===NULL">
+
+                        <div>
+                          <div ng-if="status_terima2!==NULL">
+                            <div class="card shadow mb-4 animated--grow-in mb-3">
+                              <div class="card-body mx-5 p-5">
+                                <h4 class="text-center fw-bold">SELAMAT ANDA <span ng-if="status_terima2===true">SUDAH
+                                    DITERIMA</span><span ng-if="status_terima2===false">MASUK KUOTA CADANGAN</span></h4>
+                                <p class="text-center">JALUR <b
+                                    style="text-transform: uppercase;">{{formData.jalur2}}</b> E-PPDB DI <b
+                                    style="text-transform: uppercase;">{{sekolahJalur}}</b></p>
+                                <center>
+                                  <table>
+                                    <tr>
+                                      <th scope="row">
+                                        <p>No Pendaftaran</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p class="text-break">{{formData.no_pendaftaran2}}</p>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </center>
+                                <div>
+                                  <div class="d-flex justify-content-center py-3">
+                                    <img src="img/medal.png" style="max-width: 100px;" alt="">
+                                  </div>
+                                </div>
+                                <center ng-if="status_terima2===false">
+                                  <h4 class=" btn-status-cadangan mt-2 mb-2 fw-bold montserrat">CADANGAN</h4>
+                                  <br>
+                                </center>
+                                <center ng-if="status_terima2===true">
+                                  <h4 class=" btn-status-diterima mt-2 mb-2 fw-bold montserrat">DITERIMA</h4>
+                                  <br>
+                                </center>
+                                <br>
+                                <center>
+                                  <table>
+                                    <tbody>
+                                      <tr>
+                                        <th scope="row">
+                                          <p>Nama</p>
+                                        </th>
+                                        <td>
+                                          <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                        </td>
+                                        <td>
+                                          <p>{{formData.nama}}</p>
+                                        </td>
+                                      </tr>
+                                      <tr style="width: 100px;">
+                                        <th scope="row">
+                                          <p>NISN</p>
+                                        </th>
+                                        <td>
+                                          <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                        </td>
+                                        <td>
+                                          <p>{{formData.nisn}}</p>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">
+                                          <p>Tanggal Lahir</p>
+                                        </th>
+                                        <td>
+                                          <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                        </td>
+                                        <td>
+                                          <p>{{formData.tanggal_lahir}}</p>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <a class="btn btn-md bg-primary shadow-sm text-white no-print"
+                                    style="border-radius:50px; width: 200px;" ng-click="test()"><i
+                                      class="fas fa-print"></i>
+                                    Cetak</a>
+                                  <div ng-if="status_terima2===true" class="my-2">
+                                    <p class="text-center text-success"> Untuk informasi terkait pendaftaran kembali,
+                                      silahkan hubungi sekolah mulai tanggal 2 s/d 7 Juli 2022</p>
+                                  </div>
+                                  <div ng-if="status_terima2===false" class="my-2">
+                                    <p class="text-center text-danger"> Untuk lebih lanjut, silahkan hubungi sekolah
+                                      mulai tangga 2 s/d 7 Juli 2022</p>
+                                  </div>
+                                </center>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card shadow mb-4 animated--grow-in mb-3">
+                            <div class="card-body mx-5 p-5">
+                              <h4 class="text-center fw-bold">SELAMAT ANDA <span ng-if="status_terima===true">SUDAH
+                                  DITERIMA</span><span ng-if="status_terima===false">MASUK KUOTA CADANGAN</span></h4>
+                              <p class="text-center">JALUR <b style="text-transform: uppercase;">{{formData.jalur}}</b>
+                                E-PPDB DI <b style="text-transform: uppercase;">{{sekolahZonasi}}</b></p>
+                              <center>
+                                <table>
+                                  <tr>
+                                    <th scope="row">
+                                      <p>No Pendaftaran</p>
+                                    </th>
+                                    <td>
+                                      <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                    </td>
+                                    <td>
+                                      <p class="text-break">{{formData.no_pendaftaran}}</p>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </center>
+                              <div>
+                                <div class="d-flex justify-content-center py-3">
+                                  <img src="img/medal.png" style="max-width: 100px;" alt="">
+                                </div>
+                              </div>
+                              <center ng-if="status_terima===false">
+                                <h4 class=" btn-status-cadangan mt-2 mb-2 fw-bold montserrat">CADANGAN</h4><br>
+                              </center>
+                              <center ng-if="status_terima===true">
+                                <h4 class=" btn-status-diterima mt-2 mb-2 fw-bold montserrat">DITERIMA</h4><br>
+                              </center>
+                              <br>
+                              <center>
+                                <table>
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">
+                                        <p>Nama</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p>{{formData.nama}}</p>
+                                      </td>
+                                    </tr>
+                                    <tr style="width: 100px;">
+                                      <th scope="row">
+                                        <p>NISN</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p>{{formData.nisn}}</p>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">
+                                        <p>Tanggal Lahir</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p>{{formData.tanggal_lahir}}</p>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <a class="btn btn-md bg-primary shadow-sm text-white no-print"
+                                  style="border-radius:50px; width: 200px;" ng-click="test()"><i
+                                    class="fas fa-print"></i>
+                                  Cetak</a>
+                                <div ng-if="status_terima===true" class="my-2">
+                                  <p class="text-center text-success"> Untuk informasi terkait pendaftaran kembali,
+                                    silahkan hubungi sekolah mulai tanggal 2 s/d 7 Juli 2022</p>
+                                </div>
+                                <div ng-if="status_terima===false" class="my-2">
+                                  <p class="text-center text-danger"> Untuk informasi lebih lanjut, silahkan hubungi
+                                    sekolah mulai tanggal 2 s/d 7 Juli 2022</p>
+                                </div>
+                              </center>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div ng-if="status_penyaluran!==NULL">
+
+                        <div ng-if="status_terima===true || status_terima2===true">
+                          <div ng-if="status_terima2!==NULL">
+                            <div class="card shadow mb-4 animated--grow-in mb-3">
+                              <div class="card-body mx-5 p-5">
+                                <h4 class="text-center fw-bold">SELAMAT ANDA <span ng-if="status_terima2===true">SUDAH
+                                    DITERIMA</span><span ng-if="status_terima2===false">MASUK KUOTA CADANGAN</span></h4>
+                                <p class="text-center">JALUR <b
+                                    style="text-transform: uppercase;">{{formData.jalur2}}</b> E-PPDB DI <b
+                                    style="text-transform: uppercase;">{{sekolahJalur}}</b></p>
+                                <center>
+                                  <table>
+                                    <tr>
+                                      <th scope="row">
+                                        <p>No Pendaftaran</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p class="text-break">{{formData.no_pendaftaran2}}</p>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </center>
+                                <div>
+                                  <div class="d-flex justify-content-center py-3">
+                                    <img src="img/medal.png" style="max-width: 100px;" alt="">
+                                  </div>
+                                </div>
+                                <center ng-if="status_terima2===false">
+                                  <h4 class=" btn-status-cadangan mt-2 mb-2 fw-bold montserrat">CADANGAN</h4>
+                                  <br>
+                                </center>
+                                <center ng-if="status_terima2===true">
+                                  <h4 class=" btn-status-diterima mt-2 mb-2 fw-bold montserrat">DITERIMA</h4>
+                                  <br>
+                                </center>
+                                <br>
+                                <center>
+                                  <table>
+                                    <tbody>
+                                      <tr>
+                                        <th scope="row">
+                                          <p>Nama</p>
+                                        </th>
+                                        <td>
+                                          <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                        </td>
+                                        <td>
+                                          <p>{{formData.nama}}</p>
+                                        </td>
+                                      </tr>
+                                      <tr style="width: 100px;">
+                                        <th scope="row">
+                                          <p>NISN</p>
+                                        </th>
+                                        <td>
+                                          <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                        </td>
+                                        <td>
+                                          <p>{{formData.nisn}}</p>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">
+                                          <p>Tanggal Lahir</p>
+                                        </th>
+                                        <td>
+                                          <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                        </td>
+                                        <td>
+                                          <p>{{formData.tanggal_lahir}}</p>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <a class="btn btn-md bg-primary shadow-sm text-white no-print"
+                                    style="border-radius:50px; width: 200px;" ng-click="test()"><i
+                                      class="fas fa-print"></i>
+                                    Cetak</a>
+                                  <div ng-if="status_terima2===true" class="my-2">
+                                    <p class="text-center text-success"> Untuk informasi terkait pendaftaran kembali,
+                                      silahkan hubungi sekolah mulai tanggal 2 s/d 7 Juli 2022</p>
+                                  </div>
+                                  <div ng-if="status_terima2===false" class="my-2">
+                                    <p class="text-center text-danger"> Untuk lebih lanjut, silahkan hubungi sekolah
+                                      mulai tangga 2 s/d 7 Juli 2022</p>
+                                  </div>
+                                </center>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card shadow mb-4 animated--grow-in mb-3">
+                            <div class="card-body mx-5 p-5">
+                              <h4 class="text-center fw-bold">SELAMAT ANDA <span ng-if="status_terima===true">SUDAH
+                                  DITERIMA</span><span ng-if="status_terima===false">MASUK KUOTA CADANGAN</span></h4>
+                              <p class="text-center">JALUR <b style="text-transform: uppercase;">{{formData.jalur}}</b>
+                                E-PPDB DI <b style="text-transform: uppercase;">{{sekolahZonasi}}</b></p>
+                              <center>
+                                <table>
+                                  <tr>
+                                    <th scope="row">
+                                      <p>No Pendaftaran</p>
+                                    </th>
+                                    <td>
+                                      <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                    </td>
+                                    <td>
+                                      <p class="text-break">{{formData.no_pendaftaran}}</p>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </center>
+                              <div>
+                                <div class="d-flex justify-content-center py-3">
+                                  <img src="img/medal.png" style="max-width: 100px;" alt="">
+                                </div>
+                              </div>
+                              <center ng-if="status_terima===false">
+                                <h4 class=" btn-status-cadangan mt-2 mb-2 fw-bold montserrat">CADANGAN</h4><br>
+                              </center>
+                              <center ng-if="status_terima===true">
+                                <h4 class=" btn-status-diterima mt-2 mb-2 fw-bold montserrat">DITERIMA</h4><br>
+                              </center>
+                              <br>
+                              <center>
+                                <table>
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">
+                                        <p>Nama</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p>{{formData.nama}}</p>
+                                      </td>
+                                    </tr>
+                                    <tr style="width: 100px;">
+                                      <th scope="row">
+                                        <p>NISN</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p>{{formData.nisn}}</p>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">
+                                        <p>Tanggal Lahir</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p>{{formData.tanggal_lahir}}</p>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <a class="btn btn-md bg-primary shadow-sm text-white no-print"
+                                  style="border-radius:50px; width: 200px;" ng-click="test()"><i
+                                    class="fas fa-print"></i>
+                                  Cetak</a>
+                                <div ng-if="status_terima===true" class="my-2">
+                                  <p class="text-center text-success"> Untuk informasi terkait pendaftaran kembali,
+                                    silahkan hubungi sekolah mulai tanggal 2 s/d 7 Juli 2022</p>
+                                </div>
+                                <div ng-if="status_terima===false" class="my-2">
+                                  <p class="text-center text-danger"> Untuk informasi lebih lanjut, silahkan hubungi
+                                    sekolah mulai tanggal 2 s/d 7 Juli 2022</p>
+                                </div>
+                              </center>
+                            </div>
+                          </div>
+                        </div>
+                        <div ng-if="status_penyaluran===true">
+                          <div ng-if="status_terima===false && status_terima2===false">
+                            <div ng-if="status_terima2!==NULL">
+                              <div class="card shadow mb-4 animated--grow-in mb-3">
+                                <div class="card-body mx-5 p-5">
+                                  <h4 class="text-center fw-bold">MOHON MAAF ANDA BELUM DAPAT DITERIMA</h4>
+                                  <p class="text-center">JALUR <b
+                                      style="text-transform: uppercase;">{{formData.jalur2}}</b> E-PPDB DI <b
+                                      style="text-transform: uppercase;">{{sekolahJalur}}</b></p>
+                                  <center>
+                                    <table>
+                                      <tr>
+                                        <th scope="row">
+                                          <p>No Pendaftaran</p>
+                                        </th>
+                                        <td>
+                                          <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                        </td>
+                                        <td>
+                                          <p class="text-break">{{formData.no_pendaftaran2}}</p>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </center>
+                                  <div>
+                                    <div class="d-flex justify-content-center py-3">
+                                      <img src="img/logosiswa.png" style="max-width: 100px;" alt="">
+                                    </div>
+                                  </div>
+                                  <center>
+                                    <h4 class=" btn-status-belum-diterima mt-2 mb-2 fw-bold montserrat">BELUM
+                                      DITERIMA</h4><br>
+                                  </center>
+                                  <br>
+                                  <center>
+                                    <table>
+                                      <tbody>
+                                        <tr>
+                                          <th scope="row">
+                                            <p>Nama</p>
+                                          </th>
+                                          <td>
+                                            <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                          </td>
+                                          <td>
+                                            <p>{{formData.nama}}</p>
+                                          </td>
+                                        </tr>
+                                        <tr style="width: 100px;">
+                                          <th scope="row">
+                                            <p>NISN</p>
+                                          </th>
+                                          <td>
+                                            <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                          </td>
+                                          <td>
+                                            <p>{{formData.nisn}}</p>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <th scope="row">
+                                            <p>Tanggal Lahir</p>
+                                          </th>
+                                          <td>
+                                            <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                          </td>
+                                          <td>
+                                            <p>{{formData.tanggal_lahir}}</p>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                    <a class="btn btn-md bg-primary shadow-sm text-white no-print"
+                                      style="border-radius:50px; width: 200px;" ng-click="test()"><i
+                                        class="fas fa-print"></i>
+                                      Cetak</a>
+                                    <div class="my-2">
+                                      <p class="text-center text-danger">Silahkan melanjutkan di sekolah terdekat
+                                        sepanjang kuota masih tersedia</p>
+                                    </div>
+                                  </center>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="card shadow mb-4 animated--grow-in mb-3">
+                              <div class="card-body mx-5 p-5">
+                                <h4 class="text-center fw-bold">MOHON MAAF ANDA BELUM DAPAT DITERIMA</h4>
+                                <p class="text-center">JALUR <b
+                                    style="text-transform: uppercase;">{{formData.jalur}}</b> E-PPDB DI <b
+                                    style="text-transform: uppercase;">{{sekolahZonasi}}</b></p>
+                                <center>
+                                  <table>
+                                    <tr>
+                                      <th scope="row">
+                                        <p>No Pendaftaran</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p class="text-break">{{formData.no_pendaftaran}}</p>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </center>
+                                <div>
+                                  <div class="d-flex justify-content-center py-3">
+                                    <img src="img/logosiswa.png" style="max-width: 100px;" alt="">
+                                  </div>
+                                </div>
+                                <center>
+                                  <h4 class=" btn-status-belum-diterima mt-2 mb-2 fw-bold montserrat">BELUM
+                                    DITERIMA</h4><br>
+                                </center>
+                                <br>
+                                <center>
+                                  <table>
+                                    <tbody>
+                                      <tr>
+                                        <th scope="row">
+                                          <p>Nama</p>
+                                        </th>
+                                        <td>
+                                          <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                        </td>
+                                        <td>
+                                          <p>{{formData.nama}}</p>
+                                        </td>
+                                      </tr>
+                                      <tr style="width: 100px;">
+                                        <th scope="row">
+                                          <p>NISN</p>
+                                        </th>
+                                        <td>
+                                          <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                        </td>
+                                        <td>
+                                          <p>{{formData.nisn}}</p>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">
+                                          <p>Tanggal Lahir</p>
+                                        </th>
+                                        <td>
+                                          <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                        </td>
+                                        <td>
+                                          <p>{{formData.tanggal_lahir}}</p>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <a class="btn btn-md bg-primary shadow-sm text-white no-print"
+                                    style="border-radius:50px; width: 200px;" ng-click="test()"><i
+                                      class="fas fa-print"></i>
+                                    Cetak</a>
+                                  <div class="my-2">
+                                    <p class="text-center text-danger">Silahkan melanjutkan di sekolah terdekat
+                                      sepanjang kuota masih tersedia</p>
+                                  </div>
+                                </center>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div ng-if="sekolahZonasiId===sekolahJalurId">
+
+                      <div ng-if="status_penyaluran===NULL">
+                        <div>
+                          <div class="card shadow mb-4 animated--grow-in mb-3">
+                            <div class="card-body mx-5 p-5">
+                              <h4 class="text-center fw-bold">SELAMAT ANDA
+                                <span ng-if="status_terima===true && status_terima2===false">SUDAH DITERIMA</span>
+                                <span ng-if="status_terima===false && status_terima2===true">SUDAH DITERIMA</span>
+                                <span ng-if="status_terima===false && status_terima2===false">MASUK KUOTA
+                                  CADANGAN</span>
+                              </h4>
+                              <p ng-if="status_terima===true && status_terima2===false" class="text-center fw-bold">
+                                JALUR <b style="text-transform: uppercase;">{{formData.jalur}}</b> E-PPDB DI <b
+                                  style="text-transform: uppercase;">{{sekolahZonasi}}</b></p>
+                              <p ng-if="status_terima===false && status_terima2===true" class="text-center fw-bold">
+                                JALUR <b style="text-transform: uppercase;">{{formData.jalur2}}</b> E-PPDB DI <b
+                                  style="text-transform: uppercase;">{{sekolahJalur}}</b></p>
+                              <p ng-if="status_terima===true && status_terima2===NULL" class="text-center fw-bold">JALUR
+                                <b style="text-transform: uppercase;">{{formData.jalur2}}</b> E-PPDB DI <b
+                                  style="text-transform: uppercase;">{{sekolahJalur}}</b></p>
+                              <p ng-if="status_terima===false && status_terima2===false" class="text-center fw-bold">
+                                JALUR <b style="text-transform: uppercase;">{{formData.jalur}} & {{formData.jalur2}}</b>
+                                E-PPDB
+                                DI <b style="text-transform: uppercase;">{{sekolahJalur}}</b></p>
+                              <center>
+                                <table>
+                                  <tr>
+                                    <th scope="row">
+                                      <p>No Pendaftaran</p>
+                                    </th>
+                                    <td>
+                                      <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                    </td>
+                                    <td>
+                                      <div ng-if="status_terima===true">
+                                        <div ng-if="status_terima2===NULL">
+                                          <p class="text-break">{{formData.no_pendaftaran}}</p>
+                                        </div>
+                                        <div ng-if="status_terima2==false">
+                                          <p class="text-break">{{formData.no_pendaftaran}}</p>
+                                        </div>
+                                      </div>
+                                      <div ng-if="status_terima===false">
+                                        <div ng-if="status_terima2===NULL">
+                                          <p class="text-break">{{formData.no_pendaftaran}}</p>
+                                        </div>
+                                        <div ng-if="status_terima2==false">
+                                          <p class="text-break">{{formData.no_pendaftaran}} &
+                                            {{formData.no_pendaftaran2}}</p>
+                                        </div>
+                                      </div>
+                                      <div ng-if="status_terima2===NULL">
+                                        <div ng-if="status_terima==false">
+                                          <p class="text-break">{{formData.no_pendaftaran}}</p>
+                                        </div>
+                                      </div>
+                                      <div ng-if="status_terima2===true && status_terima===false">
+                                        <p class="text-break">{{formData.no_pendaftaran2}}</p>
+                                      </div>
+
+                                    </td>
+                                  </tr>
+                                </table>
+                              </center>
+                              <div>
+                                <div class="d-flex justify-content-center py-3">
+                                  <img src="img/medal.png" style="max-width: 100px;" alt="">
+                                </div>
+                              </div>
+                              <!-- <center ng-if="status_diterima===false">
+                                <h4 class=" btn-status-invalid mt-2 mb-2">CADANGAN</h4><br>
+                              </center> -->
+                              <center ng-if="status_terima===true && status_terima2===false">
+                                <h4 class=" btn-status-diterima mt-2 mb-2 fw-bold montserrat">DITERIMA</h4><br>
+                              </center>
+                              <center ng-if="status_terima2===true && status_terima===false">
+                                <h4 class=" btn-status-diterima mt-2 mb-2 fw-bold montserrat">DITERIMA</h4><br>
+                              </center>
+                              <center ng-if="status_terima===false && status_terima2===false">
+                                <h4 class=" btn-status-cadangan mt-2 mb-2 fw-bold montserrat">CADANGAN</h4><br>
+                              </center>
+                              <br>
+                              <center>
+                                <table>
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">
+                                        <p>Nama</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p>{{formData.nama}}</p>
+                                      </td>
+                                    </tr>
+                                    <tr style="width: 100px;">
+                                      <th scope="row">
+                                        <p>NISN</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p>{{formData.nisn}}</p>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">
+                                        <p>Tanggal Lahir</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p>{{formData.tanggal_lahir}}</p>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <a class="btn btn-md bg-primary shadow-sm text-white no-print"
+                                  style="border-radius:50px; width: 200px;" ng-click="test()"><i
+                                    class="fas fa-print"></i>
+                                  Cetak</a>
+                                <div ng-if="status_terima===true && status_terima2===false" class="my-2">
+                                  <p class="text-center text-success"> Untuk informasi terkait pendaftaran kembali,
+                                    silahkan hubungi sekolah mulai tanggal 2 s/d 7 Juli 2022</p>
+                                </div>
+                                <div ng-if="status_terima2===true && status_terima===false" class="my-2">
+                                  <p class="text-center text-success"> Untuk informasi terkait pendaftaran kembali,
+                                    silahkan hubungi sekolah mulai tanggal 2 s/d 7 Juli 2022</p>
+                                </div>
+                                <div ng-if="status_terima===false && status_terima2===false" class="my-2">
+                                  <p class="text-center text-danger"> untuk informasi lebih lanjut, silahkan hubungi
+                                    sekolah mulai tanggal 2 s/d 7 Juli 2022</p>
+                                </div>
+                              </center>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div ng-if="status_penyaluran!==NULL">
+                        <div ng-if="status_terima===true || status_terima2===true">
+                          <div class="card shadow mb-4 animated--grow-in mb-3">
+                            <div class="card-body mx-5 p-5">
+                              <h4 class="text-center fw-bold">SELAMAT ANDA
+                                <span ng-if="status_terima===true && status_terima2===false">SUDAH DITERIMA</span>
+                                <span ng-if="status_terima===false && status_terima2===true">SUDAH DITERIMA</span>
+                                <span ng-if="status_terima===false && status_terima2===false">MASUK KUOTA
+                                  CADANGAN</span>
+                              </h4>
+                              <p ng-if="status_terima===true && status_terima2===false" class="text-center fw-bold">
+                                JALUR <b style="text-transform: uppercase;">{{formData.jalur}}</b> E-PPDB DI <b
+                                  style="text-transform: uppercase;">{{sekolahZonasi}}</b></p>
+                              <p ng-if="status_terima===false && status_terima2===true" class="text-center fw-bold">
+                                JALUR <b style="text-transform: uppercase;">{{formData.jalur2}}</b> E-PPDB DI <b
+                                  style="text-transform: uppercase;">{{sekolahJalur}}</b></p>
+                              <p ng-if="status_terima===true && status_terima2===NULL" class="text-center fw-bold">JALUR
+                                <b style="text-transform: uppercase;">{{formData.jalur2}}</b> E-PPDB DI <b
+                                  style="text-transform: uppercase;">{{sekolahJalur}}</b></p>
+                              <p ng-if="status_terima===false && status_terima2===false" class="text-center fw-bold">
+                                JALUR <b style="text-transform: uppercase;">{{formData.jalur}} & {{formData.jalur2}}</b>
+                                E-PPDB
+                                DI <b style="text-transform: uppercase;">{{sekolahJalur}}</b></p>
+                              <center>
+                                <table>
+                                  <tr>
+                                    <th scope="row">
+                                      <p>No Pendaftaran</p>
+                                    </th>
+                                    <td>
+                                      <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                    </td>
+                                    <td>
+                                      <div ng-if="status_terima===true">
+                                        <div ng-if="status_terima2===NULL">
+                                          <p class="text-break">{{formData.no_pendaftaran}}</p>
+                                        </div>
+                                        <div ng-if="status_terima2==false">
+                                          <p class="text-break">{{formData.no_pendaftaran}}</p>
+                                        </div>
+                                      </div>
+                                      <div ng-if="status_terima===false">
+                                        <div ng-if="status_terima2===NULL">
+                                          <p class="text-break">{{formData.no_pendaftaran}}</p>
+                                        </div>
+                                        <div ng-if="status_terima2==false">
+                                          <p class="text-break">{{formData.no_pendaftaran}} &
+                                            {{formData.no_pendaftaran2}}</p>
+                                        </div>
+                                      </div>
+                                      <div ng-if="status_terima2===NULL">
+                                        <div ng-if="status_terima==false">
+                                          <p class="text-break">{{formData.no_pendaftaran}}</p>
+                                        </div>
+                                      </div>
+                                      <div ng-if="status_terima2===true && status_terima===false">
+                                        <p class="text-break">{{formData.no_pendaftaran2}}</p>
+                                      </div>
+
+                                    </td>
+                                  </tr>
+                                </table>
+                              </center>
+                              <div>
+                                <div class="d-flex justify-content-center py-3">
+                                  <img src="img/medal.png" style="max-width: 100px;" alt="">
+                                </div>
+                              </div>
+                              <!-- <center ng-if="status_diterima===false">
+                                <h4 class=" btn-status-invalid mt-2 mb-2">CADANGAN</h4><br>
+                              </center> -->
+                              <center ng-if="status_terima===true && status_terima2===false">
+                                <h4 class=" btn-status-diterima mt-2 mb-2 fw-bold montserrat">DITERIMA</h4><br>
+                              </center>
+                              <center ng-if="status_terima2===true && status_terima===false">
+                                <h4 class=" btn-status-diterima mt-2 mb-2 fw-bold montserrat">DITERIMA</h4><br>
+                              </center>
+                              <center ng-if="status_terima===false && status_terima2===false">
+                                <h4 class=" btn-status-cadangan mt-2 mb-2 fw-bold montserrat">CADANGAN</h4><br>
+                              </center>
+                              <br>
+                              <center>
+                                <table>
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">
+                                        <p>Nama</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p>{{formData.nama}}</p>
+                                      </td>
+                                    </tr>
+                                    <tr style="width: 100px;">
+                                      <th scope="row">
+                                        <p>NISN</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p>{{formData.nisn}}</p>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">
+                                        <p>Tanggal Lahir</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <p>{{formData.tanggal_lahir}}</p>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <a class="btn btn-md bg-primary shadow-sm text-white no-print"
+                                  style="border-radius:50px; width: 200px;" ng-click="test()"><i
+                                    class="fas fa-print"></i>
+                                  Cetak</a>
+                                <div ng-if="status_terima===true && status_terima2===false" class="my-2">
+                                  <p class="text-center text-success"> Untuk informasi terkait pendaftaran kembali,
+                                    silahkan hubungi sekolah mulai tanggal 2 s/d 7 Juli 2022</p>
+                                </div>
+                                <div ng-if="status_terima2===true && status_terima===false" class="my-2">
+                                  <p class="text-center text-success"> Untuk informasi terkait pendaftaran kembali,
+                                    silahkan hubungi sekolah mulai tanggal 2 s/d 7 Juli 2022</p>
+                                </div>
+                                <div ng-if="status_terima===false && status_terima2===false" class="my-2">
+                                  <p class="text-center text-danger"> untuk informasi lebih lanjut, silahkan hubungi
+                                    sekolah mulai tanggal 2 s/d 7 Juli 2022</p>
+                                </div>
+                              </center>
+                            </div>
+                          </div>
+                        </div>
+                        <div ng-if="status_penyaluran===true">
+                          <div ng-if="status_terima===false && status_terima2===false">
+                            <div class="card shadow mb-4 animated--grow-in mb-3">
+                              <div class="card-body mx-5 p-5">
+                                <h4 class="text-center fw-bold">MOHON MAAF ANDA BELUM DAPAT DITERIMA</h4>
+                                <p ng-if="status_terima===true && status_terima2===false" class="text-center fw-bold">
+                                  JALUR <b style="text-transform: uppercase;">{{formData.jalur}}</b> E-PPDB DI <b
+                                    style="text-transform: uppercase;">{{sekolahZonasi}}</b></p>
+                                <p ng-if="status_terima===false && status_terima2===true" class="text-center fw-bold">
+                                  JALUR <b style="text-transform: uppercase;">{{formData.jalur2}}</b> E-PPDB DI <b
+                                    style="text-transform: uppercase;">{{sekolahJalur}}</b></p>
+                                <p ng-if="status_terima===true && status_terima2===NULL" class="text-center fw-bold">
+                                  JALUR <b style="text-transform: uppercase;">{{formData.jalur2}}</b> E-PPDB DI <b
+                                    style="text-transform: uppercase;">{{sekolahJalur}}</b></p>
+                                <p ng-if="status_terima===false && status_terima2===false" class="text-center fw-bold">
+                                  JALUR <b style="text-transform: uppercase;">{{formData.jalur}} &
+                                    {{formData.jalur2}}</b>
+                                  E-PPDB DI <b style="text-transform: uppercase;">{{sekolahJalur}}</b></p>
+                                <center>
+                                  <table>
+                                    <tr>
+                                      <th scope="row">
+                                        <p>No Pendaftaran</p>
+                                      </th>
+                                      <td>
+                                        <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                      </td>
+                                      <td>
+                                        <div ng-if="status_terima===true">
+                                          <div ng-if="status_terima2===NULL">
+                                            <p class="text-break">{{formData.no_pendaftaran}}</p>
+                                          </div>
+                                          <div ng-if="status_terima2==false">
+                                            <p class="text-break">{{formData.no_pendaftaran}}</p>
+                                          </div>
+                                        </div>
+                                        <div ng-if="status_terima===false">
+                                          <div ng-if="status_terima2===NULL">
+                                            <p class="text-break">{{formData.no_pendaftaran}}</p>
+                                          </div>
+                                          <div ng-if="status_terima2==false">
+                                            <p class="text-break">{{formData.no_pendaftaran}} &
+                                              {{formData.no_pendaftaran2}}</p>
+                                          </div>
+                                        </div>
+                                        <div ng-if="status_terima2===NULL">
+                                          <div ng-if="status_terima==false">
+                                            <p class="text-break">{{formData.no_pendaftaran}}</p>
+                                          </div>
+                                        </div>
+                                        <div ng-if="status_terima2===true && status_terima===false">
+                                          <p class="text-break">{{formData.no_pendaftaran2}}</p>
+                                        </div>
+
+
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </center>
+                                <div>
+                                  <div class="d-flex justify-content-center py-3">
+                                    <img src="img/logosiswa.png" style="max-width: 100px;" alt="">
+                                  </div>
+                                </div>
+                                <center>
+                                  <h4 class=" btn-status-belum-diterima mt-2 mb-2 fw-bold montserrat">BELUM
+                                    DITERIMA</h4><br>
+                                </center>
+                                <br>
+                                <center>
+                                  <table>
+                                    <tbody>
+                                      <tr>
+                                        <th scope="row">
+                                          <p>Nama</p>
+                                        </th>
+                                        <td>
+                                          <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                        </td>
+                                        <td>
+                                          <p>{{formData.nama}}</p>
+                                        </td>
+                                      </tr>
+                                      <tr style="width: 100px;">
+                                        <th scope="row">
+                                          <p>NISN</p>
+                                        </th>
+                                        <td>
+                                          <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                        </td>
+                                        <td>
+                                          <p>{{formData.nisn}}</p>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">
+                                          <p>Tanggal Lahir</p>
+                                        </th>
+                                        <td>
+                                          <p style="margin-left: 20px; margin-right: 10px;">:</p>
+                                        </td>
+                                        <td>
+                                          <p>{{formData.tanggal_lahir}}</p>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <a class="btn btn-md bg-primary shadow-sm text-white no-print"
+                                    style="border-radius:50px; width: 200px;" ng-click="test()"><i
+                                      class="fas fa-print"></i>
+                                    Cetak</a>
+                                  <div class="my-2">
+                                    <p class="text-center text-danger">Silahkan melanjutkan di sekolah terdekat
+                                      sepanjang kuota masih tersedia</p>
+                                  </div>
+                                </center>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+
+
+                    </div>
+
+                  </div>
+                </div>
+
+
+                <div class="card shadow mb-4 animated--grow-in" ng-if="cekBukaPengumuman.aktif===false">
+                  <div class="card-body mx-5 p-5 ">
+                    <div class="container umum">
+                      <div class="info">
+                        <div class="txt1">
+                          <!-- <p>Pengumuman</p> -->
+                        </div>
+                        <div class="d-flex justify-content-center py-2">
+                          <img src="img/buleleng.png" style="max-width: 150px;" alt="">
+                        </div>
+                        <br>
+                        <div class="">
+                          <!-- <div class="card">
+                            <h5 class="card-header bg-primary text-light text-center">Jadwal Pengumuman</h5>
+                            <div class="card-body">
+    
+                              <ul class="list-group list-group-flush">
+                                <li class="list-group-item font-weight-normal montserrat">Jalur Zonasi
+                                  <ul>
+                                    <li class="me-2 font-weight-normal montserrat " style="font-size : 14px">Pengumuman : 21
+                                      Juni s/d 24 Juni 2022</li>
+                                  </ul>
+                                </li>
+                                <li class="list-group-item font-weight-normal montserrat">Jalur Afirmasi dan Perpindahan
+                                  Tugas Orang tua
+                                  <ul>
+                                    <li class="me-2 font-weight-normal montserrat " style="font-size : 14px">Pengumuman : 25
+                                      Juni 2022</li>
+                                  </ul>
+                                </li>
+                                <li class="list-group-item font-weight-normal montserrat">Jalur Prestasi
+                                  <ul>
+                                    <li class="me-2 font-weight-normal montserrat " style="font-size : 14px">Pengumuman : 25
+                                      Juni s/d 26 Juni 2022</li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </div>
+                          </div> -->
+                          <center>
+                            <h5>Hasil Pengumuman PPDB akan diumumkan tanggal 1 Juli 2023</h5>
+                          </center>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <footer class="ps-5 text-muted" style="margin-bottom: 8vh;">
+                <div>
+                  <span class=" fw-bold montserrat" style="font-size: small;"> © 2023 Copyright:</span>
+                  <span class=" fw-bold montserrat" style="font-size: small;"
+                    href="https://e-ppdb.bulelengkab.go.id/">e-PPDB</span>
+                </div>
+              </footer>
+
+            </div>
+
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,385 @@
+<ion-view title="Beranda Admin SMP" hide-nav-bar="true" cache-view="false" id="loginAdmin">
+  <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+    <div id="wrapper" class="bg-light">
+      <div id="nav-flex" class="bck">
+        <div class="pt-5" id="sidebar-wrapper">
+          <div class="sidebar gmbr mb-4">
+            <img src="img/admin.png" alt="">
+          </div>
+          <div class="container">
+            <p id="nama" class="text-break text-center text-light">{{formData.nama}}</p>
+          </div>
+          <div class="d-grid gap-1 mx-3">
+            <button ng-click="beranda()" class="btn text-light side-button side-active shadow py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-home"></i> Beranda</span></button>
+            <button data-bs-toggle="collapse" href="#data-pendaftar" role="button" aria-expanded="false"
+              aria-controls="data-ranking" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-user-edit"></i> Data Pendaftar</span><i
+                class="ms-4 fas fa-angle-down float-end"></i></button>
+            <div class="collapse" id="data-pendaftar">
+              <div class="d-grid gap-1">
+                <button ui-sref="dataPendaftarZonasi()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> Zonasi</span></button>
+                <button ui-sref="dataPendaftarAfirmasi()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> Afirmasi</span></button>
+                <button ui-sref="dataPendaftarPerpindahan()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i>
+                    Perpindahan</span></button>
+                <button ui-sref="dataPendaftarPrestasi()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> Prestasi</span></button>
+              </div>
+            </div>
+            <!-- <button ng-click="data_luar_rayon()" class="btn text-light side-button py-3" type="button"><span
+                  class="float-start ms-3"><i class="fas fa-user-edit"></i> Siswa Luar Rayon</span></button> -->
+            <button ng-if="cekBukaRanking == true" data-bs-toggle="collapse" href="#data-ranking" role="button"
+              aria-expanded="false" aria-controls="data-ranking" class="btn text-light side-button py-3"
+              type="button"><span class="float-start ms-3"><i class="fas fa-trophy"></i> Data Ranking</span><i
+                class="ms-4 fas fa-angle-down float-end"></i></button>
+            <div class="collapse" id="data-ranking">
+              <div class="d-grid gap-1">
+                <button ng-click="ranking_zonasi()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-trophy"></i> Zonasi</span></button>
+                <button ng-click="ranking_afirmasi()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-trophy"></i> Afirmasi</span></button>
+                <button ng-click="ranking_perpindahan()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-trophy"></i> Perpindahan</span></button>
+                <button ng-click="ranking_prestasi()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-trophy"></i> Prestasi</span></button>
+              </div>
+            </div>
+            <button ng-if="cekBukaSiswaZonasi== true" ui-sref="siswaZonasi()" class="btn text-light side-button py-3"
+              type="button"><span class="float-start ms-3"><i class="fas fa-users"></i> Siswa Zonasi</span></button>
+            <button ng-click="pengaturan()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-cogs"></i> Pengaturan</span></button>
+            <button ng-click="logout()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-sign-out-alt"></i> Keluar</span></button>
+          </div>
+        </div>
+      </div>
+      <div id="flexbox-wrapper" class="w-100">
+        <nav class="navbar navbar-expand navbar-light bg-light">
+          <div class="container-fluid">
+            <button class="btn" id="menu-toggle" ng-click="toogle()"><i class="fas fa-align-justify"></i></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+              </ul>
+              <div class="my-lg-0 d-flex">
+                <a id="nightmode" ng-click="nightmode()" class="btn text-dark" href=""><i id="icon-night"
+                    class="far fa-sun" style="font-size:24px" data-bs-toggle="tooltip" data-placement="top"
+                    title="Light/Night"></i></a>
+                <a class="navbar-brand text-dark" href=""><i class="far fa-question-circle"
+                    style="font-size:24px"></i></a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div class="w-100 h-100" id="content-flex">
+          <div class="d-flex flex-column" style="min-height: 100vh;">
+            <div id="page-content-wrapper" style="flex :1">
+
+              <div id="main-content" class="container-fluid mt-5 px-5">
+                <div class="">
+                  <div class="mb-3">
+                    <h5 id="page-header" class="text-dark fw-bold mb-0">
+                      Beranda
+                    </h5>
+                    <span id="small-header" class="text-muted">Beranda anda berisi informasi perihal e-PPDB</span>
+                  </div>
+                </div>
+                <div class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                      <button ng-class="{'collapsed' : notifikasi==NULL}" class="accordion-button bg-light"
+                        type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne"
+                        aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        Informasi
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" ng-class="{'show' :  notifikasi!=NULL}"
+                      class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                      <div class="accordion-body m-0 p-0">
+                        <div ng-repeat="data in notifikasi | orderBy: 'jenis'">
+                          <div ng-if="data.penerima=='SMP' && data.jenis=='Perhatian'" class="alert alert-warning mt-1"
+                            role="alert">
+                            <span class="fw-bold my-2"><i class="fas fa-exclamation-circle"></i> {{data.jenis}}</span>
+                            <p class="">
+                              <span class="">
+                                {{data.pesan}}
+                              </span>
+                            </p>
+                            <p>Sekian dan Terima Kasih</p>
+                          </div>
+                          <div ng-if="data.penerima=='SMP' && data.jenis=='Pengumuman'" class="alert alert-success mt-1"
+                            role="alert">
+                            <span class="fw-bold my-2"><i class="fas fa-exclamation-circle"></i> {{data.jenis}}</span>
+                            <p class="">
+                              <span class="">
+                                {{data.pesan}}
+                              </span>
+                            </p>
+                            <p>Sekian dan Terima Kasih</p>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                      <button class="accordion-button bg-light accordion-button-dark" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true"
+                        aria-controls="panelsStayOpen-collapseTwo">
+                        Menu
+                      </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show"
+                      aria-labelledby="panelsStayOpen-headingTwo">
+                      <div class="accordion-body m-0 p-0">
+                        <div class="row mt-3">
+                          <div class="col-lg-6">
+                            <!-- card pendaftar -->
+                            <div class="row">
+                              <div class="col-xl-6 col-md-6 mb-4">
+                                <div id="menu1" class="card shadow-sm card-border-light card-border-primary">
+                                  <div class="card-body">
+                                    <div class="row">
+                                      <div class="col">
+                                        <p class="text-small text-muted fw-bold">Total Pendaftar</p>
+                                        <span class="fw-bold fs-5">{{jumlahTotalPendaftar}}</span>
+                                      </div>
+                                      <div class="col">
+                                        <div class="float-end bg-primary py-3 px-3 rounded-circle"><i
+                                            class="fa-solid fa-user text-light px-1"></i></div>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-xl-6 col-md-6 mb-4" ng-if="aksesTambah == true">
+                                <div class="card border-left-light shadow-sm h-100 py-2 bck"
+                                  style="border-radius: 10px;">
+                                  <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                      <div class="col me-2">
+                                        <div class="text-xs fw-bold text-light text-uppercase mb-3">DATA SISWA LUAR
+                                          RAYON
+                                        </div>
+                                      </div>
+                                      <div class="col-auto">
+                                        <i class="fas fa-users fa-3x text-light"></i>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="card-footer bg-transparent">
+                                    <a ng-click="data_luar_rayon()"
+                                      class="btn btn-outline-light montserrat px-4 fw-bold"
+                                      style="border-radius: 50px;">Lihat</a>
+                                    <a data-bs-toggle="modal" data-bs-target="#modal_tambah"
+                                      class="btn btn-outline-light montserrat px-4 fw-bold"
+                                      style="border-radius: 50px;"><i class="fas fa-plus"></i></a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- card pendaftar per jalur -->
+                            <div class="row">
+                              <div class="col-xl-6 col-md-6 mb-4" ui-sref="dataPendaftarZonasi()">
+                                <div id="menu1" class="card shadow-sm card-border-light card-border-primary">
+                                  <div class="card-body">
+                                    <div class="row">
+                                      <div class="col">
+                                        <p class="text-small text-muted fw-bold">Zonasi</p>
+                                        <span class="fw-bold fs-5">{{jumlahsiswazonasi}}</span>
+                                      </div>
+                                      <div class="col">
+                                        <div class="float-end bg-primary py-3 px-3 rounded-circle"><i
+                                            class="fa-solid fa-user text-light px-1"></i></div>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-xl-6 col-md-6 mb-4" ui-sref="dataPendaftarAfirmasi()">
+                                <div id="menu1" class="card shadow-sm card-border-light card-border-success">
+                                  <div class="card-body">
+                                    <div class="row">
+                                      <div class="col">
+                                        <p class="text-small text-muted fw-bold">Afirmasi</p>
+                                        <span class="fw-bold fs-5">{{jumlahsiswaafirmasi}}</span>
+                                      </div>
+                                      <div class="col">
+                                        <div class="float-end bg-success py-3 px-3 rounded-circle"><i
+                                            class="fa-solid fa-user text-light px-1"></i></div>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-xl-6 col-md-6 mb-4" ui-sref="dataPendaftarPerpindahan()">
+                                <div id="menu1" class="card shadow-sm card-border-light card-border-danger">
+                                  <div class="card-body">
+                                    <div class="row">
+                                      <div class="col">
+                                        <p class="text-small text-muted fw-bold">Perpindahan</p>
+                                        <span class="fw-bold fs-5">{{jumlahsiswaperpindahan}}</span>
+                                      </div>
+                                      <div class="col">
+                                        <div class="float-end bg-danger py-3 px-3 rounded-circle"><i
+                                            class="fa-solid fa-user text-light px-1"></i></div>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-xl-6 col-md-6 mb-4" ui-sref="dataPendaftarPrestasi()">
+                                <div id="menu1" class="card shadow-sm card-border-light card-border-warning">
+                                  <div class="card-body">
+                                    <div class="row">
+                                      <div class="col">
+                                        <p class="text-small text-muted fw-bold">Prestasi</p>
+                                        <span class="fw-bold fs-5">{{jumlahsiswaprestasi}}</span>
+                                      </div>
+                                      <div class="col">
+                                        <div class="float-end bg-warning py-3 px-3 rounded-circle"><i
+                                            class="fa-solid fa-user text-light px-1"></i></div>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- <div ng-if="formData.npsn == '50100322' || formData.npsn == 50100322" class="col-xl-6 col-md-6 mb-4" ui-sref="dataPendaftartersalurkan()">
+                                <div id="menu1" class="card shadow-sm card-border-light card-border-primary">
+                                  <div class="card-body">
+                                    <div class="row">
+                                      <div class="col">
+                                        <p class="text-small text-muted fw-bold">Tersalurkan</p>
+                                        <span class="fw-bold fs-5">{{jumlahsiswatersalurkan}}</span>
+                                      </div>
+                                      <div class="col">
+                                        <div class="float-end bg-info py-3 px-3 rounded-circle"><i
+                                            class="fa-solid fa-user text-light px-1"></i></div>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div> -->
+                            </div>
+
+
+                          </div>
+                          <div class="col-lg-4">
+                            <div class="card">
+                              <div class="card-header">
+                                <div class="row">
+                                  <div class="col-sm-12">
+                                    <span class="fw-light float-start text-dark"><i
+                                        class="fa-solid fa-chart-simple"></i> Persebaran Pendaftar Per Jalur</span>
+                                    <a ng-click='dataPendaftarSeluruhSMP()'
+                                      class="btn btn-sm btn-outline-primary shadow-sm float-end px-3 "><i
+                                        class="fa-solid fa-arrows-rotate"></i></a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="card-body">
+                                <canvas id="chart-jalur" width="50" height="32"></canvas>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <footer class="ps-5 text-muted" style="margin-bottom: 8vh;">
+              <div>
+                <span class=" fw-bold montserrat" style="font-size: small;"> © 2023 Copyright:</span>
+                <span class=" fw-bold montserrat" style="font-size: small;"
+                  href="https://e-ppdb.bulelengkab.go.id/">e-PPDB</span>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+    <div class="modal fade" id="modal_tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-success">
+            <h5 class="modal-title fw-bold text-light" id="exampleModalLabel">Tambah Data
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="form-tambah-siswa-rayon">
+              <div class="form-group row">
+                <label for="inputEmail3" class="col-xl-2 col-form-label">Nama</label>
+                <div class="col-xl-10">
+                  <input type="text" class="form-control" id="namaSiswa" placeholder="Masukan Nama Lengkap">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail3" class="col-xl-2 col-form-label">NISN</label>
+                <div class="col-xl-10">
+                  <input type="text" class="form-control" id="nisnSiswa" placeholder="Masukan NISN">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail3" class="col-xl-2 col-form-label">NIK</label>
+                <div class="col-xl-10">
+                  <input type="text" class="form-control" id="nikSiswa" placeholder="Masukan NIK">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail3" class="col-xl-2 col-form-label">Tanggal
+                  Lahir</label>
+                <div class="col-xl-10">
+                  <input type="text" class="form-control" id="tglLahirSiswa" placeholder="yyyy-mm-dd">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail3" class="col-xl-2 col-form-label">Tempat
+                  Lahir</label>
+                <div class="col-xl-10">
+                  <input type="text" class="form-control" id="tempatLahirSiswa" placeholder="Masukan Tempat lahir">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail3" class="col-xl-2 col-form-label">Alamat</label>
+                <div class="col-xl-10">
+                  <input type="text" class="form-control" id="AlamatSiswa" placeholder="Masukan Alamat">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail3" class="col-xl-2 col-form-label">Sekolah
+                  Asal</label>
+                <div class="col-xl-10">
+                  <input type="text" class="form-control mb-3" id="sekolahSiswa" placeholder="Masukan Nama Sekolah">
+                  <input type="text" class="form-control" id="npsnSiswa" placeholder="Masukan NPSN Sekolah">
+                </div>
+              </div>
+
+            </form>
+          </div>
+          <div class="modal-footer border-0">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Tutup</button>
+            <button type="button" class="btn btn-success" ng-click="simpanTambahDataSiswa()">Simpan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

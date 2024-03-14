@@ -1,0 +1,203 @@
+<ion-view title="e-PPDB Singaraja" hide-nav-bar="true" cache-view="false" id="welcome">
+  <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+    <!-- <center>
+      <br><br>
+      <h1>E PPDB DIBUKA PADA TANGGAL 19 JUNI 2023 PUKUL 08:00 WITA</h1>
+      <h2>jika saat jadwal PPDB dibuka anda masih melihat tampilan ini silahkan lakukan refresh dengan cara klik ctrl f5 pada laptop atau komputer anda atau clear history browser anda terlebih dahulu</h2>
+      <h2>untuk cara clear history browser chrome dapat dilihat pada <a href="https://support.google.com/chrome/answer/95589?hl=id&co=GENIE.Platform%3DDesktop#zippy=%2Cmenghapus-histori" target="_blank">Halaman Ini</a></h2>
+    </center> -->
+    <div class="login_html">
+      <div class="container-fluid bg-gradient-purple2">
+        <div class="row no-gutter" style="min-height: 100vh;">
+          <div class="d-none d-md-flex col-md-4 col-lg-7 ">
+            <center>
+              <img src="img/bghome2023.jpg" alt="" style="width: 100%; margin-top: 5%;" class="vertical-center">
+            </center>
+          </div>
+          <div class="col-md-8 col-lg-5 bg-white">
+            <div class="login">
+              <div class="">
+                <div class="mt-3">
+                  <div class="">
+                    <div class="container">
+                      <ul class="nav nav-pills nav-fill mb-3" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-linka active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                            type="button" role="tab" aria-controls="home" aria-selected="false">Pendaftaran PPDB</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-linka" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                            type="button" role="tab" aria-controls="profile" aria-selected="false">Informasi
+                            PPDB</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-linka" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">Pengaduan / Help
+                            Desk</button>
+                        </li>
+                      </ul>
+                      <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                          <div class="">
+
+                            <div class="">
+                              <div id="logineppdb_open">
+                                <div class="d-flex float-end">
+                                  <a id="tombol_loginadmin" class="me-2 mt-3 btn btn-sm bg-primary shadow-sm text-light"
+                                    style="border-radius:100px;" ng-click="loginAdmin()"><i
+                                      class="far fa-user-circle"></i>
+                                    Operator</a>
+                                  <a id="tombol_loginsiswa" class="me-2 mt-3 btn btn-sm bg-primary shadow-sm text-light"
+                                    style="border-radius:100px; display: none;" ng-click="loginSiswa()"><i
+                                      class="far fa-user-circle"></i>
+                                    Siswa</a>
+                                </div>
+
+
+                                <div id="login-info" class="mx-auto">
+                                  <div class="pt-5">
+                                    <h1 class="login-heading montserrat mt-5 fw-bold text-gradient-blue2">Selamat Datang
+                                      !</h1>
+                                    <h6 class="login-small mb-4 montserrat text-muted">Masukan NISN untuk melakukan
+                                      pendaftaran</h6>
+                                  </div>
+                                  <form method="post" class="">
+                                    <div class="form-floating mb-3">
+                                      <input type="text" class="form-control" id="nisn" name="username"
+                                        placeholder="NISN" required="required">
+                                      <label for="nisn">Masukan NISN</label>
+                                    </div>
+                                    <div class="d-grid gap-1">
+                                      <button ng-click="login()"
+                                        class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-4 mt-3">Log
+                                        in</button>
+                                      <small class="text-center text-secondary line-between"><span>Registrasi Siswa Non
+                                          Dapodik / Non Buleleng</span></small>
+                                      <button data-bs-toggle="modal" data-bs-target="#modal_tambah"
+                                        class="btn btn-lg btn-outline-primary btn-login text-uppercase fw-bold mb-3">Registrasi
+                                        Siswa
+                                      </button>
+                                    </div>
+                                  </form>
+
+                                </div>
+
+                                <div id="login-admin" class="mx-auto">
+                                  <div class="pt-5">
+                                    <h1 class="login-heading montserrat mt-5 fw-bold text-gradient-blue2">Selamat Datang
+                                      !</h1>
+                                    <h5 class="login-small mb-4 montserrat text-muted">Silahkan Log in ke Akun
+                                      Anda &nbsp;<a data-bs-toggle="tooltip" data-placement="top"
+                                        title="Pastikan email dan password yang dimasukan sudah benar"><i
+                                          class="far fa-question-circle text-dark"></i></a></h5>
+                                  </div>
+                                  <form>
+                                    <div class="form-floating mb-3">
+                                      <input type="email" id="email" name="email" class="form-control"
+                                        placeholder="Email" ng-model="formData.email">
+                                      <label for="email">Email</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                      <input type="password" class="form-control" id="password" name="password"
+                                        placeholder="Password" ng-model="formData.password">
+                                      <label for="password">Password</label>
+                                    </div>
+                                    <div class="d-grid gap-2">
+                                      <button ng-click="masukAdmin()"
+                                        class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2">Log
+                                        in</button>
+                                    </div>
+                                  </form>
+                                </div>
+
+
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item font-weight-normal montserrat">Jalur Zonasi
+                              <ul>
+                                <li class="ms-2 font-weight-normal montserrat " style="font-size : 14px">Pendaftaran :
+                                  19 s.d. 21 Juni 2023</li>
+                              </ul>
+                            </li>
+                            <li class="list-group-item font-weight-normal montserrat">Jalur Afirmasi
+                              <ul>
+                                <li class="ms-2 font-weight-normal montserrat " style="font-size : 14px">Pendaftaran :
+                                  19 s.d. 21 Juni 2023</li>
+                              </ul>
+                            </li>
+                            <li class="list-group-item font-weight-normal montserrat">Jalur Perpindahan Tugas Orang Tua
+                              <ul>
+                                <li class="ms-2 font-weight-normal montserrat " style="font-size : 14px">Pendaftaran :
+                                 21 s.d. 22 Juni 2023</li>
+                              </ul>
+                            </li>
+                            <li class="list-group-item font-weight-normal montserrat">Jalur Prestasi
+                              <ul>
+                                <li class="ms-2 font-weight-normal montserrat " style="font-size : 14px">Pendaftaran :
+                                  26 s.d 27 Juni 2023</li>
+                              </ul>
+                            </li>
+                            <a class="btn btn-lg btn-outline-primary btn-login text-uppercase fw-bold mb-3"
+                              href="https://sites.google.com/dinas.belajar.id/informasi-ppdb-buleleng/beranda" target=”_blank”>Info lebih lanjut klik disini </a>
+
+                          </ul>
+                        </div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item font-weight-normal montserrat">Pengaduan / Help Desk
+                              <ul>
+                                <li class="ms-2 font-weight-normal montserrat " style="font-size : 14px">
+                                  <a class="btn btn-lg btn-outline-primary btn-login text-uppercase fw-bold mb-3"
+                                  href="https://sites.google.com/dinas.belajar.id/informasi-ppdb-buleleng/beranda/helpdesk#h.ljiozrl2lhg6" target=”_blank”>Link HelpDesk</a>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL REGISTRASI -->
+    <div class="modal fade" id="modal_tambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <h5 class="modal-title fw-bold" id="exampleModalLabel">Registrasi Siswa Non Dapodik / Diluar Buleleng
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="form-tambah-siswa-rayon">
+              <div class="form-group row mb-3">
+                <label for="inputEmail3" class="col-xl-2 col-form-label">NISN</label>
+                <div class="col-xl-10">
+                  <input type="text" class="form-control" id="nisnCheck" placeholder="Masukan NISN">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer border-0">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Tutup</button>
+            <!-- <button type="button" class="btn btn-success" ng-click="checkNisnDaftar()">Check NISN</button> -->
+            <button type="button" class="btn btn-success" ng-click="checkNisnDaftar()"
+              data-bs-dismiss="modal">Check NISN</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

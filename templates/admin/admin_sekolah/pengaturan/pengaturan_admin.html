@@ -1,0 +1,163 @@
+<ion-view title="Pengaturan Detail Akun Admin SMP" hide-nav-bar="true" cache-view="false" id="loginAdmin">
+    <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+        <div id="wrapper" class="bg-light">
+          <div id="nav-flex">
+            <div class="pt-5" id="sidebar-wrapper">
+              <div class="sidebar gmbr mb-4">
+                <img src="img/admin.png" alt="">
+              </div>
+              <div class="container center">
+                <a href="" class="text-center text-light">
+                  <p id="nama" class="text-break">{{formData.nama}}</p>
+                </a>
+              </div>
+              <div class="d-grid gap-1 mx-3">
+                <button ng-click="beranda()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-3"><i class="fas fa-home"></i> Beranda</span></button>
+                <button data-bs-toggle="collapse" href="#data-pendaftar" role="button" aria-expanded="false"
+                aria-controls="data-ranking" class="btn text-light side-button py-3" type="button"><span
+                  class="float-start ms-3"><i class="fas fa-user-edit"></i> Data Pendaftar</span><i
+                  class="ms-4 fas fa-angle-down float-end"></i></button>
+                <div class="collapse" id="data-pendaftar">
+                  <div class="d-grid gap-1 mx-3">
+                    <button ui-sref="dataPendaftarZonasi()" class="btn text-light side-button py-3" type="button"><span
+                        class="float-start ms-4"><i class="fas fa-user-edit"></i> Zonasi</span></button>
+                    <button ui-sref="dataPendaftarAfirmasi()" class="btn text-light side-button py-3" type="button"><span
+                        class="float-start ms-4"><i class="fas fa-user-edit"></i> Afirmasi</span></button>
+                    <button ui-sref="dataPendaftarPerpindahan()" class="btn text-light side-button py-3" type="button"><span
+                        class="float-start ms-4"><i class="fas fa-user-edit"></i> Perpindahan</span></button>
+                    <button ui-sref="dataPendaftarPrestasi()" class="btn text-light side-button py-3" type="button"><span
+                        class="float-start ms-4"><i class="fas fa-user-edit"></i> Prestasi</span></button>
+                  </div>
+                </div>
+                <!-- <button ng-click="data_luar_rayon()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-3"><i class="fas fa-user-edit"></i> Siswa Luar Rayon</span></button> -->
+                <button ng-if="cekBukaRanking == true"   data-bs-toggle="collapse" href="#data-ranking" role="button" aria-expanded="false"
+                  aria-controls="data-ranking" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-3"><i class="fas fa-trophy"></i> Data Ranking</span><i
+                    class="ms-4 fas fa-angle-down float-end"></i></button>
+                <div class="collapse" id="data-ranking">
+                  <div class="d-grid gap-1 mx-3">
+                    <button ng-click="ranking_zonasi()" class="btn text-light side-button py-3" type="button"><span
+                        class="float-start ms-4"><i class="fas fa-trophy"></i> Zonasi</span></button>
+                    <button ng-click="ranking_afirmasi()" class="btn text-light side-button py-3" type="button"><span
+                        class="float-start ms-4"><i class="fas fa-trophy"></i> Afirmasi</span></button>
+                    <button ng-click="ranking_perpindahan()" class="btn text-light side-button py-3" type="button"><span
+                        class="float-start ms-4"><i class="fas fa-trophy"></i> Perpindahan</span></button>
+                    <button ng-click="ranking_prestasi()" class="btn text-light side-button py-3" type="button"><span
+                        class="float-start ms-4"><i class="fas fa-trophy"></i> Prestasi</span></button>
+                  </div>
+                </div>
+                <button ng-click="pengaturan()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-3"><i class="fas fa-cogs"></i> Pengaturan</span></button>
+                <button ng-click="logout()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-3"><i class="fas fa-sign-out-alt"></i> Keluar</span></button>
+              </div>
+            </div>
+          </div>
+            <div id="flexbox-wrapper" class="w-100">
+                <nav class="navbar navbar-expand navbar-light bg-light">
+                  <div class="container-fluid">
+                    <button class="btn" id="menu-toggle" ng-click="toogle()"><i class="fas fa-align-justify"></i></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+                      </ul>
+                      <div class="my-lg-0 d-flex">
+                        <div class="navbar-brand form-check form-switch">
+                          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                          <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                        </div>
+                        <a class="navbar-brand text-dark" href=""><i class="far fa-question-circle"
+                            style="font-size:24px"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </nav>
+                <div class="w-100 h-100" id="content-flex">
+                    <div class="d-flex flex-column w-100" style="min-height: 100vh;">
+                        <div id="page-content-wrapper" style="flex :1">
+                            <div id="main-content" class="container-fluid mt-5 px-5" >
+                                <h5 class="mb-5"><a ng-click="dashboard()" class="text-dark fw-bold"
+                                    style="text-decoration: none;font-size: 40px;">Pengaturan
+                                  </a> <br> <a ng-click="dashboard()" class="text-muted"
+                                    style="text-decoration: none;font-size:20px">Akun Admin</a></h5>
+                                <div class="card shadow-sm mb-4 animated--grow-in">
+                                    <div class="card-header bg-white">
+                                        <div class="row">
+                                            <div class="col-sm-11">
+                                                <div class="">
+                                                    <p class="text-center text-light m-0">DETAIL AKUN</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <a ng-click='pengaturan()'
+                                                    class="btn btn-sm bg-warning shadow-sm text-white float-right px-3"
+                                                    style="border-radius:50px;">Kembali</a>
+                                            </div>
+                                        </div>
+            
+                                    </div>
+                                    <div class="card-body mx-5 p-5">
+                                        <form>
+                                            <div class="form-group row mb-3">
+                                                <label for="inputEmail3" class="col-xl-2 col-form-label">Nama Admin</label>
+                                                <div class="col-xl-10">
+                                                    <input type="text" class="form-control" id="edit_nama_lengkap"
+                                                        value="{{formData.nama}}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-3">
+                                                <label for="inputPassword3" class="col-xl-2 col-form-label">Email</label>
+                                                <div class="col-xl-10">
+                                                    <input type="text" class="form-control" id="daftar_nisn"
+                                                        value="{{formData.email}}" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-3">
+                                                <label for="inputPassword3" class="col-xl-2 col-form-label">Password</label>
+                                                <div class="col-xl-10">
+                                                    <input type="password" class="form-control" placeholder="Password"  value="{{formData.password}}" id="edit_password">
+                                                    <button class="btn btn-outline-secondary" type="button" ng-click="lookPassword()"><i class="fa fa-eye"></i></button>
+                                                  </div>
+                                            </div>
+                                            <div class="form-group row mb-3">
+                                                <label for="inputPassword3" class="col-xl-2 col-form-label">Sekolah</label>
+                                                <div class="col-xl-10">
+                                                    <input type="text" class="form-control" id="daftar_asal_sekolah"
+                                                        value="{{formData.namaSekolah}}" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-3">
+                                                <label for="inputPassword3" class="col-xl-2 col-form-label">No Hpp</label>
+                                                <div class="col-xl-10">
+                                                    <input type="text" class="form-control" id="edit_noHp"
+                                                        value="{{formData.noHp}}">
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <a ng-click="simpan_perubahanadmin()" class=" btn btn-primary shadow-sm float-right P-2"
+                                            style="border-radius:50px; width: 150px; margin-top: 30px;"><i
+                                                class="fa fa-sm "></i>SIMPAN</a>
+                                    </div>
+            
+                                </div>
+                            </div>
+            
+                        </div>
+                        <footer class="ps-5" style="margin-bottom: 8vh;">
+                            <div class="text-muted">
+                              <span class=" fw-bold montserrat" style="font-size: small;"> © 2023 Copyright:</span>
+                              <a class=" fw-bold montserrat text-muted" style="font-size: small;"
+                                href="https://e-ppdb.bulelengkab.go.id/">e-PPDB</a>
+                            </div>
+                          </footer>
+                    </div>
+                </div>
+              </div>
+
+
+
+        </div>
+    </ion-content>
+</ion-view>

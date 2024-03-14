@@ -1,0 +1,154 @@
+<ion-view title="Data Pendaftar Seluruh" hide-nav-bar="true" cache-view="false" id="">
+  <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+    <div id="wrapper" class="bg-light">
+      <div id="nav-flex" class="bck">
+        <div class="pt-5" id="sidebar-wrapper">
+          <div class="sidebar gmbr mb-4">
+            <img src="img/buleleng.png" alt="">
+          </div>
+          <div class="container">
+            <p id="nama" class="text-center text-light text-break">{{formData.nama}}</p>
+          </div>
+          <div class="d-grid gap-1 mx-3">
+            <button ng-click="beranda()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-home"></i> Beranda</span></button>
+            <button data-bs-toggle="collapse" href="#data-admin" role="button" aria-expanded="false"
+              aria-controls="data-admin" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-user-edit"></i> Data Admin</span><i
+                class="ms-4 fas fa-angle-down float-end"></i></button>
+            <div class="collapse" id="data-admin">
+              <div class="d-grid gap-1">
+                <button ui-sref="dataAdminSd()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> SD</span></button>
+                <button ui-sref="dataAdminSmp()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> SMP</span></button>
+                <button ui-sref="dataAdminSuperDinas()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> Super</span></button>
+              </div>
+            </div>
+            <button ui-sref="dataSiswa()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-users"></i> Data Siswa</span></button>
+            <button data-bs-toggle="collapse" href="#data-siswa" role="button" aria-expanded="true"
+              aria-controls="data-siswa" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-users"></i> Data Pendaftar</span><i
+                class="ms-4 fas fa-angle-down float-end"></i></button>
+            <div class="collapse show" id="data-siswa">
+              <div class="d-grid gap-1">
+                <button ui-sref="dataPendaftarSeluruhSMP()"
+                  class="btn text-light side-button side-button side-active shadow py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-users"></i> Seluruh</span></button>
+                <button ui-sref="dataPendaftarAdminSuper()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-users"></i> Per SMP</span></button>
+              </div>
+            </div>
+            <button data-bs-toggle="collapse" href="#data-sekolah" role="button" aria-expanded="false"
+              aria-controls="data-sekolah" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-school"></i> Data Sekolah</span><i
+                class="ms-4 fas fa-angle-down float-end"></i></button>
+            <div class="collapse" id="data-sekolah">
+              <div class="d-grid gap-1 mx-3">
+                <button ui-sref="dataSekolahSd()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-school"></i> SD</span></button>
+                <button ui-sref="dataSekolahSmp()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-school"></i> SMP</span></button>
+              </div>
+            </div>
+            <button ng-click="pengaturan()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-cogs"></i> Pengaturan</span></button>
+            <button ng-click="logout()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-sign-out-alt"></i> Keluar</span></button>
+          </div>
+        </div>
+      </div>
+      <div id="flexbox-wrapper" class="w-100">
+        <nav class="navbar navbar-expand navbar-light bg-light">
+          <div class="container-fluid">
+            <button class="btn" id="menu-toggle" ng-click="toogle()"><i class="fas fa-align-justify"></i></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+              </ul>
+              <div class="my-lg-0 d-flex">
+                <a id="nightmode" ng-click="nightmode()" class="btn text-dark" href=""><i id="icon-night"
+                    class="far fa-sun" style="font-size:24px" data-bs-toggle="tooltip" data-placement="top"
+                    title="Light/Night"></i></a>
+                <a class="btn text-dark" href=""><i class="far fa-question-circle" style="font-size:24px"
+                    data-bs-toggle="tooltip" data-placement="top" title="Bantuan"></i></a>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <div class="w-100 h-100" id="content-flex">
+          <div class="d-flex flex-column" style="min-height: 100vh;">
+
+            <div id="page-content-wrapper" style="flex :1">
+
+              <div id="main-content" class="container-fluid mt-5 px-5">
+                <div class="">
+                  <div class="mb-3">
+                    <h5 id="page-header" class="text-dark fw-bold mb-0">
+                      Data Ranking Afirmasi , Perpindahan , Prestasi
+                    </h5>
+                    <span id="small-header" class="text-muted">Seluruh SMP</span>
+
+                  </div>
+                  <!-- <button ng-click="RankingAfirmasi()" class="btn btn-success mt-3"><i class="fa fa-file"></i>
+                    RANKING AFIRMASI
+                  </button>
+                  <button ng-click="RankingPerpindahan()" class="btn btn-danger mt-3"><i class="fa fa-file"></i>
+                    RANKING PERPINDAHAN
+                  </button>
+                  <button ng-click="RankingPrestasi()" class="btn btn-warning mt-3"><i class="fa fa-file"></i>
+                    RANKING PRESTASI
+                  </button>
+                  <button ng-click="EliminasiZonasi()" class="btn btn-primary mt-3"><i class="fa fa-file"></i>
+                    ELIMINASI ZONASI
+                  </button>
+                  <button ng-click="RankingZonasi()" class="btn btn-primary mt-3"><i class="fa fa-file"></i>
+                    RANKING ZONASI
+                  </button> -->
+                </div>
+                <!-- <button ng-click="siswaTercecerCheck()" class="btn btn-danger mt-3"><i class="fa fa-file"></i>
+                  CHECK SISWA TERCECER
+                </button>
+
+                <button ng-click="finalExport()" class="btn btn-danger mt-3"><i class="fa fa-file"></i>
+                  JALANKAN EXPORT DATA FINAL
+                </button>
+
+                <button ng-click="finalExportZonasi()" class="btn btn-primary mt-3"><i class="fa fa-file"></i>
+                  JALANKAN EXPORT DATA FINAL ZONASI
+                </button>
+
+                <button ng-click="checkDataKurang()" class="btn btn-danger mt-3"><i class="fa fa-file"></i>
+                  DATA SISWA KURANG
+                </button> -->
+
+                
+                <button ng-click="checkBelumDaftar()" class="btn btn-danger mt-3"><i class="fa fa-file"></i>
+                  DATA SISWA Belum Daftar
+                </button>
+
+                <button ng-click="exportpersekolah()" class="btn btn-danger mt-3"><i class="fa fa-file"></i>
+                  EXPORT REKAP PER SEKOLAH
+                </button>
+              </div>
+
+            </div>
+            <footer class="ps-5 text-muted" style="margin-bottom: 8vh;">
+              <div>
+                <span class=" fw-bold montserrat" style="font-size: small;"> © 2023 Copyright:</span>
+                <span class=" fw-bold montserrat" style="font-size: small;"
+                  href="https://e-ppdb.bulelengkab.go.id/">e-PPDB</span>
+              </div>
+            </footer>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+  </ion-content>
+</ion-view>

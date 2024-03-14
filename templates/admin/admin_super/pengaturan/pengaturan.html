@@ -1,0 +1,404 @@
+<ion-view title="Pengaturan" hide-nav-bar="true" cache-view="false" id="">
+  <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+    <div id="wrapper" class="bg-light">
+      <div id="nav-flex" class="bck">
+        <div class="pt-5" id="sidebar-wrapper">
+          <div class="sidebar gmbr mb-4">
+            <img src="img/buleleng.png" alt="">
+          </div>
+          <div class="container">
+            <p id="nama" class="text-center text-light text-break">{{formData.nama}}</p>
+          </div>
+          <div class="d-grid gap-1 mx-3">
+            <button ui-sref="berandaAdminSuper()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-home"></i> Beranda</span></button>
+            <button data-bs-toggle="collapse" href="#data-admin" role="button" aria-expanded="false"
+              aria-controls="data-admin" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-user-edit"></i> Data Admin</span><i
+                class="ms-4 fas fa-angle-down float-end"></i></button>
+            <div class="collapse" id="data-admin">
+              <div class="d-grid gap-1">
+                <button ui-sref="dataAdminSd()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> SD</span></button>
+                <button ui-sref="dataAdminSmp()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> SMP</span></button>
+                <button ui-sref="dataAdminSuperDinas()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> Super</span></button>
+              </div>
+            </div>
+            <button ui-sref="dataSiswa()" class="btn text-light side-button py-3" type="button"><span
+              class="float-start ms-3"><i class="fas fa-users"></i> Data Siswa</span></button>
+            <button data-bs-toggle="collapse" href="#data-siswa" role="button" aria-expanded="false"
+              aria-controls="data-siswa" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-users"></i> Data Pendaftar</span><i
+                class="ms-4 fas fa-angle-down float-end"></i></button>
+            <div class="collapse" id="data-siswa">
+              <div class="d-grid gap-1">
+                <button ui-sref="dataPendaftarSeluruhSMP()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-users"></i> Seluruh</span></button>
+                <button ui-sref="dataPendaftarAdminSuper()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-users"></i> Per SMP</span></button>
+              </div>
+            </div>
+            <button data-bs-toggle="collapse" href="#data-sekolah" role="button" aria-expanded="false"
+              aria-controls="data-sekolah" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-school"></i> Data Sekolah</span><i
+                class="ms-4 fas fa-angle-down float-end"></i></button>
+            <div class="collapse" id="data-sekolah">
+              <div class="d-grid gap-1">
+                <button ui-sref="dataSekolahSd()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-school"></i> SD</span></button>
+                <button ui-sref="dataSekolahSmp()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-school"></i> SMP</span></button>
+              </div>
+            </div>
+            <button ui-sref="pengaturanAdminSuper()"
+              class="btn text-light side-button side-button side-active shadow py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-cogs"></i> Pengaturan</span></button>
+            <button ng-click="logout()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-sign-out-alt"></i> Keluar</span></button>
+          </div>
+        </div>
+      </div>
+      <div id="flexbox-wrapper" class="w-100">
+        <nav class="navbar navbar-expand navbar-light bg-light">
+          <div class="container-fluid">
+            <button class="btn" id="menu-toggle" ng-click="toogle()"><i class="fas fa-align-justify"></i></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+              </ul>
+              <div class="my-lg-0 d-flex">
+                <a id="nightmode" ng-click="nightmode()" class="btn text-dark" href=""><i id="icon-night"
+                    class="far fa-sun" style="font-size:24px" data-bs-toggle="tooltip" data-placement="top"
+                    title="Light/Night"></i></a>
+                <a class="btn text-dark" href=""><i class="far fa-question-circle" style="font-size:24px"
+                    data-bs-toggle="tooltip" data-placement="top" title="Bantuan"></i></a>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <div class="w-100 h-100" id="content-flex">
+          <div class="d-flex flex-column" style="min-height: 100vh;">
+
+            <div id="page-content-wrapper" style="flex :1">
+
+              <div id="main-content" class="container-fluid mt-5 px-5">
+
+                <div class="">
+                  <div class="mb-3">
+                    <h5 id="page-header" class="text-dark fw-bold mb-0" >
+                      Pengaturan e-PPDB
+                    </h5>
+                    <span id="small-header" class="text-muted" >{{formData.nama}}</span>
+                  </div>
+                  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active " id="pills-akun-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-akun" type="button" role="tab" aria-controls="pills-akun"
+                        aria-selected="true">Akun</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link " id="pills-pendaftaran-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-pendaftaran" type="button" role="tab" aria-controls="pills-pendaftaran"
+                        aria-selected="false">e-PPDB</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link " id="pills-pengumuman-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-pengumuman" type="button" role="tab" aria-controls="pills-pengumuman"
+                        aria-selected="false">Notifikasi</button>
+                    </li>
+                  </ul>
+                  <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-akun" role="tabpanel"
+                      aria-labelledby="pills-akun-tab">
+                      <div class="card shadow-sm mb-4 animated--grow-in">
+                        <div class="card-body mx-5 p-5">
+                          <form>
+                            <div class="form-group row mb-3">
+                              <label for="inputEmail3" class="col-xl-2 col-form-label">Nama Admin</label>
+                              <div class="col-xl-10">
+                                <input type="text" class="form-control" id="edit_nama_lengkap"
+                                  value="{{formData.nama}}">
+                              </div>
+                            </div>
+                            <div class="form-group row mb-3">
+                              <label for="inputPassword3" class="col-xl-2 col-form-label">Email</label>
+                              <div class="col-xl-10">
+                                <input type="text" class="form-control" id="daftar_nisn" value="{{formData.email}}"
+                                  readonly>
+                              </div>
+                            </div>
+                            <div class="form-group row mb-3">
+                              <label for="inputPassword3" class="col-xl-2 col-form-label">Password</label>
+                              <div class="col-xl-10">
+                                <div class="input-group mb-3">
+                                  <input type="password" class="form-control" placeholder="Password"
+                                    value="{{formData.password}}" id="edit_password">
+                                  <button id="btn-look-pass" class="btn btn-outline-primary" type="button" ng-click="lookPassword()"><i
+                                      class="fa fa-eye"></i></button>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                          <a ng-click="simpan_perubahanadmin()" class="btn btn-primary shadow-sm float-end px-3 mt-3"><i
+                              class="fa fa-sm "></i>Simpan</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-pendaftaran" role="tabpanel"
+                      aria-labelledby="pills-pendaftaran-tab">
+                      <div class="card shadow-sm mb-4 animated--grow-in">
+                        <div class="card-body mx-5 p-5">
+                          <form action="">
+                            <div class="form-group row mb-3">
+                              <label for="inputEmail3" class="col-xl-2 col-form-label">Pendaftaran</label>
+                              <div class="col-xl-10" id="">
+                                <select id="Status_Pendaftaran" class="form-select">
+                                  <option value=true>On</option>
+                                  <option value=false>Off</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group row mb-3">
+                              <label for="inputEmail3" class="col-xl-2 col-form-label">Pengumuman</label>
+                              <div class="col-xl-10" id="">
+                                <select id="Status_Pengumuman" class="form-select">
+                                  <option value=true>On</option>
+                                  <option value=false>Off</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group row mb-3">
+                              <label for="inputEmail3" class="col-xl-2 col-form-label">Penyaluran</label>
+                              <div class="col-xl-10" id="">
+                                <select id="Status_Penyaluran" class="form-select">
+                                  <option value=true>On</option>
+                                  <option value=false>Off</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group row mb-3">
+                              <label for="inputEmail3" class="col-xl-2 col-form-label">Akses Zonasi</label>
+                              <div class="col-xl-10" id="">
+                                <select id="status_JalurZonasi" class="form-select">
+                                  <option value=true>On</option>
+                                  <option value=false>Off</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group row mb-3">
+                              <label for="inputEmail3" class="col-xl-2 col-form-label">Akses Afirmasi</label>
+                              <div class="col-xl-10" id="">
+                                <select id="status_JalurAfirmasi" class="form-select">
+                                  <option value=true>On</option>
+                                  <option value=false>Off</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group row mb-3">
+                              <label for="inputEmail3" class="col-xl-2 col-form-label">Akses Perpindahan</label>
+                              <div class="col-xl-10" id="">
+                                <select id="status_JalurPerpindahan" class="form-select">
+                                  <option value=true>On</option>
+                                  <option value=false>Off</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="inputEmail3" class="col-xl-2 col-form-label">Akses Prestasi</label>
+                              <div class="col-xl-10" id="">
+                                <select id="status_JalurPrestasi" class="form-select">
+                                  <option value=true>On</option>
+                                  <option value=false>Off</option>
+                                </select>
+                              </div>
+                            </div>
+                            <a ng-click="simpan_pengaturan()" class="btn btn-primary shadow-sm float-end px-3 mt-3"><i
+                                class="fa fa-sm "></i>Simpan</a>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-pengumuman" role="tabpanel"
+                      aria-labelledby="pills-pengumuman-tab">
+                      <div class="card shadow-sm mb-4 animated--grow-in">
+                        <div class="card-header py-3 bg-white">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <a class="btn btn-sm btn-success shadow-sm float-start px-3 " data-bs-toggle="modal"
+                                data-bs-target="#modal_tambah_notif"><i class="fa fa-plus fa-sm"></i> Tambah</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card-body">
+                          <div class="table-responsive">
+                            <table class="table" id="" width="100%" cellspacing="0">
+                              <thead>
+                                <tr>
+                                  <th width="">No</th>
+                                  <th width="">Jenis</th>
+                                  <th width="">Penerima</th>
+                                  <th width="">Tanggal</th>
+                                  <th width="">Aksi</th>
+                                </tr>
+                              </thead>
+
+                              <tbody>
+
+                                <tr ng-repeat="data in notifikasi | orderBy: 'createAt' | filter:searchData">
+                                  <td id="td-table" width="">{{$index+1}}</td>
+                                  <td width="">{{data.jenis}}</td>
+                                  <td width="">{{data.penerima}}</td>
+                                  <td width="">{{data.createAt}}</td>
+                                  <td width="">
+                                    <a data-id="{{data.$id}}" data-bs-toggle="modal" data-bs-target="#modal_edit_notif"
+                                      title="Detail" class="updateData btn bg-success text-light"><span
+                                        class="fas fa-eye"></span></a>
+
+                                    <a data-id="{{data.$id}}" data-bs-toggle="
+                                      title=" Delete" class="removeData btn bg-danger text-light"><span
+                                        class="fas fa-fw fa-trash"></span></a>
+
+                                  </td>
+                                </tr>
+
+                              </tbody>
+                            </table>
+                            <!--modal tambah -->
+                            <div class="modal fade" id="modal_tambah_notif" tabindex="-1" role="dialog"
+                              aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header border-0 ">
+                                    <h5 class="modal-title fw-bold text-dark" id="exampleModalLabel">Tambah
+                                      Data
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                      aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form>
+                                      <div class="form-group row mb-3">
+                                        <label for="inputEmail3" class="col-xl-2 col-form-label">Jenis</label>
+                                        <div class="col-xl-10">
+                                          <select class="form-select" aria-label="select-jenis" id="jenisNotif">
+                                            <option value="Pengumuman">Pengumuman</option>
+                                            <option value="Perhatian">Perhatian</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                      <div class="form-group row mb-3">
+                                        <label for="inputEmail3" class="col-xl-2 col-form-label">Penerima</label>
+                                        <div class="col-xl-10">
+                                          <select class="form-select" aria-label="select-penerima" id="penerimaNotif">
+                                            <option value="SD">Admin SD</option>
+                                            <option value="SMP">Admin SMP</option>
+                                            <option value="Siswa">Siswa</option>
+                                          </select>
+                                        </div>
+                                      </div>
+
+                                      <div class="form-group row mb-3">
+                                        <label for="inputPassword3" class="col-xl-2 col-form-label">Pesan</label>
+                                        <div class="col-xl-10">
+                                          <textarea class="form-control" id="pesanNotif" rows="5"></textarea>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </div>
+                                  <div class="modal-footer border-0">
+                                    <button type="button" class="btn btn-outline-secondary"
+                                      data-bs-dismiss="modal">Tutup</button>
+                                    <button type="button" class="btn btn-primary" ng-click="simpanTambahNotif()"
+                                      data-bs-dismiss="modal">Simpan</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <!--modal edit -->
+                            <div class="modal fade" id="modal_edit_notif" tabindex="-1" role="dialog"
+                              aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header border-0">
+                                    <h5 class="modal-title fw-bold text-dark" id="exampleModalLabel">Edit
+                                      Data
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                      aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form>
+                                      <div class="form-group row mb-3">
+                                        <label for="inputEmail3" class="col-xl-2 col-form-label">Jenis</label>
+                                        <div class="col-xl-10">
+                                          <select class="form-select" aria-label="select-penerima" id="jenisNotifEdit"
+                                            value="">
+                                            <option value="Perhatian">Perhatian</option>
+                                            <option value="Pengumuman">Pengumuman</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                      <div class="form-group row mb-3">
+                                        <label for="inputEmail3" class="col-xl-2 col-form-label">Penerima</label>
+                                        <div class="col-xl-10">
+                                          <select class="form-select" aria-label="select-penerima"
+                                            id="penerimaNotifEdit" value="">
+                                            <option value="SD">Admin SD</option>
+                                            <option value="SMP">Admin SMP</option>
+                                            <option value="Siswa">Siswa</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                      <div class="form-group row mb-3">
+                                        <label for="inputPassword3" class="col-xl-2 col-form-label">Tanggal</label>
+                                        <div class="col-xl-10">
+                                          <input type="text" class="form-control" id="createAtEdit" value="">
+                                        </div>
+                                      </div>
+                                      <div class="form-group row mb-3">
+                                        <label for="inputPassword3" class="col-xl-2 col-form-label">Pesan</label>
+                                        <div class="col-xl-10">
+                                          <textarea class="form-control" id="pesanNotifEdit" rows="5"></textarea>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </div>
+                                  <div class="modal-footer border-0">
+                                    <button type="button" class="btn btn-outline-secondary"
+                                      data-bs-dismiss="modal">Tutup</button>
+                                    <button type="button" ng-click="updateNotif()" class="btn btn-primary updateNotif"
+                                      data-bs-dismiss="modal">Simpan</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <footer class="ps-5 text-muted" style="margin-bottom: 8vh;">
+              <div>
+                <span class=" fw-bold montserrat" style="font-size: small;"> © 2023 Copyright:</span>
+                <span class=" fw-bold montserrat" style="font-size: small;"
+                  href="https://e-ppdb.bulelengkab.go.id/">e-PPDB</span>
+              </div>
+            </footer>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </ion-content>
+</ion-view>

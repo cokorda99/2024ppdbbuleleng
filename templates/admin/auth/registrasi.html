@@ -1,0 +1,102 @@
+<ion-view title="Registrasi Admin" hide-nav-bar="true" cache-view="false" id="welcome">
+    <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+        <!-- The App Section -->
+        <link rel="stylesheet" href="../../../custom/sb-admin-2.css">
+        <div>
+            <section id="header">
+                <nav class="navbar navbar-expand navbar-light " style="background-color: #1f1039;">
+                    <img src="img/eppdb.png" class="img-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item active">
+                            </li>
+                            <li class="nav-item">
+                            </li>
+                            <li class="nav-item">
+                            </li>
+                        </ul>
+                        <a class="navbar-brand text-white" href="">BANTUAN</a>
+                    </div>
+                </nav>
+            </section>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 d-none d-md-block img-container">
+                        <div class="containertxt">
+                        </div>
+                        <div class="containerbxt">
+                            <div class="container-fluid">
+                                <div class="row cstumer">
+                                    <div class="col text-right cstt">
+                                        <img src="img/support.svg" alt="">
+                                    </div>
+
+                                    <div class="col-8 cntact footer" style="color:black;">
+                                        (+62)81 789 012
+                                        <br>
+                                        e-ppdb@gmail.com
+                                    </div>
+                                    <div class="col">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="col-lg-4 col-md-4 row justify-content-center align-content-center form-container form-box text-center ">
+                        <form>
+                            <div class="container-box" style="width: 160%">
+                                <h4 id="logitxt" style="color:black;">REGISTRASI ADMIN</h4>
+                                <div class=" form-group inputan1">
+                                    <p class="text-secondary text-left h6">NIP</p>
+                                    <input id="nisn" type="number" class="form-control form-control-user"
+                                        placeholder="NIP">
+                                </div>
+                                <div class=" form-group inputan1">
+                                    <p class="text-secondary text-left h6">Nama</p>
+                                    <input id="nama" type="text" class="form-control form-control-user"
+                                        placeholder="Nama">
+                                </div>
+                                <div class=" form-group inputan1">
+                                    <p class="text-secondary text-left h6">Email</p>
+                                    <input id="nama" type="email" class="form-control form-control-user"
+                                        placeholder="email">
+                                </div>
+                                <div class="form-group inputan1">
+                                    <p class="h6 text-secondary text-left ">Password</p>
+                                    <input id="password" type="password" class="form-control form-control-user"
+                                        placeholder="Password">
+                                </div>
+                                <div class="form-group inputan1">
+                                    <p class="h6 text-secondary text-left ">Konfirmasi Password</p>
+                                    <input id="konfirmasi" type="password" class="form-control form-control-user"
+                                        placeholder="Konfirmasi Password">
+                                </div>
+                                <div class="form-group inputan1">
+                                    <p class="h6 text-secondary text-left ">Jenis Admin</p>
+                                </div>
+                                <input type="radio" id="adminsuper" name="admin" value="admin_super" style="float: left;">
+                                <label for="admin_super" style="float: left; margin-left: 20px;">Admin Super (Dinas Pendidikan)</label><br><br>
+                                <input type="radio" id="adminsmp" name="admin" value="admin_smp" style="float: left;">
+                                <label for="admin_smp" style="float: left; margin-left: 20px;">Admin Sekolah SMP</label><br><br>
+                                <input type="radio" id="admin" name="admin" value="adminsd" style="float: left;">
+                                <label for="admin_sd" style="float: left; margin-left: 20px;">Admin Sekolah SD</label>
+                                <button ng-click="registrasi()"
+                                    class="mt-4 btn btn-success btn-user btn-block">DAFTAR</button>
+                            </div>
+                        </form>
+                        <!-- <a class="small" href="register.php">Buat Akun!</a> -->
+                    </div>
+                    <div class="col-lg-4 col-md-6 d-none d-md-block img-container">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

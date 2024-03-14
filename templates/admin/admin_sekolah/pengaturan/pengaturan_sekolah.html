@@ -1,0 +1,325 @@
+<ion-view title="Pengaturan Data Sekolah" hide-nav-bar="true" cache-view="false" id="loginAdmin">
+  <ion-content padding="false" class="manual-ios-statusbar-padding" scroll="false">
+    <div id="wrapper" class="bg-light">
+      <div id="nav-flex">
+        <div class="pt-5" id="sidebar-wrapper">
+          <div class="sidebar gmbr mb-4">
+            <img src="img/admin.png" alt="">
+          </div>
+          <div class="container">
+            <p id="nama" class="text-center text-light text-break">{{formData.nama}}</p>
+          </div>
+          <div class="d-grid gap-1 mx-3">
+            <button ng-click="beranda()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-home"></i> Beranda</span></button>
+            <button data-bs-toggle="collapse" href="#data-pendaftar" role="button" aria-expanded="false"
+            aria-controls="data-ranking" class="btn text-light side-button py-3" type="button"><span
+              class="float-start ms-3"><i class="fas fa-user-edit"></i> Data Pendaftar</span><i
+              class="ms-4 fas fa-angle-down float-end"></i></button>
+            <div class="collapse" id="data-pendaftar">
+              <div class="d-grid gap-1 mx-3">
+                <button ui-sref="dataPendaftarZonasi()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> Zonasi</span></button>
+                <button ui-sref="dataPendaftarAfirmasi()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> Afirmasi</span></button>
+                <button ui-sref="dataPendaftarPerpindahan()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> Perpindahan</span></button>
+                <button ui-sref="dataPendaftarPrestasi()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-user-edit"></i> Prestasi</span></button>
+              </div>
+            </div>
+            <!-- <button ng-click="data_luar_rayon()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-user-edit"></i> Siswa Luar Rayon</span></button> -->
+            <button ng-if="cekBukaRanking == true"  data-bs-toggle="collapse" href="#data-ranking" role="button" aria-expanded="false"
+              aria-controls="data-ranking" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-trophy"></i> Data Ranking</span><i
+                class="ms-4 fas fa-angle-down float-end"></i></button>
+            <div class="collapse" id="data-ranking">
+              <div class="d-grid gap-1 mx-3">
+                <button ng-click="ranking_zonasi()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-trophy"></i> Zonasi</span></button>
+                <button ng-click="ranking_afirmasi()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-trophy"></i> Afirmasi</span></button>
+                <button ng-click="ranking_perpindahan()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-trophy"></i> Perpindahan</span></button>
+                <button ng-click="ranking_prestasi()" class="btn text-light side-button py-3" type="button"><span
+                    class="float-start ms-4"><i class="fas fa-trophy"></i> Prestasi</span></button>
+              </div>
+            </div>
+            <button ng-click="pengaturan()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-cogs"></i> Pengaturan</span></button>
+            <button ng-click="logout()" class="btn text-light side-button py-3" type="button"><span
+                class="float-start ms-3"><i class="fas fa-sign-out-alt"></i> Keluar</span></button>
+          </div>
+        </div>
+      </div>
+      <div id="flexbox-wrapper" class="w-100">
+        <nav class="navbar navbar-expand navbar-light bg-light">
+          <div class="container-fluid">
+            <button class="btn" id="menu-toggle" ng-click="toogle()"><i class="fas fa-align-justify"></i></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+              </ul>
+              <div class="my-lg-0 d-flex">
+                <div class="navbar-brand form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                  <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                </div>
+                <a class="btn text-dark" href=""><i class="far fa-question-circle"
+                    style="font-size:24px" data-bs-toggle="tooltip" data-placement="top" title="Bantuan"></i></a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div class="w-100 h-100" id="content-flex">
+          <div class="d-flex flex-column w-100" style="min-height: 100vh;">
+            <div id="page-content-wrapper" style="flex :1">
+
+              <!-- Begin Page Content -->
+              <div id="main-content" class="container-fluid mt-5 px-5">
+                <!-- Page Heading -->
+                <h5 class="mb-5"><a ng-click="dashboard()" class="text-dark fw-bold"
+                  style="text-decoration: none;font-size: 40px;">Pengaturan
+                </a> <br> <a ng-click="dashboard()" class="text-muted"
+                  style="text-decoration: none;font-size:20px">Sekolah</a></h5>
+                <!-- !-- DataTales Example -->
+                <div class="card shadow-sm mb-4 animated--grow-in">
+                  <div class="card-header" style="background-color: #021038;">
+
+                    <div class="row">
+                      <div class="col-sm-11">
+                        <div class="">
+                          <p class="text-center text-light m-0">PENGATURAN KUOTA SEKOLAH</p>
+                        </div>
+                      </div>
+                      <div class="col-sm-1">
+                        <a ng-click='pengaturan()' class="btn btn-sm bg-warning shadow-sm text-white float-right px-3"
+                          style="border-radius:50px;">Kembali</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body mx-5 p-5">
+                    <form>
+                      <div class="form-group row mb-3">
+                        <label for="inputEmail3" class="col-xl-2 col-form-label">Sekolah</label>
+                        <div class="col-xl-10">
+                          <input type="text" class="form-control" value="{{formData.namaSekolah}}" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group row mb-3">
+                        <label for="inputPassword3" class="col-xl-2 col-form-label">NPSN</label>
+                        <div class="col-xl-10">
+                          <input type="text" class="form-control" value="{{formData.npsn}}" readonly>
+                        </div>
+                      </div>
+                      <!-- <div class="form-group row mb-3">
+                                                <label for="inputPassword3" class="col-xl-2 col-form-label">Kuota(Kapasitas)</label>
+                                                <div class="col-xl-10">
+                                                    <input type="number" class="form-control" id="kuotaSekolah" value="{{formSekolah.kuota}}">
+                                                </div>
+                                            </div> -->
+                    </form>
+                    <form>
+                      <div class="form-group row mb-3">
+                        <label for="inputEmail3" class="col-xl-2 col-form-label">Kuota(Kapasitas)</label>
+                        <div class="col-xl-10">
+                          <input type="text" class="form-control" id="kuotaSekolah" value="{{formSekolah.kuota}}"
+                            readonly>
+                        </div>
+                      </div>
+                      <h4>Penyaluran dari Dinas Pendidikan</h4>
+                      <div class="form-group row mb-3">
+                        <label for="inputEmail3" class="col-xl-2 col-form-label">Penyaluran Zonasi</label>
+                        <div class="col-xl-10">
+                          <input type="text" class="form-control" id="kuotaSekolah" value="{{formSekolah.penyaluran}}"
+                            readonly>
+                        </div>
+                      </div>
+                      <div class="form-group row mb-3">
+                        <label for="inputEmail3" class="col-xl-2 col-form-label">Penyaluran Afirmasi</label>
+                        <div class="col-xl-10">
+                          <input type="text" class="form-control" id="kuotaSekolah"
+                            value="{{formSekolah.penyaluranAfirmasi}}" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group row mb-3">
+                        <label for="inputEmail3" class="col-xl-2 col-form-label">Penyaluran Perpindahan</label>
+                        <div class="col-xl-10">
+                          <input type="text" class="form-control" id="kuotaSekolah"
+                            value="{{formSekolah.penyaluranPerpindahan}}" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group row mb-3">
+                        <label for="inputEmail3" class="col-xl-2 col-form-label">Penyaluran Prestasi</label>
+                        <div class="col-xl-10">
+                          <input type="text" class="form-control" id="kuotaSekolah"
+                            value="{{formSekolah.penyaluranPrestasi}}" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group row mb-3">
+                        <label for="inputPassword3" class="col-xl-2 col-form-label">Zonasi (%)</label>
+                        <div class="col-xl-10">
+
+                          <div class="row">
+                            <div class="col">
+                              <input type="number" class="form-control " id="persentase_zonasi"
+                                value="{{formSekolah.persentase_zonasi}}"readonly>
+                            </div>
+                            <div class="col">
+                              <input type="text" class="form-control " id="daftar_nisn"
+                                value="{{formSekolah.kuota_zonasi}}" readonly>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row mb-3">
+                        <label for="inputPassword3" class="col-xl-2 col-form-label">Afirmasi (%)</label>
+                        <div class="col-xl-10">
+                          <div class="row">
+                            <div class="col">
+                              <input type="number" class="form-control " id="persentase_afirmasi"
+                                value="{{formSekolah.persentase_afirmasi}}" readonly>
+                            </div>
+                            <div class="col">
+                              <input type="text" class="form-control " id="daftar_nisn"
+                                value="{{formSekolah.kuota_afirmasi}}" readonly>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group row mb-3">
+                        <label for="inputPassword3" class="col-xl-2 col-form-label">Perpindahan (%)</label>
+                        <div class="col-xl-10">
+                          <div class="row">
+                            <div class="col">
+                              <input type="number" class="form-control " id="persentase_perpindahan"
+                                value="{{formSekolah.persentase_perpindahan}}" readonly>
+                            </div>
+                            <div class="col">
+                              <input type="text" class="form-control " id="daftar_nisn"
+                                value="{{formSekolah.kuota_perpindahan}}" readonly>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group row mb-3">
+                        <label for="inputPassword3" class="col-xl-2 col-form-label">Prestasi (%)</label>
+                        <div class="col-xl-10">
+                          <div class="row">
+                            <div class="col">
+                              <input type="number" class="form-control " id="persentase_prestasi"
+                                value="{{formSekolah.persentase_prestasi}}" readonly>
+                            </div>
+                            <div class="col">
+                              <input type="text" class="form-control " id="daftar_nisn"
+                                value="{{formSekolah.kuota_prestasi}}" readonly>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <a ng-click="simpan_persentase()" class=" btn btn-primary shadow-sm float-right P-2"
+                      style="border-radius:50px; width: 150px; margin-top: 30px;"><i class="fa fa-sm "></i>SIMPAN</a>
+                    <!-- <a ng-click="simpan_kuotaSekolah()" class=" btn btn-primary shadow-sm float-right P-2"
+                                            style="border-radius:50px; width: 150px; margin-top: 30px;"><i
+                                                class="fa fa-sm "></i>SIMPAN</a> -->
+                  </div>
+
+                </div>
+                <!-- <div class="card shadow-sm mb-4 animated--grow-in">
+                                    <div class="card-header" style="background-color: #021038;">
+                                        <p class="text-center text-light m-0">PEMBAGIAN JUMLAH KUOTA PADA JALUR</p>
+                                      </div>
+                                    <div class="card-body mx-5 p-5">
+                                        <form>
+                                            <div class="form-group row mb-3">
+                                                <label for="inputEmail3" class="col-xl-2 col-form-label">Kuota(Kapasitas)</label>
+                                                <div class="col-xl-10">
+                                                    <input type="text" class="form-control" id="kuotaSekolah"
+                                                        value="{{formSekolah.kuota}}" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-3">
+                                                <label for="inputPassword3" class="col-xl-2 col-form-label">Zonasi (%)</label>
+                                                <div class="col-xl-10">
+            
+                                                  <div class="row">
+                                                    <div class="col">
+                                                        <input type="number" class="form-control " id="persentase_zonasi" value="{{formSekolah.persentase_zonasi}}">
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="text" class="form-control " id="daftar_nisn" value="{{formSekolah.kuota_zonasi}}" readonly>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            <div class="form-group row mb-3">
+                                                <label for="inputPassword3" class="col-xl-2 col-form-label">Afirmasi (%)</label>
+                                                <div class="col-xl-10">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <input type="number" class="form-control " id="persentase_afirmasi" value="{{formSekolah.persentase_afirmasi}}">
+                                                        </div>
+                                                        <div class="col">
+                                                            <input type="text"  class="form-control " id="daftar_nisn" value="{{formSekolah.kuota_afirmasi}}" readonly>
+                                                        </div>
+                                                    </div>                               
+                                                </div>
+                                            </div>
+            
+                                            <div class="form-group row mb-3">
+                                                <label for="inputPassword3" class="col-xl-2 col-form-label">Perpindahan (%)</label>
+                                                <div class="col-xl-10">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <input type="number" class="form-control "id="persentase_perpindahan" value="{{formSekolah.persentase_perpindahan}}">
+                                                        </div>
+                                                        <div class="col">
+                                                            <input type="text"  class="form-control "id="daftar_nisn" value="{{formSekolah.kuota_perpindahan}}" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+            
+                                            <div class="form-group row mb-3">
+                                                <label for="inputPassword3" class="col-xl-2 col-form-label">Prestasi (%)</label>
+                                                <div class="col-xl-10">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <input type="number" class="form-control " id="persentase_prestasi" value="{{formSekolah.persentase_prestasi}}">
+                                                        </div>
+                                                        <div class="col">
+                                                            <input type="text" class="form-control " id="daftar_nisn" value="{{formSekolah.kuota_prestasi}}" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <a ng-click="simpan_persentase()" class=" btn btn-primary shadow-sm float-right P-2"
+                                            style="border-radius:50px; width: 150px; margin-top: 30px;"><i
+                                                class="fa fa-sm "></i>SIMPAN</a>
+                                    </div>
+            
+                                </div> -->
+              </div>
+
+            </div>
+            <footer class="ps-5 text-muted" style="margin-bottom: 8vh;">
+              <div>
+                <span class=" fw-bold montserrat" style="font-size: small;"> © 2023 Copyright:</span>
+                <span class=" fw-bold montserrat" style="font-size: small;"
+                  href="https://e-ppdb.bulelengkab.go.id/">e-PPDB</span>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </ion-content>
+</ion-view>

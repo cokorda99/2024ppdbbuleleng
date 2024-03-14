@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" content="4">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>e-PPDB Buleleng</title>
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- custom css -->
+  <link href="custom/style.css" rel="stylesheet">
+  <link href="css/ionic.app.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-4/bootstrap-4.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
+  <!-- <link href="custom/vendor1/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
+  <script src="custom/style.js"></script>
+  <!-- <script src="https://kit.fontawesome.com/cfd89fe234.js" crossorigin="anonymous"></script> -->
+  <script src="https://kit.fontawesome.com/3dbb581568.js" crossorigin="anonymous"></script>
+  <!-- <script src="https://kit.fontawesome.com/ab49a2b9c9.js" crossorigin="anonymous"></script> -->
+
+
+
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+  <!-- 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js">
+  </script>
+
+  <script src="cordova.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/pagination.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/routes.js"></script>
+
+
+  <script src="templates/auth/authentification.js"></script>
+  <script src="templates/admin/auth/auth.js"></script>
+
+  <!-- ADMIN SD> -->
+  <script src="templates/admin/admin_sd/beranda/beranda.js"></script>
+  <script src="templates/admin/admin_sd/data_siswa/data_siswa.js"></script>
+  <script src="templates/admin/admin_sd/pengaturan/pengaturan.js"></script>
+  <script src="templates/admin/admin_sd/calon_siswa/calon_siswa.js"></script>
+
+
+  <!-- ADMIN SMP> -->
+  <script src="templates/admin/admin_sekolah/beranda/beranda.js"></script>
+  <script src="templates/admin/admin_sekolah/data_pendaftar/data_pendaftar.js"></script>
+  <script src="templates/admin/admin_sekolah/data_ranking/data_ranking.js"></script>
+  <script src="templates/admin/admin_sekolah/pengaturan/pengaturan.js"></script>
+  <script src="templates/admin/admin_sekolah/data_siswa/data_siswa.js"></script>
+  <script src="templates/admin/admin_sekolah/siswaZonasi/siswaZonasi.js"></script>
+
+
+  <!-- ADMIN SUPER -->
+  <script src="templates/admin/admin_super/beranda/beranda.js"></script>
+  <script src="templates/admin/admin_super/data_admin/data_admin.js"></script>
+  <script src="templates/admin/admin_super/data_sekolah/data_sekolah.js"></script>
+  <script src="templates/admin/admin_super/data_siswa/data_siswa.js"></script>
+  <script src="templates/admin/admin_super/pengaturan/pengaturan.js"></script>
+  <script src="templates/admin/admin_super/data_pendaftar/data_pendaftar.js"></script>
+  <script src="templates/admin/admin_super/perangkingan/perangkingan.js"></script>
+
+  <!-- User -->
+  <script src="templates/user/user.js"></script>
+  <script src="templates/user/dashboard/dashboard.js"></script>
+  <script src="templates/user/pendaftaran/pendaftaran.js"></script>
+  <script src="templates/user/pengaturan/pengaturan.js"></script>
+  <script src="templates/user/pengumuman/pengumuman.js"></script>
+
+  <!-- DAFTAR SD -->
+  <script src="templates/daftarSD/siswaSD.js"></script>
+
+  <script src="js/directives.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/firebase.js"></script>
+  <script src="js/angularfire.min.js"></script>
+  <script src="js/ng-youtube-embed.min.js"></script>
+  <script src="js/excel.js"></script>
+  <script src="js/FileSaver.min.js"></script>
+  <script src="js/firebase.init.js"></script>
+  <script src="js/ng-cordova.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.1/xlsx.full.min.js"></script>
+
+  <script src="js/ng-file-upload-shim.min.js"></script>
+  <script src="js/ng-file-upload.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/lodash/4.15.0/lodash.min.js"></script>
+  <script src="js/loadBalancing.js"></script>
+  <script src="cordova.js"></script>
+
+
+  <style type="text/css" media="print">
+    .no-print {
+      display: none;
+    }
+
+    .dropbtn {
+      /* background-color: #04AA6D; */
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+      background-color: blue;
+    }
+
+    /* 
+    .toggledaftar {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    .toggledaftar input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .status {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .status:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked+.status {
+      background-color: #2196F3;
+    }
+
+    input:focus+.status {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.status:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+    .status.round {
+      border-radius: 34px;
+    }
+
+    .status.round:before {
+      border-radius: 50%;
+    } */
+
+    /* #map {
+    float: left;
+    width: calc(100% - 400px);
+    height: 100vh;
+} */
+    #map {
+      height: 100%;
+    }
+  </style>
+
+  <style>
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked+.slider {
+      background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+  </style>
+
+
+
+
+</head>
+
+
+<body ng-app="app" animation="slide-left-right-ios7">
+  <ion-nav-view></ion-nav-view>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+  </script> -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-storage.js"></script>
+  
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe3GMc2F-sDZYtVacfCr-sKY-2GFDTe8Q&libraries=places"></script> -->
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDx472mpVncbEhBnt27WESN-pi-ZJk3Vqw&libraries=places"></script> -->
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe3GMc2F-sDZYtVacfCr-sKY-2GFDTe8Q&libraries=places"></script> -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEKJLRlkBBtXdQz8V4cstOX6aQF599ZKA&libraries=places"></script>
+
+  
+
+  <script>
+        function preview() {
+          fotolook.src=URL.createObjectURL(event.target.files[0]);
+        }
+  </script>
+</body>
+
+</html>
